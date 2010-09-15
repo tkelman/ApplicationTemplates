@@ -77,7 +77,8 @@ int main( ){
 		// Set directory containing mps data files.
 		std::string dataDir;
 		std::string osilFileName;
-		dataDir = dirsep == '/' ? "../../data/" : "..\\..\\data\\";
+		//dataDir = dirsep == '/' ? "../../data/" : "..\\..\\data\\";
+		dataDir = dirsep == '/' ? "../data/" : "..\\data\\";
 		// first declare a generic solver
 		DefaultSolver *solver  = NULL;
 		
