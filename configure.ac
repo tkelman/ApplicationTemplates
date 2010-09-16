@@ -400,14 +400,33 @@ AC_SUBST(USE_ASL_LIB)
 AC_COIN_HAS_ASL
 
 ##############################################################################
-#                   VPATH links for example input files                      #
+#                   VPATH links for example C++ source-code files                      #
 ##############################################################################
 
 # In case this is a VPATH configuration we need to make sure that the
 # input files for the examples are available in the VPATH directory.
 #### EXAMPLE SOURCE CODE
 AC_COIN_VPATH_LINK(osSolverDemo/osSolverDemo.cpp)
-##AC_COIN_VPATH_LINK(examples/osSolverDemo/osSolverDemo.cpp)
+
+AC_COIN_VPATH_LINK(osDip/OSDip_Main.cpp)
+AC_COIN_VPATH_LINK(osDip/OSDipApp.cpp)
+AC_COIN_VPATH_LINK(osDip/OSDipApp.h)
+AC_COIN_VPATH_LINK(osDip/OSDipBlockCoinSolver.cpp)
+AC_COIN_VPATH_LINK(osDip/OSDipBlockCoinSolver.h)
+AC_COIN_VPATH_LINK(osDip/OSDipBlockSolver.cpp)
+AC_COIN_VPATH_LINK(osDip/OSDipBlockSolver.h)
+AC_COIN_VPATH_LINK(osDip/OSDipFactoryInitializer.h)
+AC_COIN_VPATH_LINK(osDip/OSDipInterface.cpp)
+AC_COIN_VPATH_LINK(osDip/OSDipInterface.h)
+AC_COIN_VPATH_LINK(osDip/OSDipParam.h)
+AC_COIN_VPATH_LINK(osDip/own.sty)
+AC_COIN_VPATH_LINK(osDip/osDip.tex)
+AC_COIN_VPATH_LINK(osDip/osDip.pdf)
+AC_COIN_VPATH_LINK(osDip/osdip.parm.in)
+
+##############################################################################
+#                   VPATH links for example C++ source-code files                      #
+##############################################################################
 #### EXAMPLE DATA FILES
 AC_COIN_VPATH_LINK(data/CoinOS.opt)
 AC_COIN_VPATH_LINK(data/CppADTestLag.osil)
@@ -425,6 +444,24 @@ AC_COIN_VPATH_LINK(data/rosenbrockmod.osil)
 AC_COIN_VPATH_LINK(data/sendWithJobID.osol)
 AC_COIN_VPATH_LINK(data/wayneQuadratic.osil)
 
+
+##############################################################################
+#                   VPATH links for example Visual Studio project files                      #
+##############################################################################
+
+AC_COIN_VPATH_LINK(MSVisualStudioOSExamples/algorithmicDiff/algorithmicDiff.vcproj)
+AC_COIN_VPATH_LINK(MSVisualStudioOSExamples/branchCutPrice/branchCutPrice.vcproj)
+AC_COIN_VPATH_LINK(MSVisualStudioOSExamples/cglCuts/cglCuts.vcproj)
+AC_COIN_VPATH_LINK(MSVisualStudioOSExamples/instanceGenerator/instanceGenerator.vcproj)
+AC_COIN_VPATH_LINK(MSVisualStudioOSExamples/osModificationDemo/osModificationDemo.vcproj)
+AC_COIN_VPATH_LINK(MSVisualStudioOSExamples/osRemoteTest/osRemoteTest.vcproj)
+AC_COIN_VPATH_LINK(MSVisualStudioOSExamples/osResultDemo/osResultDemo.vcproj)
+AC_COIN_VPATH_LINK(MSVisualStudioOSExamples/osSolverDemo/osSolverDemo.vcproj)
+AC_COIN_VPATH_LINK(MSVisualStudioOSExamples/template/template.vcproj)
+AC_COIN_VPATH_LINK(MSVisualStudioOSExamples/VISUALSTUDIOREADME.txt)
+AC_COIN_VPATH_LINK(MSVisualStudioOSExamples/osExamples.sln)
+
+
 ##############################################################################
 #                   Finishing up by writing all the output                   #
 ##############################################################################
@@ -432,20 +469,19 @@ AC_COIN_VPATH_LINK(data/wayneQuadratic.osil)
 # Here list all the files that configure should create (except for the
 # configuration header file)
 AC_CONFIG_FILES([Makefile
-
+          osDip/Makefile
           osSolverDemo/Makefile])
-
-#          examples/algorithmicDiff/Makefile
-#          examples/instanceGenerator/Makefile
-#          examples/cglCuts/Makefile
-#          examples/osModificationDemo/Makefile
-#          examples/osRemoteTest/Makefile
-#          examples/osSolverDemo/Makefile
-#	  examples/osResultDemo/Makefile
-#          examples/template/Makefile
-#          examples/branchCutPrice/Makefile
-# 	  examples/osDip/Makefile
-# 	  examples/osDip/osdip.parm
+          algorithmicDiff/Makefile
+          examples/instanceGenerator/Makefile
+          examples/cglCuts/Makefile
+          examples/osModificationDemo/Makefile
+          examples/osRemoteTest/Makefile
+          examples/osSolverDemo/Makefile
+	  examples/osResultDemo/Makefile
+          examples/template/Makefile
+          examples/branchCutPrice/Makefile
+ 	  examples/osDip/Makefile
+ 	  examples/osDip/osdip.parm
           
 
 

@@ -33,7 +33,7 @@ ADDINCFLAGS =  -I${prefix}/include
 # CHANGEME: SRCDIR and VPATH should be the path to the source code. It is assumed
 # that the lib directory is in prefix/lib and the header files are in
 # prefix/include
-SRCDIR = @srcdir@
+
 VPATH = @srcdir@
 
 # Directory with OS header files
@@ -242,11 +242,11 @@ LIBS += -L$(COINLIBDIR) -lCoinUtils
 CYGPATH_W = echo
 
 #===========================================================================#
-all: $(EXEDECOMP)
+all: $(EXE)
 
 .SUFFIXES: .cpp .c .o .obj
 
-$(EXEDECOMP):  $(OBJS)
+$(EXE): $(OBJS)
 	bla=;\
 	for file in $(OBJS); do bla="$$bla `$(CYGPATH_W) $$file`"; done; \
 	$(CXX) $(CXXLINKFLAGS) $(CXXFLAGS) -o $@ $$bla $(ADDLIBS) $(LIBS)
@@ -254,10 +254,9 @@ $(EXEDECOMP):  $(OBJS)
 clean:
 	rm -rf $(EXE) $(OBJS)
 
-
-
 .cpp.o:
-	$(CXX) $(CXXFLAGS) $(INCL) -c -o $@ `test -f '$<' || echo '$(SRCDIR)/'`$<
+	$(CXX) $(CXXFLAGS) $(INCL) -c -o $@ $<
+
 
 .cpp.obj:
-	$(CXX) $(CXXFLAGS) $(INCL) -c -o $@ `if test -f '$<'; then $(CYGPATH_W) '$<'; else $(CYGPATH_W) '$(SRCDIR)/$<'; fi`
+	$(CXX) $(CXXFLAGS) $(INCL) -c -o $@ `$(CYGPATH_W) '$<'`
