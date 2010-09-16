@@ -10,7 +10,7 @@
 ##########################################################################
 
 # CHANGEME: This should be the name of your executable
-EXEDECOMP = osdip@EXEEXT@
+EXE = osdip@EXEEXT@
 
 # CHANGEME: Here is the name of all object files corresponding to the source
 #           code that you wrote in order to define the problem statement
@@ -25,7 +25,7 @@ OBJS         += OSDipBlockCoinSolver.@OBJEXT@
 # CHANGEME: Additional libraries
 ADDLIBS = 
 
-prefix = @prefix@
+
 
 # CHANGEME: Additional flags for compilation (e.g., include flags)
 ADDINCFLAGS =  -I${prefix}/include
@@ -33,6 +33,8 @@ ADDINCFLAGS =  -I${prefix}/include
 # CHANGEME: SRCDIR and VPATH should be the path to the source code. It is assumed
 # that the lib directory is in prefix/lib and the header files are in
 # prefix/include
+
+prefix = ../../
 
 VPATH = @srcdir@
 
@@ -242,6 +244,7 @@ LIBS += -L$(COINLIBDIR) -lCoinUtils
 CYGPATH_W = echo
 
 #===========================================================================#
+
 all: $(EXE)
 
 .SUFFIXES: .cpp .c .o .obj
@@ -260,3 +263,4 @@ clean:
 
 .cpp.obj:
 	$(CXX) $(CXXFLAGS) $(INCL) -c -o $@ `$(CYGPATH_W) '$<'`
+

@@ -408,6 +408,8 @@ AC_COIN_HAS_ASL
 #### EXAMPLE SOURCE CODE
 AC_COIN_VPATH_LINK(osSolverDemo/osSolverDemo.cpp)
 
+AC_COIN_VPATH_LINK(cglCuts/OSCglCuts.cpp)
+
 AC_COIN_VPATH_LINK(osDip/OSDip_Main.cpp)
 AC_COIN_VPATH_LINK(osDip/OSDipApp.cpp)
 AC_COIN_VPATH_LINK(osDip/OSDipApp.h)
@@ -422,10 +424,10 @@ AC_COIN_VPATH_LINK(osDip/OSDipParam.h)
 AC_COIN_VPATH_LINK(osDip/own.sty)
 AC_COIN_VPATH_LINK(osDip/osDip.tex)
 AC_COIN_VPATH_LINK(osDip/osDip.pdf)
-AC_COIN_VPATH_LINK(osDip/osdip.parm.in)
+
 
 ##############################################################################
-#                   VPATH links for example C++ source-code files                      #
+#                   VPATH links for example data files                      #
 ##############################################################################
 #### EXAMPLE DATA FILES
 AC_COIN_VPATH_LINK(data/CoinOS.opt)
@@ -443,6 +445,20 @@ AC_COIN_VPATH_LINK(data/parincLinear.osil)
 AC_COIN_VPATH_LINK(data/rosenbrockmod.osil)
 AC_COIN_VPATH_LINK(data/sendWithJobID.osol)
 AC_COIN_VPATH_LINK(data/wayneQuadratic.osil)
+
+AC_COIN_VPATH_LINK(data/spl1.osil)
+AC_COIN_VPATH_LINK(data/spl2.osil)
+AC_COIN_VPATH_LINK(data/genAssign.osil)
+AC_COIN_VPATH_LINK(data/smallIPBook.osil)
+
+AC_COIN_VPATH_LINK(data/spl1.osol)
+AC_COIN_VPATH_LINK(data/spl1-b.osol)
+AC_COIN_VPATH_LINK(data/spl2.osol)
+AC_COIN_VPATH_LINK(data/spl2-b.osol)
+AC_COIN_VPATH_LINK(data/genAssign.osol)
+AC_COIN_VPATH_LINK(data/smallIPBook.osol)
+
+
 
 
 ##############################################################################
@@ -469,19 +485,18 @@ AC_COIN_VPATH_LINK(MSVisualStudioOSExamples/osExamples.sln)
 # Here list all the files that configure should create (except for the
 # configuration header file)
 AC_CONFIG_FILES([Makefile
-          osDip/Makefile
-          osSolverDemo/Makefile])
-          algorithmicDiff/Makefile
-          examples/instanceGenerator/Makefile
-          examples/cglCuts/Makefile
-          examples/osModificationDemo/Makefile
-          examples/osRemoteTest/Makefile
-          examples/osSolverDemo/Makefile
-	  examples/osResultDemo/Makefile
-          examples/template/Makefile
-          examples/branchCutPrice/Makefile
- 	  examples/osDip/Makefile
- 	  examples/osDip/osdip.parm
+  osDip/Makefile
+  osDip/osdip.parm
+  algorithmicDiff/Makefile
+  instanceGenerator/Makefile
+  cglCuts/Makefile
+  osModificationDemo/Makefile
+  osRemoteTest/Makefile
+  osSolverDemo/Makefile
+  osResultDemo/Makefile
+  template/Makefile
+  branchCutPrice/Makefile])
+
           
 
 

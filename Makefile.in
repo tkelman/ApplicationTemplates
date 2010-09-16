@@ -39,9 +39,18 @@ DIST_COMMON = README $(am__configure_deps) $(srcdir)/../config.guess \
 	$(srcdir)/../config.sub $(srcdir)/../install-sh \
 	$(srcdir)/../ltmain.sh $(srcdir)/../missing \
 	$(srcdir)/Makefile.am $(srcdir)/Makefile.in \
-	$(top_srcdir)/configure $(top_srcdir)/osDip/Makefile.in \
-	$(top_srcdir)/osSolverDemo/Makefile.in AUTHORS COPYING \
-	ChangeLog INSTALL NEWS
+	$(top_srcdir)/algorithmicDiff/Makefile.in \
+	$(top_srcdir)/branchCutPrice/Makefile.in \
+	$(top_srcdir)/cglCuts/Makefile.in $(top_srcdir)/configure \
+	$(top_srcdir)/instanceGenerator/Makefile.in \
+	$(top_srcdir)/osDip/Makefile.in \
+	$(top_srcdir)/osDip/osdip.parm.in \
+	$(top_srcdir)/osModificationDemo/Makefile.in \
+	$(top_srcdir)/osRemoteTest/Makefile.in \
+	$(top_srcdir)/osResultDemo/Makefile.in \
+	$(top_srcdir)/osSolverDemo/Makefile.in \
+	$(top_srcdir)/template/Makefile.in AUTHORS COPYING ChangeLog \
+	INSTALL NEWS
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/acinclude.m4 \
@@ -51,7 +60,12 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
  configure.lineno configure.status.lineno
 mkinstalldirs = $(install_sh) -d
-CONFIG_CLEAN_FILES = osDip/Makefile osSolverDemo/Makefile
+CONFIG_CLEAN_FILES = osDip/Makefile osDip/osdip.parm \
+	algorithmicDiff/Makefile instanceGenerator/Makefile \
+	cglCuts/Makefile osModificationDemo/Makefile \
+	osRemoteTest/Makefile osSolverDemo/Makefile \
+	osResultDemo/Makefile template/Makefile \
+	branchCutPrice/Makefile
 SOURCES =
 DIST_SOURCES =
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -344,7 +358,25 @@ $(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(am__aclocal_m4_deps)
 	cd $(srcdir) && $(ACLOCAL) $(ACLOCAL_AMFLAGS)
 osDip/Makefile: $(top_builddir)/config.status $(top_srcdir)/osDip/Makefile.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
+osDip/osdip.parm: $(top_builddir)/config.status $(top_srcdir)/osDip/osdip.parm.in
+	cd $(top_builddir) && $(SHELL) ./config.status $@
+algorithmicDiff/Makefile: $(top_builddir)/config.status $(top_srcdir)/algorithmicDiff/Makefile.in
+	cd $(top_builddir) && $(SHELL) ./config.status $@
+instanceGenerator/Makefile: $(top_builddir)/config.status $(top_srcdir)/instanceGenerator/Makefile.in
+	cd $(top_builddir) && $(SHELL) ./config.status $@
+cglCuts/Makefile: $(top_builddir)/config.status $(top_srcdir)/cglCuts/Makefile.in
+	cd $(top_builddir) && $(SHELL) ./config.status $@
+osModificationDemo/Makefile: $(top_builddir)/config.status $(top_srcdir)/osModificationDemo/Makefile.in
+	cd $(top_builddir) && $(SHELL) ./config.status $@
+osRemoteTest/Makefile: $(top_builddir)/config.status $(top_srcdir)/osRemoteTest/Makefile.in
+	cd $(top_builddir) && $(SHELL) ./config.status $@
 osSolverDemo/Makefile: $(top_builddir)/config.status $(top_srcdir)/osSolverDemo/Makefile.in
+	cd $(top_builddir) && $(SHELL) ./config.status $@
+osResultDemo/Makefile: $(top_builddir)/config.status $(top_srcdir)/osResultDemo/Makefile.in
+	cd $(top_builddir) && $(SHELL) ./config.status $@
+template/Makefile: $(top_builddir)/config.status $(top_srcdir)/template/Makefile.in
+	cd $(top_builddir) && $(SHELL) ./config.status $@
+branchCutPrice/Makefile: $(top_builddir)/config.status $(top_srcdir)/branchCutPrice/Makefile.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
 
 mostlyclean-libtool:
@@ -366,7 +398,7 @@ CTAGS:
 distdir: $(DISTFILES)
 	$(am__remove_distdir)
 	mkdir $(distdir)
-	$(mkdir_p) $(distdir)/.. $(distdir)/osDip $(distdir)/osSolverDemo
+	$(mkdir_p) $(distdir)/.. $(distdir)/algorithmicDiff $(distdir)/branchCutPrice $(distdir)/cglCuts $(distdir)/instanceGenerator $(distdir)/osDip $(distdir)/osModificationDemo $(distdir)/osRemoteTest $(distdir)/osResultDemo $(distdir)/osSolverDemo $(distdir)/template
 	@srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`; \
 	topsrcdirstrip=`echo "$(top_srcdir)" | sed 's|.|.|g'`; \
 	list='$(DISTFILES)'; for file in $$list; do \
