@@ -141,7 +141,7 @@
 				LinkLibraryDependencies="false"
 				AdditionalOptions="&#x0D;&#x0A;&#x0D;&#x0A;&#x0D;&#x0A;"
 				AdditionalDependencies="libCbc.lib libCbcSolver.lib libOsi.lib libOsiSym.lib libOsiVol.lib libOsiDylp.lib amplsolv.lib libBonCouenne.lib libbonmin.lib libbonminampl.lib libCouenne.lib libCouenneReadnl.lib"
-				OutputFile="$(ProjectName).exe"
+				OutputFile="..\..\..\$(ProjectName)\$(ProjectName).exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="..\..\..\lib;..\..\..\lib\ifort"
 				GenerateManifest="false"
