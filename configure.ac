@@ -403,10 +403,16 @@ AC_COIN_HAS_ASL
 #                   VPATH links for example C++ source-code files                      #
 ##############################################################################
 
+AC_PROG_LN_S
+AC_COIN_CHECK_VPATH
+
 # In case this is a VPATH configuration we need to make sure that the
 # input files for the examples are available in the VPATH directory.
 #### EXAMPLE SOURCE CODE
 AC_COIN_VPATH_LINK(osSolverDemo/osSolverDemo.cpp)
+
+AC_COIN_VPATH_LINK(cglCuts/OSCglCuts.cpp)
+
 
 AC_COIN_VPATH_LINK(cglCuts/OSCglCuts.cpp)
 
@@ -424,6 +430,38 @@ AC_COIN_VPATH_LINK(osDip/OSDipParam.h)
 AC_COIN_VPATH_LINK(osDip/own.sty)
 AC_COIN_VPATH_LINK(osDip/osDip.tex)
 AC_COIN_VPATH_LINK(osDip/osDip.pdf)
+
+
+##############################################################################
+#                  The Bcp Files                     #
+##############################################################################
+
+
+
+AC_COIN_COPY_FROM_FILELIST(examples/BAC, examples/BAC/examplefiles.txt)
+
+# In case this is a VPATH configuration we need to make sure that the
+# input files for the examples are available in the VPATH directory.
+
+
+##############################################################################
+#                   Copy over the examples                                   #
+##############################################################################
+
+AC_DEFUN([AC_COPY_FROM_FILE], 
+[
+	if test -f $2 ; then 
+		AC_MSG_CHECKING(Creating target dir $1)
+	    mkdir -p $1
+		cd $1
+		for f in `cat $srcdir/$2` ; do
+			if test ! -e $srcdir/`dirname $2`/$f ; then
+			    mkdir -p `dirname $f`
+			    $LN_S $srcdir/`dirname $2`/$f $f
+			fi
+		done
+	fi
+])
 
 
 ##############################################################################

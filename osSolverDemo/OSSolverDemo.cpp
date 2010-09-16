@@ -150,7 +150,7 @@ int main( ){
 		int numOfBasisVar = osr->getNumberOfBasisVar(0);
 		std::cout << "NUMBER OF BASIS VARS = " << numOfBasisVar << std::endl;
 		
-		return 0;
+
 		
 		
 		//do garbage collection

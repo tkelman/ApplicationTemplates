@@ -128,7 +128,7 @@ int  main(){
 	const char dirsep =  CoinFindDirSeparator();
   	// Set directory containing mps data files.
   	std::string dataDir;
-    dataDir = dirsep == '/' ? "../../data/" : "..\\..\\data\\";
+    dataDir = dirsep == '/' ? "../data/" : "..\\data\\";
 	//osilFileName =  dataDir + "HS071_NLP.osil";
 	osilFileName =  dataDir   + "CppADTestLag.osil";
 	std::cout  << "osilFileName  =  " << osilFileName << std::endl;

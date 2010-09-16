@@ -57,7 +57,7 @@ int main( ){
 		// Set directory containing mps data files.
 		std::string dataDir;
 		std::string osilFileName;
-		dataDir = dirsep == '/' ? "../../data/" : "..\\..\\data\\";
+		dataDir = dirsep == '/' ? "../data/" : "..\\data\\";
 		
 		osilFileName =  dataDir  +  "parincLinear.osil";
 		std::cout << "Try to read a sample file" << std::endl;

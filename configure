@@ -23338,9 +23338,17 @@ fi
 #                   VPATH links for example C++ source-code files                      #
 ##############################################################################
 
-# In case this is a VPATH configuration we need to make sure that the
-# input files for the examples are available in the VPATH directory.
-#### EXAMPLE SOURCE CODE
+echo "$as_me:$LINENO: checking whether ln -s works" >&5
+echo $ECHO_N "checking whether ln -s works... $ECHO_C" >&6
+LN_S=$as_ln_s
+if test "$LN_S" = "ln -s"; then
+  echo "$as_me:$LINENO: result: yes" >&5
+echo "${ECHO_T}yes" >&6
+else
+  echo "$as_me:$LINENO: result: no, using $LN_S" >&5
+echo "${ECHO_T}no, using $LN_S" >&6
+fi
+
 echo "$as_me:$LINENO: checking whether this is a VPATH configuration" >&5
 echo $ECHO_N "checking whether this is a VPATH configuration... $ECHO_C" >&6
 if test `cd $srcdir; pwd` != `pwd`; then
@@ -23352,9 +23360,20 @@ echo "$as_me:$LINENO: result: $coin_vpath_config" >&5
 echo "${ECHO_T}$coin_vpath_config" >&6
 
 
+# In case this is a VPATH configuration we need to make sure that the
+# input files for the examples are available in the VPATH directory.
+#### EXAMPLE SOURCE CODE
+
 if test $coin_vpath_config = yes; then
   coin_vpath_link_files="$coin_vpath_link_files osSolverDemo/osSolverDemo.cpp"
 fi
+
+
+
+if test $coin_vpath_config = yes; then
+  coin_vpath_link_files="$coin_vpath_link_files cglCuts/OSCglCuts.cpp"
+fi
+
 
 
 
@@ -23432,6 +23451,96 @@ fi
 if test $coin_vpath_config = yes; then
   coin_vpath_link_files="$coin_vpath_link_files osDip/osDip.pdf"
 fi
+
+
+
+##############################################################################
+#                  The Bcp Files                     #
+##############################################################################
+
+
+
+
+echo Creating copies in examples/BAC ...
+cmd="cp"
+if test -e $srcdir/examples/BAC/examplefiles.txt ; then
+  my_target_dir="examples/BAC"
+  my_link_files=`cat $srcdir/examples/BAC/examplefiles.txt`
+  my_dirname=`(dirname examples/BAC/examplefiles.txt) 2>/dev/null ||
+$as_expr Xexamples/BAC/examplefiles.txt : 'X\(.*[^/]\)//*[^/][^/]*/*$' \| \
+	 Xexamples/BAC/examplefiles.txt : 'X\(//\)[^/]' \| \
+	 Xexamples/BAC/examplefiles.txt : 'X\(//\)$' \| \
+	 Xexamples/BAC/examplefiles.txt : 'X\(/\)' \| \
+	 .     : '\(.\)' 2>/dev/null ||
+echo Xexamples/BAC/examplefiles.txt |
+    sed '/^X\(.*[^/]\)\/\/*[^/][^/]*\/*$/{ s//\1/; q; }
+  	  /^X\(\/\/\)[^/].*/{ s//\1/; q; }
+  	  /^X\(\/\/\)$/{ s//\1/; q; }
+  	  /^X\(\/\).*/{ s//\1/; q; }
+  	  s/.*/./; q'`
+#  if test -e $my_target_dir; then : ; else
+#    AS_MKDIR_P($my_target_dir)
+#  fi
+  for i in $my_link_files; do
+    #rm -rf $my_target_dir/$i
+    if test -e $my_target_dir/$i; then : ; else
+      dirn2=`(dirname $my_target_dir/$i) 2>/dev/null ||
+$as_expr X$my_target_dir/$i : 'X\(.*[^/]\)//*[^/][^/]*/*$' \| \
+	 X$my_target_dir/$i : 'X\(//\)[^/]' \| \
+	 X$my_target_dir/$i : 'X\(//\)$' \| \
+	 X$my_target_dir/$i : 'X\(/\)' \| \
+	 .     : '\(.\)' 2>/dev/null ||
+echo X$my_target_dir/$i |
+    sed '/^X\(.*[^/]\)\/\/*[^/][^/]*\/*$/{ s//\1/; q; }
+  	  /^X\(\/\/\)[^/].*/{ s//\1/; q; }
+  	  /^X\(\/\/\)$/{ s//\1/; q; }
+  	  /^X\(\/\).*/{ s//\1/; q; }
+  	  s/.*/./; q'`
+      if test -e $dirn2; then : ; else
+        { if $as_mkdir_p; then
+    mkdir -p $dirn2
+  else
+    as_dir=$dirn2
+    as_dirs=
+    while test ! -d "$as_dir"; do
+      as_dirs="$as_dir $as_dirs"
+      as_dir=`(dirname "$as_dir") 2>/dev/null ||
+$as_expr X"$as_dir" : 'X\(.*[^/]\)//*[^/][^/]*/*$' \| \
+	 X"$as_dir" : 'X\(//\)[^/]' \| \
+	 X"$as_dir" : 'X\(//\)$' \| \
+	 X"$as_dir" : 'X\(/\)' \| \
+	 .     : '\(.\)' 2>/dev/null ||
+echo X"$as_dir" |
+    sed '/^X\(.*[^/]\)\/\/*[^/][^/]*\/*$/{ s//\1/; q; }
+  	  /^X\(\/\/\)[^/].*/{ s//\1/; q; }
+  	  /^X\(\/\/\)$/{ s//\1/; q; }
+  	  /^X\(\/\).*/{ s//\1/; q; }
+  	  s/.*/./; q'`
+    done
+    test ! -n "$as_dirs" || mkdir $as_dirs
+  fi || { { echo "$as_me:$LINENO: error: cannot create directory $dirn2" >&5
+echo "$as_me: error: cannot create directory $dirn2" >&2;}
+   { (exit 1); exit 1; }; }; }
+
+      fi
+      $cmd $abs_source_dir/$my_dirname/$i $my_target_dir/$i
+    fi
+  done
+else
+  { echo "$as_me:$LINENO: WARNING: File list file examples/BAC/examplefiles.txt missing!" >&5
+echo "$as_me: WARNING: File list file examples/BAC/examplefiles.txt missing!" >&2;}
+fi
+
+
+
+# In case this is a VPATH configuration we need to make sure that the
+# input files for the examples are available in the VPATH directory.
+
+
+##############################################################################
+#                   Copy over the examples                                   #
+##############################################################################
+
 
 
 
