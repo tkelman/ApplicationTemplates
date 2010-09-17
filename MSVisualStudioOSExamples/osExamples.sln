@@ -17,7 +17,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "branchCutPrice", "branchCut
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cglCuts", "cglCuts.vcproj", "{7FFFD7EF-19CB-4D8E-B9BF-A9CB3F88D351}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "osSolverDemo", "osSolverDemo\osSolverDemo.vcproj", "{E9056D5E-F8D6-48F2-B9D5-E8736B742FD5}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "osSolverDemo", "osSolverDemo.vcproj", "{E9056D5E-F8D6-48F2-B9D5-E8736B742FD5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
