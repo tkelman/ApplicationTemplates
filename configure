@@ -25133,6 +25133,7 @@ fi
 ##############################################################################
 
 #AC_PROG_LN_S
+#For this project we want hard links
 LN_S='ln'
 echo "$as_me:$LINENO: checking whether this is a VPATH configuration" >&5
 echo $ECHO_N "checking whether this is a VPATH configuration... $ECHO_C" >&6
