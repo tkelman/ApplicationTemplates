@@ -432,7 +432,9 @@ AC_COIN_HAS_ASL
 #                   VPATH links for example C++ source-code files                      #
 ##############################################################################
 
-AC_PROG_LN_S
+#AC_PROG_LN_S
+#For this project we want hard links
+LN_S='ln'
 AC_COIN_CHECK_VPATH
 
 # In case this is a VPATH configuration we need to make sure that the
