@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\..\include;..\..\examples\branchCutPrice\include;..\..\include\Coin"
+				AdditionalIncludeDirectories="..\..\include;..\branchCutPrice\include;..\..\include\Coin"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -118,7 +118,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="..\..\..\include;..\..\branchCutPrice\include;..\..\..\include\Coin"
+				AdditionalIncludeDirectories="..\..\include;..\branchCutPrice\include;..\..\include\Coin"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -142,7 +142,7 @@
 				AdditionalDependencies="libipopt.lib libOS.lib libOsiCbc.lib libOsiClp.lib libCgl.lib libSym.lib libVol.lib libDylp.lib libCoinUtils.lib libClp.lib libCbc.lib libCbcSolver.lib libOsi.lib libOsiSym.lib libOsiVol.lib libOsiDylp.lib amplsolv.lib libBonCouenne.lib libbonmin.lib libbonminampl.lib libCouenne.lib libCouenneReadnl.lib libBcp.lib"
 				OutputFile="$(ProjectName).exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\..\..\lib\ifort;..\..\..\lib"
+				AdditionalLibraryDirectories="..\..\lib\ifort;..\..\lib"
 				GenerateManifest="false"
 				GenerateDebugInformation="false"
 				ProgramDatabaseFile=""
@@ -185,35 +185,35 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\..\branchCutPrice\Member\OS.cpp"
+				RelativePath="..\branchCutPrice\Member\OS.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\branchCutPrice\Member\OS_cut.cpp"
+				RelativePath="..\branchCutPrice\Member\OS_cut.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\branchCutPrice\Member\OS_init.cpp"
+				RelativePath="..\branchCutPrice\Member\OS_init.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\branchCutPrice\LP\OS_lp.cpp"
+				RelativePath="..\branchCutPrice\LP\OS_lp.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\branchCutPrice\Member\OS_packer.cpp"
+				RelativePath="..\branchCutPrice\Member\OS_packer.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\branchCutPrice\TM\OS_tm.cpp"
+				RelativePath="..\branchCutPrice\TM\OS_tm.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\branchCutPrice\Member\OS_user_data.cpp"
+				RelativePath="..\branchCutPrice\Member\OS_user_data.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\branchCutPrice\Member\OS_var.cpp"
+				RelativePath="..\branchCutPrice\Member\OS_var.cpp"
 				>
 			</File>
 		</Filter>
