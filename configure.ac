@@ -42,6 +42,13 @@ AC_COIN_PROJECTDIR_INIT
 LIBS_without_ADDLIBS="$LIBS"
 
 
+
+
+
+
+# Check if user wants to produce debugging code
+AC_COIN_DEBUG_COMPILE(examples)
+
 # Get the name of the C++ compiler and appropriate compiler options
 coin_opt_cxxflags="-O3"
 AC_COIN_PROG_CXX
@@ -63,6 +70,28 @@ AC_COIN_INIT_AUTO_TOOLS
 # that we can't get them any other way. This will define WORDS_BIGENDIAN if
 # we're on a big-endian machine, and do nothing otherwise. Also necessary for
 # the David Gay dtoa
+
+AC_C_BIGENDIAN
+
+# We also need to worry about long long 
+# if -pedantic used for OSdtoa then we crash without
+# the following was added to autoconf 2.60 -- put in when build tools switches over
+# this will define HAVE_LONG_LONG_INT
+#AC_TYPE_LONG_LONG_INT 
+#for now assume C++
+#AC_DEFINE([SIZEOF_LONG_LONG],[0],[in C++ make sure SIZEOF_LONG_LONG is less than 8])
+#KIPP deal with the above
+
+AC_LANG_PUSH( C++)
+
+
+
+# the following does not work for cached variables
+#AC_CHECK_SIZEOF( long long)
+AC_CHECK_SIZEOF( int)
+AC_CHECK_SIZEOF( double)
+AC_CHECK_SIZEOF( long)
+
 
 
 
@@ -413,8 +442,21 @@ AC_COIN_VPATH_LINK(osSolverDemo/osSolverDemo.cpp)
 
 AC_COIN_VPATH_LINK(cglCuts/OSCglCuts.cpp)
 
-
 AC_COIN_VPATH_LINK(cglCuts/OSCglCuts.cpp)
+
+AC_COIN_VPATH_LINK(algorithmicDiff/OSAlgorithmicDiffTest.cpp)
+
+AC_COIN_VPATH_LINK(instanceGenerator/OSInstanceGenerator.cpp)
+
+AC_COIN_VPATH_LINK(osModificationDemo/OSModificationDemo.cpp)
+
+AC_COIN_VPATH_LINK(instanceGenerator/OSInstanceGenerator.cpp)
+
+AC_COIN_VPATH_LINK(osRemoteTest/OSRemoteTest.cpp)
+
+AC_COIN_VPATH_LINK(osResultDemo/OSResultDemo.cpp)
+
+AC_COIN_VPATH_LINK(template/template.cpp)
 
 AC_COIN_VPATH_LINK(osDip/OSDip_Main.cpp)
 AC_COIN_VPATH_LINK(osDip/OSDipApp.cpp)
@@ -438,7 +480,7 @@ AC_COIN_VPATH_LINK(osDip/osDip.pdf)
 
 
 
-AC_COIN_COPY_FROM_FILELIST(examples/BAC, examples/BAC/examplefiles.txt)
+AC_COIN_COPY_FROM_FILELIST(branchCutPrice, branchCutPrice/examplefiles.txt)
 
 # In case this is a VPATH configuration we need to make sure that the
 # input files for the examples are available in the VPATH directory.
