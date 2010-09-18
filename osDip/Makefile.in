@@ -42,9 +42,8 @@ OSINCDIR = @includedir@/
 OSLIBDIR = ${prefix}/lib
 
 # CHANGEME:
-#must fill in see example
-DIPPATH = 
-#DIPPATH = /Users/kmartin/coin/dip-trunk/vpath/
+#must change to location of Dip project
+DIPPATH = /Users/kmartin/coin/dip-trunk/vpath-debug/
 
 
 

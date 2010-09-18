@@ -14,7 +14,7 @@
 \bibliographystyle{plain}
 \makeindex
      
-     
+       
 %%%%%
 % some other macros
 \newcommand{\figurepath}{./figures}
@@ -102,14 +102,16 @@
 
 
 
-\title{Using Dip With OS}
+\title{The OS Dip Solver:\\
+A Generic Block-Angluar Decomposition Algorithm}
 \vskip 2in
 \author{Horand Gassmann, Jun Ma,  Kipp Martin}
 \maketitle
 
 \begin{abstract}
 In this document we describe how to use the Decomposition in Integer Programming
-(Dip) package with the Optimization Services (OS) package.  The code for this example is contained in the folder {\tt  OS/examples/osDip.}
+(Dip) package with the Optimization Services (OS) package.  The code for this
+example is contained in the folder {\tt  ApplicationTemplates/osDip.}
 
 \end{abstract}
 
@@ -126,24 +128,27 @@ In this document we describe how to use the Decomposition in Integer Programming
 %\noindent\hrulefill
 \newpage
 
-\section{Using the OS-Dip Example}
+\section{Building and Testing the OS-Dip Example}
 
-Currently, the Decomposition in Integer Programming ({\bf Dip} package is not a dependency of the Optimization Services ({\bf OS}) package.  In order to run the {\bf osDip} example it is necessary to download both the {\bf OS} and {\bf  Dip} package. Download order is not relevant. In the discussion that follows we assume that for both {\bf OS} and {\bf Dip} the user has successfully completed a {\tt configure}, {\tt make}, and {\tt make install}.
+Currently, the Decomposition in Integer Programming ({\bf Dip} package is not a
+dependency of the Optimization Services ({\bf OS}) package. In order to run the
+OS Dip solver it is necessary to download both the {\bf OS} and {\bf  Dip}
+projects. Download order is not relevant. 
+In the discussion that follows we assume that for both 
+{\bf OS} and {\bf Dip} the user has successfully completed a {\tt
+configure}, {\tt make}, and {\tt make install}. We also assume
+that the user is working with the trunk version of both {\bf OS} and {\bf Dip.}
 
 
+The OS Dip solver C++ code is contained in {\tt TemplateApplication/osDip}.
+ The {\tt configure}  will create a {\tt Makefile}  in the {\tt
+ TemplateApplication/osDip} folder. The {\tt Makefile} must be edited to reflect
+ the location of the {\bf Dip} project. The {\tt Makefile} contains the
+ line
 
-I have tested this on several simple plant location problems and generalized
-assignment problems. I have tested on both the Mac and Linux and it seems to be
-working. The configure step should generate a working Makefile for your platform.
-The OS project still does not include Dip as an external so you need to point to
-the Dip root. There is a variable in the generated Makefile,
-
-DIPPATH =
-
-that need to be filled in after configure. This "should" be the only line in the
-Makefile you need to edit. So on my machine, I have
-
-DIPPATH = /Users/kmartin/coin/dip-trunk/vpath/
+\begin{verbatim}
+DIPPATH = /Users/kmartin/coin/dip-trunk/vpath-debug/
+\end{verbatim}
 
 and there exists a directory
 
@@ -336,7 +341,9 @@ X41 + X42 =    1
 
 \section{Implementing A Block Solver}
 
-\section{Issues}
+Describe the Factory Code
+
+\section{Issues to Fix}
 
 \begin{itemize}
   \item Enhance solveRelaxed to allow parallel processing of blocks. See ticket
