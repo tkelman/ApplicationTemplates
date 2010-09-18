@@ -22,7 +22,7 @@ under the Common Public License.])
 
 # List one file in the package so that the configure script can test
 # whether the package is actually there
-AC_CONFIG_SRCDIR(osSolverDemo/osSolverDemo.cpp)
+AC_CONFIG_SRCDIR(osSolverDemo/OSSolverDemo.cpp)
 
 # Where should everything be installed by default?  Here, we want it
 # to be installed directly in 'bin', 'lib', 'include' subdirectories
@@ -440,7 +440,7 @@ AC_COIN_CHECK_VPATH
 # In case this is a VPATH configuration we need to make sure that the
 # input files for the examples are available in the VPATH directory.
 #### EXAMPLE SOURCE CODE
-AC_COIN_VPATH_LINK(osSolverDemo/osSolverDemo.cpp)
+AC_COIN_VPATH_LINK(osSolverDemo/OSSolverDemo.cpp)
 
 AC_COIN_VPATH_LINK(cglCuts/OSCglCuts.cpp)
 

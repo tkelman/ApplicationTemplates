@@ -431,7 +431,7 @@ PACKAGE_VERSION='1.0'
 PACKAGE_STRING='examples 1.0'
 PACKAGE_BUGREPORT=''
 
-ac_unique_file="osSolverDemo/osSolverDemo.cpp"
+ac_unique_file="osSolverDemo/OSSolverDemo.cpp"
 ac_default_prefix=`pwd`
 # Factoring default headers for most tests.
 ac_includes_default="\
@@ -25151,7 +25151,7 @@ echo "${ECHO_T}$coin_vpath_config" >&6
 #### EXAMPLE SOURCE CODE
 
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files osSolverDemo/osSolverDemo.cpp"
+  coin_vpath_link_files="$coin_vpath_link_files osSolverDemo/OSSolverDemo.cpp"
 fi
 
 
