@@ -1,4 +1,3 @@
-
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual C++ Express 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "instanceGenerator", "instanceGenerator.vcproj", "{1D00CF5F-628E-47EB-A2FB-9FFC878DDE29}"
