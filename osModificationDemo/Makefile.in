@@ -23,11 +23,7 @@ ADDLIBS =
 # CHANGEME: Additional flags for compilation (e.g., include flags)
 ADDINCFLAGS =  -I${prefix}/include
 
-# CHANGEME:  VPATH should be the path to the source code. It is assumed
-# that the lib directory is in prefix/lib and the header files are in
-# prefix/include
 
-VPATH = @srcdir@
 prefix = ../../
 
 ASLLIB = @ASLLIB@

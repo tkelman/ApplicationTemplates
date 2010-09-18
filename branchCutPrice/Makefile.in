@@ -34,11 +34,7 @@ ADDLIBS =
 ADDINCFLAGS =  -I${prefix}/include   -I`$(CYGPATH_W)  $(SRCDIR)/include`
 
 
-# CHANGEME: SRCDIR and VPATH should be the path to the source code. It is assumed
-# that the lib directory is in prefix/lib and the header files are in
-# prefix/include
-SRCDIR = @srcdir@
-VPATH = @srcdir@ @srcdir@/TM @srcdir@/Member @srcdir@/LP
+
 prefix = ../../
 
 ASLLIB = @ASLLIB@
