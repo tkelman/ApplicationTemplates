@@ -25504,55 +25504,93 @@ fi
 
 
 
+##############################################################################
+#                   VPATH links for Excel files                              #
+##############################################################################
+
+if test $coin_vpath_config = yes; then
+  coin_vpath_link_files="$coin_vpath_link_files Excel/OSWebServiceGUI.xlsm"
+fi
+
+
+if test $coin_vpath_config = yes; then
+  coin_vpath_link_files="$coin_vpath_link_files Excel/clsws_OSSolverServiceServic.cls"
+fi
+
+
+if test $coin_vpath_config = yes; then
+  coin_vpath_link_files="$coin_vpath_link_files Excel/parIncVBA.xlsm"
+fi
+
+
+if test $coin_vpath_config = yes; then
+  coin_vpath_link_files="$coin_vpath_link_files Excel/clsOSInstance.cls"
+fi
+
 
 
 ##############################################################################
-#                   VPATH links for example Visual Studio project files                      #
+#                   VPATH links for other files                              #
+##############################################################################
+
+if test $coin_vpath_config = yes; then
+  coin_vpath_link_files="$coin_vpath_link_files AUTHORS"
+fi
+
+
+if test $coin_vpath_config = yes; then
+  coin_vpath_link_files="$coin_vpath_link_files README"
+fi
+
+
+
+##############################################################################
+#                   VPATH links for example Visual Studio project files      #
 ##############################################################################
 
 
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files MSVisualStudioOSExamples/algorithmicDiff/algorithmicDiff.vcproj"
+  coin_vpath_link_files="$coin_vpath_link_files MSVisualStudioOSExamples/algorithmicDiff.vcproj"
 fi
 
 
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files MSVisualStudioOSExamples/branchCutPrice/branchCutPrice.vcproj"
+  coin_vpath_link_files="$coin_vpath_link_files MSVisualStudioOSExamples/branchCutPrice.vcproj"
 fi
 
 
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files MSVisualStudioOSExamples/cglCuts/cglCuts.vcproj"
+  coin_vpath_link_files="$coin_vpath_link_files MSVisualStudioOSExamples/cglCuts.vcproj"
 fi
 
 
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files MSVisualStudioOSExamples/instanceGenerator/instanceGenerator.vcproj"
+  coin_vpath_link_files="$coin_vpath_link_files MSVisualStudioOSExamples/instanceGenerator.vcproj"
 fi
 
 
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files MSVisualStudioOSExamples/osModificationDemo/osModificationDemo.vcproj"
+  coin_vpath_link_files="$coin_vpath_link_files MSVisualStudioOSExamples/osModificationDemo.vcproj"
 fi
 
 
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files MSVisualStudioOSExamples/osRemoteTest/osRemoteTest.vcproj"
+  coin_vpath_link_files="$coin_vpath_link_files MSVisualStudioOSExamples/osRemoteTest.vcproj"
 fi
 
 
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files MSVisualStudioOSExamples/osResultDemo/osResultDemo.vcproj"
+  coin_vpath_link_files="$coin_vpath_link_files MSVisualStudioOSExamples/osResultDemo.vcproj"
 fi
 
 
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files MSVisualStudioOSExamples/osSolverDemo/osSolverDemo.vcproj"
+  coin_vpath_link_files="$coin_vpath_link_files MSVisualStudioOSExamples/osSolverDemo.vcproj"
 fi
 
 
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files MSVisualStudioOSExamples/template/template.vcproj"
+  coin_vpath_link_files="$coin_vpath_link_files MSVisualStudioOSExamples/template.vcproj"
 fi
 
 
@@ -25563,6 +25601,11 @@ fi
 
 if test $coin_vpath_config = yes; then
   coin_vpath_link_files="$coin_vpath_link_files MSVisualStudioOSExamples/osExamples.sln"
+fi
+
+
+if test $coin_vpath_config = yes; then
+  coin_vpath_link_files="$coin_vpath_link_files MSVisualStudioOSExamples/osExamples.suo"
 fi
 
 
