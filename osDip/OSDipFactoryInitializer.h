@@ -17,6 +17,7 @@
 #include<map>
 #include "OSDipBlockCoinSolver.h"
 //#include "MyBlockSolver.h"
+#include "OSDipBlockSolverFactory.h"
 #include <string>
 
 

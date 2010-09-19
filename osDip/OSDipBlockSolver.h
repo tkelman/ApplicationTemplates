@@ -1,5 +1,5 @@
-/* $Id: OSBlockSolver.h 3038 2009-11-07 11:43:44Z Gassmann $ */
-/** @file OSBlockSolver.h
+/* $Id: OSDipBlockSolver.h 3038 2009-11-07 11:43:44Z Gassmann $ */
+/** @file OSDipBlockSolver.h
  * 
  *
  * @author  Gus Gassmann, Jun Ma, Kipp Martin, 
@@ -26,6 +26,9 @@
 #include <vector>
 #include <string>
 #include <map>
+
+
+
 
 // --------------------------------------------------------------------- //
 /*!
@@ -106,17 +109,5 @@ public:
 };//end class OSDipBlockSolver
 
 
-/**
- * Solver Factory
- */
-
-class OSDipBlockSolverFactory{
-	
-public:
-	OSInstance *osinstance;
-	virtual  OSDipBlockSolver* create() = 0;
-	static  std::map<std::string, OSDipBlockSolverFactory*> factories;
-	static 	OSDipBlockSolver* createOSDipBlockSolver(const string &solverName) throw(ErrorClass);
-};
 
 #endif

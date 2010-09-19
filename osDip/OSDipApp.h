@@ -53,7 +53,10 @@ public:
 	std::set<int> m_blockVarsAll; 
 	
 	/** m_coreConstraintIndexes is the set core constraint indexes */
-	std::set<int>  m_coreConstraintIndexes;		
+	std::set<int>  m_coreConstraintIndexes;	
+	
+	/** m_blockFactories is a vector solver factory for each block */
+	std::vector<std::string >  m_blockFactories;
 	
 	/** Class id tag (for log / debugging). */
 	const string m_classTag;

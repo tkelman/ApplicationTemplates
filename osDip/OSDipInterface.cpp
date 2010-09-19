@@ -159,6 +159,58 @@ double OS_DipInterface::getObjectiveOffset() {
 }// end getObjectiveOffset
 
 
+
+
+std::vector<std::string > OS_DipInterface::getBlockFactories() {
+
+	//get the factory solver for each block in the model
+
+	if(m_blockFactoriesProcessed == true) return m_blockFactories;
+
+	try {
+		if (m_osoption == NULL)
+			throw ErrorClass("we have a null osoption");
+
+		std::vector<OtherVariableOption*> otherVariableOptions;
+		std::vector<OtherVariableOption*>::iterator vit;
+		
+		if (m_osoption != NULL && m_osoption->getNumberOfOtherVariableOptions()
+				> 0) {
+
+			otherVariableOptions = m_osoption->getOtherVariableOptions("Dip");
+			//iterate over the vector of variable options
+			for (vit = otherVariableOptions.begin(); vit
+					!= otherVariableOptions.end(); vit++) {
+				
+				// right now we assume blocks are ordered  -- we ignor value
+				if ((*vit)->name.compare("variableBlockSet") == 0) {
+												
+					if( (*vit)->value.size() > 0){
+						
+						 m_blockFactories.push_back( (*vit)->value );
+						 
+					}else{
+						
+						 m_blockFactories.push_back( "" );
+					}
+				
+				}
+				
+			}
+		}
+		
+	}//end try
+	
+	catch (const ErrorClass& eclass) {
+
+		std::cout << eclass.errormsg << std::endl;
+		throw ErrorClass(eclass.errormsg);
+
+	}
+	m_blockFactoriesProcessed = true;
+	return m_blockFactories;
+}//end getBlockVarIndexes
+
 std::vector<std::set<int> > OS_DipInterface::getBlockVarIndexes() {
 
 	//get the variable indexes for each block in the model
@@ -184,7 +236,7 @@ std::vector<std::set<int> > OS_DipInterface::getBlockVarIndexes() {
 
 				// right now we assume blocks are ordered  -- we ignor value
 				if ((*vit)->name.compare("variableBlockSet") == 0) {
-
+					
 					// see if we have a set of block variables
 					// if so we insert into our vector of sets
 					varSet.clear();
@@ -616,7 +668,7 @@ OS_DipInterface::OS_DipInterface():
 		m_blockVariableIndexesProcessed( false),
 		m_coreConstraintIndexesProcessed( false),
 		m_blockConstraintIndexesProcessed( false),
-		m_blockOSInstancesProcessed( false) {
+		m_blockFactoriesProcessed( false) {
 
 }
 

@@ -23,14 +23,6 @@
 
 %Brad Bell Macros
 
-% Latex macros defined for all the CppAD documentation:
-\newcommand{\T}{ {\rm T} }
-\newcommand{\R}{ {\bf R} }
-\newcommand{\C}{ {\bf C} }
-\newcommand{\D}[2]{ \frac{\partial #1}{\partial #2} }
-\newcommand{\DD}[3]{ \frac{\partial^2 #1}{\partial #2 \partial #3} }
-\newcommand{\Dpow}[2]{ \frac{\partial^{#1}}{\partial  {#2}^{#1}} }
-\newcommand{\dpow}[2]{ \frac{ {\rm d}^{#1}}{{\rm d}\, {#2}^{#1}} }
 
 % Define the hangref environment used for the References list:
 \newenvironment{hangref}
@@ -62,37 +54,11 @@
 
 \setlength{\fboxrule}{2\fboxrule} \setlength{\fboxsep}{3\fboxsep}
 
-\newcommand{\Sa}{8pt}
-\newcommand{\Sb}{0pt}
 
-\renewcommand{\_}{{\char"5F}}
-\renewcommand{\{}{{\char"7B}}
-\renewcommand{\}}{{\char"7D}}
-\renewcommand{\^}{{\char"0D}}
 
-\let\accute= \'
-\renewcommand{\'}{{\char"0D}}
 
-\newcommand{\bfit}{\bfseries\itshape}
 
-\newlength{\extopskip} \newlength{\exbottomskip}
-\setlength{\exbottomskip}{1\baselineskip}
-\addtolength{\exbottomskip}{-5.0pt}
-\setlength{\extopskip}{1\exbottomskip}
-\addtolength{\extopskip}{-1\parskip}
 
-\newenvironment{Example}{\vspace{1\extopskip}\noindent\hspace*{2em}
-                         \frenchspacing\small
-                         \tt\begin{tabular}{@{}l@{}}}{
-                         \end{tabular}\\[1\exbottomskip]}
-
-\newcommand{\Titem}{\item[$\triangleright$]}
-\newcommand{\Ditem}{\item[$\diamond$]}
-
-\newenvironment{Itemize}{\begin{quote}\normalsize
-   \baselineskip 20pt plus .3pt minus .1pt \begin{itemize}}
-   {\end{itemize}\end{quote}}
-   % Set path to folder containing figures
 \newcommand{\FigureFolder}{figures}
 
 
@@ -103,7 +69,7 @@
 
 
 \title{The OS Dip Solver:\\
-A Generic Block-Angluar Decomposition Algorithm}
+A Generic Block-Angluar Decomposition Implementation}
 \vskip 2in
 \author{Horand Gassmann, Jun Ma,  Kipp Martin}
 \maketitle
@@ -130,10 +96,10 @@ example is contained in the folder {\tt  ApplicationTemplates/osDip.}
 
 \section{Building and Testing the OS-Dip Example}\label{section:build}
 
-Currently, the Decomposition in Integer Programming ({\bf Dip} package is not a
-dependency of the Optimization Services ({\bf OS}) package. In order to run the
-OS Dip solver it is necessary to download both the {\bf OS} and {\bf  Dip}
-projects. Download order is irrelevant. 
+Currently, the Decomposition in Integer Programming ({\bf Dip}) package is not a
+dependency of the Optimization Services ({\bf OS}) package -- {\bf Dip} is not
+included in the {\bf OS} Externals file. In order to run the OS Dip solver it is
+necessary to download both the {\bf OS} and {\bf  Dip} projects. Download order is irrelevant. 
 In the discussion that follows we assume that for both 
 {\bf OS} and {\bf Dip} the user has successfully completed a {\tt
 configure}, {\tt make}, and {\tt make install}. We also assume
@@ -207,54 +173,185 @@ algorithm for block-angular integer programs.
 \subsection{General Philosophy}
 
 
-\subsection{The code}
+\begin{eqnarray}
+z_{IP} &=&  \min  \{c^{\top} x \, | \, A^{\prime} x \ge b^{\prime},  \,\, 
+A^{\prime \prime} x \ge b^{\prime \prime}, \, \, x \in \mathbb{Z}^{n}  \}
+\end{eqnarray}
 
-The following C++ files are used.
+\begin{eqnarray}
+{\cal P} &=&  \rm{conv} ( \{ x \in \mathbb{Z}^{n} \, | \, A^{\prime} x \ge
+b^{\prime}
+\})
+\end{eqnarray}
+
+
+\begin{eqnarray}
+z_{LP} &=&  \min  \{c^{\top} x \, | \, A^{\prime} x \ge b^{\prime},  \,\, 
+A^{\prime \prime} x \ge b^{\prime \prime}, \, \, x \in \mathbb{R}^{n}  \}
+\end{eqnarray}
+
+
+\begin{eqnarray}
+z_{D} &=&  \min  \{c^{\top} x \, | \, A^{\prime} x \ge b^{\prime},  \,\, 
+x \in {\cal P}, \, \, x \in \mathbb{R}^{n}  \}
+\end{eqnarray}
+
+The implementation of the OS Dip solver provides a virtual class {\tt
+OSDipBlockSolver} with a pure virtual function {\tt solve()}.  The user is
+expected to provide a class that inherits from {\tt OSDipBlockSolver} and
+implements the method {\tt solve()}.  The {\tt solve()} method should optimize a
+linear objective function over ${\cal P}.$ More details are provided below. The
+implementation is such so that the user only has to provide a class with a solve
+method. The user does not have to edit or alter any of the OS Dip Solver code.
+By using polymorphic factories the actual solver details are hidden from the OS
+Solver.  A default solver, {\tt OSDipBlockCoinSolver}, is provided. This default
+solver takes no advantage of special structure and simply calls COIN-OR {bf
+Cbc.}
+
+\subsection{The Code}
+
+
+
+
+
+{\bf Key classes}
+
 
 \vskip 8pt
-\noindent {\bf OSDip\_Main.cpp}
+\noindent {\bf OSDipBlockSolver:}  This is a virtual class with a pure virtual
+function: 
+
+\begin{verbatim}
+void solve(double *cost, std::vector<IndexValuePair*> *solIndexValPair,
+double *optVal)
+\end{verbatim}
+
+
+
+\vskip 8pt
+\noindent {\bf OSDipBlockSolverFactory:}  This is also virtual class with a pure
+virtual function: 
+
+\begin{verbatim}
+OSDipBlockSolver* create()
+\end{verbatim}
+
+This class also has the static method
+
+\begin{verbatim}
+OSDipBlockSolver* createOSDipBlockSolver(const string &solverName)
+\end{verbatim}
+
+and a map
+
+\begin{verbatim}
+std::map<std::string, OSDipBlockSolverFactory*> factories;
+\end{verbatim}
 
 
 \vskip 8pt
-\noindent {\bf OSDipBlockSolver.cpp}
+\noindent {\bf Factory:}  This class inherits from the class {\bf
+OSDipBlockSolverFactory}. Every sover class that inherits from the  {\bf
+OSDipBlockSolver} class should have a {\bf Factory} class memember and since
+this {\bf Factory} class member inherits from the {\bf
+OSDipBlockSolverFactory} class it should implement a {\tt create()} method that
+creates an optject in the class inheriting from {\bf
+OSDipBlockSolver}.
 
 \vskip 8pt
-\noindent {\bf OSDipBlockCoinSolver.cpp}
+\noindent {\bf OSDipFactoryInitializer:}  This class initializes the static map
+
+\begin{verbatim}
+OSDipBlockSolverFactory::factories
+\end{verbatim}
+in the {\bf OSDipBlockSolverFactory} class. 
 
 \vskip 8pt
-\noindent {\bf OSDipInterface.cpp}
+\noindent {\bf OSDipApp:}  This class inherits from the {\bf Dip} class {\bf
+DecompApp}. In {\bf OSDipApp} we implement methods for creating the core
+(coupling) constraints, i.e. the constraints $A^{\prime \prime} x \ge
+b^{\prime \prime}$.  This is done by implementing the  {\tt createModels()}
+method. Regardless, of the problem none of the relaxed or block constraints in $A^{\prime } x \ge
+b^{\prime}$ are created. These are treated implicitly in the solver class that
+inherits from the class {\bf OSDipBlockSolver.}  This class also implemnts a
+method that defines the variables that appear only in the blocks ({\bf
+createModelMasterOnlys2}), and a method for generating an initial master (the
+method {\bf generateInitVars()  }). 
+
+Since the constraints $A^{\prime } x \ge
+b^{\prime}$ are treated explicitly by the Dip solver the {\tt solveRelaxed()}
+method must be implemented. In our implementation we have the {\bf OSDipApp} class data
+member:
+\begin{verbatim}
+std::vector<OSDipBlockSolver* > m_osDipBlockSolver;
+\end{verbatim}
+when the {\tt solveRelaxed()} method is called for block {\tt whichBlock} in
+turn we make the call
+\begin{verbatim}
+m_osDipBlockSolver[whichBlock]->solve(cost, &solIndexValPair, &varRedCost);
+\end{verbatim}
+and the appropriated solver in class {\bf OSDipBlockSolver} is called. Finally,
+the {\bf OSDipApp} class also  initiates the reading of the OS option and
+instance files. How these files are used is discussed in Section \ref{section:defineinstance}. 
+Based on option input
+data this class also creates the appropriate solver object for each block, i.e.
+it populates the {\tt  m\_osDipBlockSolver} vector.
 
 \vskip 8pt
-\noindent {\bf OSDipApp.cpp}
+\noindent {\bf OSDipInterface:} This class is used  as an interface between the
+{\bf OSDipApp} class and classes in the {\bf OS} library. This provides a number
+of get methods to provide information to {\bf OSDipApp} such as the coefficients
+in the $A^{\prime \prime}$ matrix, objective function coefficients, number of
+blocks etc. The {\bf OSDipInterface} class reads the input OSiL and OSoL files
+and creates in-memory data structures based on these files. 
 
 
+
+\vskip 8pt
+\noindent {\bf OSDipBlockCoinSolver:}  This class inherits from the {\bf
+OSDipBlockSolver} class. It is meant to illustrate how to create a solver class.
+This class solves each block by calling {\bf Cbc}.  Use of this class provides a
+generic black angular decomposition algorithm.
+
+
+
+\vskip 8pt
+There is also  {\bf OSDip\_Main.cpp:} which has the {\tt main()} routine and is
+the entry point for the executable. It first creates a new price-branch-and-cut
+decomposition algorithm and then an Alps solver for which the {\tt solve()}
+method is called. 
+
+
+\section{User Requirements}\label{section:userreq}
+
+
+The {\bf OSDipBlockCoinSolver} class provides a solve method for optimizing a
+linear objective function over {\cal P} given a linear objective function.
+However, this takes no advantage of the special structure available in the
+blocks. Therefore, the user may wish to implement his or her own solver class.
+In this case the user is required to do the following:
  
+ \begin{itemize}
+   
+   \item[1.] implement a class that inherits from the {\bf OSDipBlockSolver}
+   class and implements the solve method,
+   
+   \item[2.] implement a class {\bf Factory} that inherits from the class {\bf
+OSDipBlockSolverFactory} and implements the {\tt create()} method,
 
-\section{Defining the Problem Instance and Blocks}\label{section:defineinstance}
-
-Here we describe how to use the OSoption stuff and OSInstance.
-
-\section{The Parameter File}\label{section:paramaterfile}
-
-Look at the osdip.parm file. You can see by commenting and uncommenting you can
-run one of three problems that will also get downloaded.
-
-sp1.osil -- a simple plant location problem spl2.osil -- a second simple plant
-location problem genAssign.osil -- a generalize assignment problem
-
-The osol files (the option files) determine behavior. For example, if you use
-
-osolFiles/spl1-b.osol
-
-then the assingment constraints are the block constraints. If you use
-
-osolFiles/spl1.osol
-
-then the setup forcing constraints are the block constraints.  This  new  example
-also exhibits the problems I filed ticked on.
-
-
-\section{Simple Plant/Lockbox Location Example}
+	\item[3.] edit the file {\bf OSDipFactoryInitializer.h} and add a line:
+	
+	\begin{verbatim}
+	OSDipBlockSolverFactory::factories["MyBlockSolver"] = new
+	MyBlockSolver::Factory;
+	\end{verbatim}
+   
+   \item[4.] alter the Makefile to include the new source code.
+ \end{itemize}
+ 
+ 
+ 
+ \section{Simple Plant/Lockbox Location Example}
 
 
  The problem minimizing
@@ -287,24 +384,30 @@ $$
 \eqnarrayx{
   & \min  &\sum_{i = 1}^{n} \sum_{j = 1}^{m} c_{ij} x_{ij}& + &\sum_{i = 1}^{n} f_{i} y_{i} &&&&&
 \eq{eq:lockobj} \cr
-(LB) &{\rm s.t.} & \sum_{i = 1}^{n} x_{ij} &=& 1, & j = 1, \ldots, m &&&&\eq{eq:lockdemand} \cr
-&&x_{ij} - y_{i} &\le& 0, & i = 1, \ldots, n, & j = 1, \ldots, m &&& \eq{eq:locksetup} \cr
+(LB) &&x_{ij} - y_{i} &\le& 0, & i = 1, \ldots, n, & j = 1, \ldots, m
+&&&\eq{eq:locksetup} \cr  &{\rm s.t.} & \sum_{i = 1}^{n} x_{ij} &=& 1, & j = 1, \ldots, m &&&&\eq{eq:lockdemand} \cr
 && x_{ij}, \, \, y_{i} &\in& \{ 0, 1 \}, & i = 1, \ldots, n, & j = 1, \ldots, m. &&&\eq{eq:lockbinary}
 \cr
 }
 $$
 
 The objective (\ref{eq:lockobj}) is to minimize the sum of the cost of capital plus the fixed cost of
-operating the lock boxes.  The requirement that every customer be assigned a lock box is modeled by
-constraint (\ref{eq:lockdemand}).   Constraints (\ref{eq:locksetup})  are forcing  constraints and
-play the same role as constraint set (\ref{eq:mpdlsfixcharge}) in the dynamic lot size model.   
-
-\vskip 10pt
-{\bf Location Example 1:} A three-by-five example.
+operating the lock boxes.   Constraints (\ref{eq:locksetup})  are forcing 
+constraints and require that a lock box be open if a customer is served by that
+lock box. For now, we consider these the $A^{\prime} x \ge b^{\prime}$
+constraints.  The requirement that every customer be assigned a lock box is
+modeled by constraints (\ref{eq:lockdemand}).  For now, we consider these the
+$A^{\prime \prime} x \ge b^{\prime \prime}$ constraints.
 
 \vskip 12pt
+{\bf Location Example 1:} A three plant, five customer model.
 
-\begin{center}
+\vskip 8pt
+
+\begin{table}[ht]\label{table:spl3by5data}
+\centering
+\caption{Data for a 3 plant, 5 customer problem}
+\vskip 8pt
 \begin{tabular}{|cc|c|c|} \hline
        &    & CUSTOMER &         \\
       &     &\begin{tabular}{ccccc}
@@ -316,18 +419,92 @@ play the same role as constraint set (\ref{eq:mpdlsfixcharge}) in the dynamic lo
        & 3   &\begin{tabular}{ccccc}
             5   &  4  &  2  &  1  &  3 \end{tabular} &  3  \\   \hline
 \end{tabular}     
-\end{center}                         
+\end{table}  
+
+
+\vskip 10pt
+\begin{eqnarray*}
+\min  && 2x_{11} +3 x_{12} + 4x_{13} + 5x_{14}+ 7x_{15} + 2 y_{1} + \\
+&& 4x_{21} +3 x_{22} + x_{23} + 2x_{24}+  6x_{25} + 3y_{2}+ \\
+&& 5x_{31} +4 x_{32} + 2 x_{33} + x_{34}+  3x_{35} +   3y_{3} \\
+\end{eqnarray*}
+
+
+\begin{eqnarray*}
+\begin{array}{lll}
+x_{11}\leq y_{1}\leq 1 & &  \\
+x_{12}\leq y_{1}\leq 1 & & \\
+x_{13}\leq y_{1}\leq 1 & & \\
+x_{14}\leq y_{1}\leq 1 & & \\
+x_{15}\leq y_{1}\leq 1 & & \\
+x_{21}\leq y_{2}\leq 1 & & \\
+x_{22}\leq y_{2}\leq 1 & &   \\
+x_{23}\leq y_{2}\leq 1 & & \\
+x_{24}\leq y_{2}\leq 1 & & \\
+x_{25}\leq y_{2}\leq 1 & & \\
+x_{31}\leq y_{3}\leq 1 & & \\
+x_{32}\leq y_{3}\leq 1 & &\\
+x_{33}\leq y_{3}\leq 1 & &\\ 
+x_{33}\leq y_{3}\leq 1 & &\\ 
+x_{33}\leq y_{3}\leq 1 & &\\ 
+\end{array}
+ A^{\prime}x \ge b^{\prime} \,\, {\rm constraints} \\
+x_{ij},y_{i}\ge 0 , \,\, i = 1, \ldots, n, \, \, j = 1, \ldots, m.   
+\end{eqnarray*}
+
+
+\[
+\begin{array}{llll}
+{\rm s.t.} &x_{11}+x_{21}+x_{31}  = 1 & & \\
+&x_{12}+x_{22}+x_{32} = 1 & &   \\
+&x_{13}+x_{23}+x_{33} = 1 & &  \\
+&x_{14}+x_{24}+x_{34} = 1 & &  \\
+&x_{15}+x_{25}+x_{35} = 1 & &  
+\end{array}   A^{\prime \prime}   x \ge b^{\prime \prime} \,\, {\rm
+constraints}x \ge 0 \,\, {\rm constraints}
+\]
+  
+  
+
+
+                      
 
 
 \vskip 12pt
 
-{\bf Location Example 2:} A three-by-three example.
+{\bf Location Example 2 (SPL2):} A three plant, three customer model.
 
-\vskip 10pt
-$\min                                                    
-2x_{11}+x_{12}+x_{13}+x_{21}+2x_{22}+x_{23}+x_{31}+x_{32}+2x_{33}+
-y_{1}+y_{2}+y_{3}$
+\vskip 8pt
 
+
+\begin{table}[ht]\label{table:spl3by3data}
+\centering
+\caption{Data for a three plant, three customer problem}
+\vskip 8pt
+\begin{tabular}{|cc|c|c|} \hline
+       &    & CUSTOMER &         \\
+      &     &\begin{tabular}{ccc}
+             1&2&3 
+             \end{tabular} & FIXED COSTS  \\ \hline
+     &   1   &\begin{tabular}{ccc}
+             2&1&1 
+             \end{tabular} &   1  \\
+ PLANT & 2   &\begin{tabular}{ccc}
+             1  &  2  &  1   
+             \end{tabular} &  1  \\    
+       & 3   &\begin{tabular}{ccc}
+            1   &  1  &  2   
+            \end{tabular} &  1  \\   \hline
+\end{tabular}     
+\end{table}  
+
+ 
+\vskip 8pt
+\begin{eqnarray*}
+\min  && 2x_{11} + x_{12} + x_{13}  +  y_{1} + \\
+&& x_{21} +2 x_{22} + x_{23} +       y_{2}+ \\
+&& x_{31} + x_{32} + 1 x_{33} +  +       y_{3} \\
+\end{eqnarray*}
 
 \[
 \begin{array}{llll}
@@ -409,6 +586,154 @@ X41 + X42 =    1
 3 X11 + 6 X21 + 5 X31 + 7 X41 <=   13
 2 X12 + 4 X22 + 10 X32 + 4 X42 <=   10
 \end{verbatim}
+ 
+
+ 
+
+\section{Defining the Problem Instance and Blocks}\label{section:defineinstance}
+
+Here we describe how to use the OSoption stuff and OSInstance.  We illustrate
+with a simple plant location problem. Refer back to the example in Table
+\ref{table:spl3by5data} for a three-plant, five-customer problem. We treat the
+fixed charge constraints as the block constraints, i.e. we treat constraint set
+\ref{eq:locksetup} as the set $A^{\prime} x \ge b^{\prime}$ constraints. These
+constraints naturally break into a block for each plant, i.e. there is a block
+of constraints:
+\begin{eqnarray}
+x_{ij} \le y_{i}
+\end{eqnarray}
+In order to use the OS Dip solver it is necessary to: 1) define the set of
+variables in each block and 2) define the set of constraints that constitute the
+core or coupling constraints. This information is communicated to the OS Dip
+solver using Optimization Services option Language (OSoL). The OSoL input file
+for the example in Table \ref{table:spl3by5data} appears in Figures
+\ref{figure:parinc-osil} and \ref{figure:parinc-osil2}.  See lines 32-55. There
+is an {\tt <other>} option with {\tt name="variableBlockSet"} for each block.
+Each block then lists the variables in the block. For example, the first block
+consists of variable indexed by 0, 1, 2, 3, 4, and 15. These correspond to
+variables $x_{11},$  $x_{12},$  $x_{13},$  $x_{13},$ $x_{14},$ and  $y_{1}.$
+Likewise the second block corresponds to the variable for the second plant and
+the third block corresponds to variables for the third plant.
+
+
+
+
+
+{\small
+\begin{figure}[hp]
+   \small {\obeyspaces\let =\
+\makebox[0in][t]{\fbox{\tt\begin{tabular}{@{}l@{}}
+1   <?xml version="1.0" encoding="UTF-8"?>\\
+2   <osol>\\
+3      <general>\\
+4         <instanceName>spl1 -- setup constraints are the blocks</instanceName>\\
+5      </general>\\
+6      <optimization>\\
+7         <variables numberOfOtherVariableOptions="6">\\
+8         <other name="initialCol" solver="Dip" numberOfVar="6" value="0">\\
+9            <var idx="0" value="1"/>\\
+10           <var idx="1" value="1"/>\\
+11           <var idx="2" value="1"/>\\
+12           <var idx="3" value="1"/>\\
+13           <var idx="4" value="1"/>\\
+14           <var idx="15" value="1"/>\\
+15        </other>\\
+16           <other name="initialCol" solver="Dip" numberOfVar="6" value="1">\\
+17              <var idx="5" value="1"/>\\
+18              <var idx="6" value="1"/>\\
+19              <var idx="7" value="1"/>\\
+20              <var idx="8" value="1"/>\\
+21              <var idx="9" value="1"/>\\
+22              <var idx="16" value="1"/>\\
+23           </other>\\
+24           <other name="initialCol" solver="Dip" numberOfVar="6" value="2">\\
+25              <var idx="10" value="1"/>\\
+26              <var idx="11" value="1"/>\\
+27              <var idx="12" value="1"/>\\
+28              <var idx="13" value="1"/>\\
+29              <var idx="14" value="1"/>\\
+30              <var idx="17" value="1"/>\\
+31           </other>\\
+32           <other name="variableBlockSet" solver="Dip" numberOfVar="6" value="MySolver1">\\
+33              <var idx="0"/>\\
+34              <var idx="1"/>\\
+35              <var idx="2"/>\\
+36              <var idx="3"/>\\
+37              <var idx="4"/>\\
+38              <var idx="15"/>\\
+39           </other>\\
+40           <other name="variableBlockSet" solver="Dip" numberOfVar="6" value="MySolver2">\\
+41              <var idx="5"/>\\
+42              <var idx="6"/>\\
+43              <var idx="7"/>\\
+44              <var idx="8"/>\\
+45              <var idx="9"/>\\
+46              <var idx="16"/>\\
+47           </other>\\
+\end{tabular} }}} \medskip
+\caption{A sample OSoL file -- SPL1.osol}\label{figure:parinc-osil}
+\end{figure}
+} %end small
+
+
+It is also necessary to convey which constraints constitute the core
+constraints. This is done in lines 58-64. The core constraints are indexed by 0,
+1, 2, 3, 4. These constitute the demand constraints given in Equation
+(\ref{eq:lockdemand}). In the Optimization Services instance Language (OSiL
+file) file that corresponds to this problem the demand constraints are input
+first. 
+
+
+{\small
+\begin{figure}[hp]
+   \small {\obeyspaces\let =\
+\makebox[0in][t]{\fbox{\tt\begin{tabular}{@{}l@{}}
+48           <other name="variableBlockSet" solver="Dip" numberOfVar="6" value="MySolver3">\\
+49              <var idx="10"/>\\
+50              <var idx="11"/>\\
+51              <var idx="12"/>\\
+52              <var idx="13"/>\\
+53              <var idx="14"/>\\
+54              <var idx="17"/>\\
+55           </other>\\
+56        </variables>\\
+57        <constraints numberOfOtherConstraintOptions="1">\\
+58           <other name="constraintSet" solver="Dip" numberOfCon="5" type="Core">\\
+59              <con idx="0"/>\\
+60              <con idx="1"/>\\
+61              <con idx="2"/>\\
+62              <con idx="3"/>\\
+63              <con idx="4"/>\\
+64           </other>\\
+65        </constraints>\\
+66     </optimization>\\
+67  </osol>\\
+\end{tabular} }}} \medskip
+\caption{A sample OSoL file -- SPL1.osol (Continued)}\label{figure:parinc-osil2}
+\end{figure}
+} %end small
+ 
+
+\section{The Dip Parameter File}\label{section:paramaterfile}
+
+Look at the osdip.parm file. You can see by commenting and uncommenting you can
+run one of three problems that will also get downloaded.
+
+sp1.osil -- a simple plant location problem spl2.osil -- a second simple plant
+location problem genAssign.osil -- a generalize assignment problem
+
+The osol files (the option files) determine behavior. For example, if you use
+
+osolFiles/spl1-b.osol
+
+then the assingment constraints are the block constraints. If you use
+
+osolFiles/spl1.osol
+
+then the setup forcing constraints are the block constraints.  This  new  example
+also exhibits the problems I filed ticked on.
+
+
 
 \section{Implementing A Block Solver}
 
@@ -425,6 +750,11 @@ Describe the Factory Code
   \item Figure out how to use BranchEnforceInMaster or BranchEnforceInSubProb so
   I don't get the large bonds on the variables. See ticket 47.
 \end{itemize}
+
+
+
+
+ 
 
 \end{document}
 

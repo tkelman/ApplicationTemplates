@@ -25,6 +25,8 @@
 #include "OSCoinSolver.h"
 #include "OSrLReader.h"
 
+#include "OSDipBlockSolverFactory.h"
+
 // --------------------------------------------------------------------- //
 /*!
  * \class 
@@ -93,7 +95,7 @@ public:
 	class Factory : public OSDipBlockSolverFactory{
 		
 	public:
-
+		
 		OSDipBlockSolver* create() {  return new OSDipBlockCoinSolver( osinstance); };
 		
 	};// end class OSDipBlockSolverFactory

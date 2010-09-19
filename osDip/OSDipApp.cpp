@@ -61,20 +61,45 @@ void OSDipApp::initializeApp(UtilParameters & utilParam) {
 		// next get a vector of sets, where each set is the
 		// variable indexes for a block
 		m_blockVars = m_osInterface.getBlockVarIndexes();
+		
+		//get the solver factory for each block
+		 m_blockFactories = m_osInterface.getBlockFactories();
 
 		//finally get an osinstance for each block
 		m_blockOSInstances = m_osInterface.getBlockOSInstances();
+		
+		
 
 		//loop over the instances and generate a solver for each block
 		std::vector<OSInstance*>::iterator vit1;
+		
+		std::string solverFactory;
+		int kount = 0;
 
 		OSDipBlockSolver *solver = NULL;
 		factoryInit  = new OSDipFactoryInitializer();
 		
 		for (vit1 = m_blockOSInstances.begin(); vit1
 				!= m_blockOSInstances.end(); vit1++) {
-			OSDipBlockSolverFactory::factories[ m_appParam.solverFactory]->osinstance = *vit1;
-			solver = OSDipBlockSolverFactory::factories[ m_appParam.solverFactory]->create();
+			
+			//kipp check for a valid name here -- 
+			if( m_blockFactories[ kount].size()  > 0){
+				
+				solverFactory =  m_blockFactories[ kount];
+				
+			}else{
+				
+				solverFactory =  m_appParam.solverFactory;
+				
+			}
+			
+			kount++;
+			
+			
+			OSDipBlockSolverFactory::factories[ solverFactory]->osinstance = *vit1;
+			solver = OSDipBlockSolverFactory::factories[ solverFactory]->create();
+			
+			
 			m_osDipBlockSolver.push_back( solver);
 
 		}

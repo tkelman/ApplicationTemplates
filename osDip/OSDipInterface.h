@@ -121,6 +121,12 @@ public:
 	bool m_blockOSInstancesProcessed;
 	
 	
+	//get factory solver for each block in the model
+	std::vector<std::string > getBlockFactories();
+	std::vector<std::string > m_blockFactories;
+	bool m_blockFactoriesProcessed;
+	
+	
 	//get the objective function coefficients
 	double *getObjectiveFunctionCoeff();
 	

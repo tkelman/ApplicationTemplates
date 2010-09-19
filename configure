@@ -25251,6 +25251,16 @@ fi
 
 
 if test $coin_vpath_config = yes; then
+  coin_vpath_link_files="$coin_vpath_link_files osDip/OSDipBlockSolverFactory.h"
+fi
+
+
+if test $coin_vpath_config = yes; then
+  coin_vpath_link_files="$coin_vpath_link_files osDip/OSDipBlockSolverFactory.cpp"
+fi
+
+
+if test $coin_vpath_config = yes; then
   coin_vpath_link_files="$coin_vpath_link_files osDip/OSDipInterface.cpp"
 fi
 
