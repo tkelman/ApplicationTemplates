@@ -677,11 +677,9 @@ the third block corresponds to variables for the third plant.
 
 
 It is also necessary to convey which constraints constitute the core
-constraints. This is done in lines 58-64. The core constraints are indexed by 0,
-1, 2, 3, 4. These constitute the demand constraints given in Equation
-(\ref{eq:lockdemand}). In the Optimization Services instance Language (OSiL
-file) file that corresponds to this problem the demand constraints are input
-first. 
+constraints. This is done in lines 58-64. The core constraints are indexed by
+15, 16, 17, 18, 19. These constitute the demand constraints given in Equation
+(\ref{eq:lockdemand}). 
 
 
 {\small
@@ -699,11 +697,11 @@ first.
 56        </variables>\\
 57        <constraints numberOfOtherConstraintOptions="1">\\
 58           <other name="constraintSet" solver="Dip" numberOfCon="5" type="Core">\\
-59              <con idx="0"/>\\
-60              <con idx="1"/>\\
-61              <con idx="2"/>\\
-62              <con idx="3"/>\\
-63              <con idx="4"/>\\
+59              <con idx="15"/>\\
+60              <con idx="16"/>\\
+61              <con idx="17"/>\\
+62              <con idx="18"/>\\
+63              <con idx="19"/>\\
 64           </other>\\
 65        </constraints>\\
 66     </optimization>\\
