@@ -49,36 +49,15 @@
         	</variables>
 
         	
-        <constraints numberOfOtherConstraintOptions="6">
+        <constraints numberOfOtherConstraintOptions="1">
 
-        	<other name="constraintSet" solver="Dip" numberOfCon="1" type="Block" value="0">
-        		<con idx="0" />
-        	
-        	</other>
-        	
-        	<other name="constraintSet" solver="Dip" numberOfCon="1" type="Block" value="1">
-        		<con idx="1" />
-
-        	</other>
-        	
-        	<other name="constraintSet" solver="Dip" numberOfCon="1" type="Block" value="2">
-        		<con idx="2" />
-
-        	</other>
-        	
-        	
-        	<other name="constraintSet" solver="Dip" numberOfCon="1" type="Block" value="3">
-        		<con idx="3" />
-
-        	</other>
-        	
-        	<other name="constraintSet" solver="Dip" numberOfCon="1" type="Block" value="4">
-        		<con idx="4" />
-
-        	</other>
-        	
         	
         	<other name="constraintSet" solver="Dip" numberOfCon="15" type="Core">
+        		<con idx="0"/>
+        		<con idx="1"/>
+        		<con idx="2"/>
+        		<con idx="3"/>
+        		<con idx="4"/>
         		<con idx="5"/>
         		<con idx="6"/>
         		<con idx="7"/>
@@ -89,11 +68,6 @@
         		<con idx="12"/>
         		<con idx="13"/>
         		<con idx="14"/>
-        		<con idx="15"/>
-        		<con idx="16"/>
-        		<con idx="17"/>
-        		<con idx="18"/>
-        		<con idx="19"/>
         	</other>
         	
         </constraints>	

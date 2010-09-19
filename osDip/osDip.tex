@@ -79,6 +79,29 @@ In this document we describe how to use the Decomposition in Integer Programming
 (Dip) package with the Optimization Services (OS) package.  The code for this
 example is contained in the folder {\tt  ApplicationTemplates/osDip.}
 
+
+The OS Dip solver:
+
+1. Assumes the subproblems are solved via an oracle
+
+2. The OS Dip Solver code is independent of the oracle used to optimize the
+subporblems
+
+3. Variables are assigned to blocks using an OS option file, the assignment of
+variables and blocks has no effect on the OS Dip Solver code
+
+4. Different blocks can be assigned different solution oracles in the OS Option
+file
+
+5. There is a default oracle implemented (called OSDipBockCoinSolver) that
+currently uses Cbc
+
+6. Users can add their own oracles without altering the OS Dip Solver code. This
+is done via polymorphic factories. The user creates a separate file containing
+the Oracle class. The user provided Oracle class simply inherits from the
+OSDipBlockSolver class. Just 1) add the object file name to the Makefile, and 2)
+add the necessary line to OSDipFactoryInitializer.h
+
 \end{abstract}
 
 
@@ -179,7 +202,7 @@ A^{\prime \prime} x \ge b^{\prime \prime}, \, \, x \in \mathbb{Z}^{n}  \}
 \end{eqnarray}
 
 \begin{eqnarray}
-{\cal P} &=&  \rm{conv} ( \{ x \in \mathbb{Z}^{n} \, | \, A^{\prime} x \ge
+{\cal P} &=&  {\rm conv} ( \{ x \in \mathbb{Z}^{n} \, | \, A^{\prime} x \ge
 b^{\prime}
 \})
 \end{eqnarray}
@@ -326,7 +349,7 @@ method is called.
 
 
 The {\bf OSDipBlockCoinSolver} class provides a solve method for optimizing a
-linear objective function over {\cal P} given a linear objective function.
+linear objective function over ${\cal P}$ given a linear objective function.
 However, this takes no advantage of the special structure available in the
 blocks. Therefore, the user may wish to implement his or her own solver class.
 In this case the user is required to do the following:
@@ -448,11 +471,11 @@ x_{33}\leq y_{3}\leq 1 & &\\
 x_{33}\leq y_{3}\leq 1 & &\\ 
 x_{33}\leq y_{3}\leq 1 & &\\ 
 \end{array}
- A^{\prime}x \ge b^{\prime} \,\, {\rm constraints} \\
+ A^{\prime }x \ge b^{\prime} \,\, {\rm constraints} \\
 x_{ij},y_{i}\ge 0 , \,\, i = 1, \ldots, n, \, \, j = 1, \ldots, m.   
 \end{eqnarray*}
 
-
+ 
 \[
 \begin{array}{llll}
 {\rm s.t.} &x_{11}+x_{21}+x_{31}  = 1 & & \\
@@ -461,7 +484,7 @@ x_{ij},y_{i}\ge 0 , \,\, i = 1, \ldots, n, \, \, j = 1, \ldots, m.
 &x_{14}+x_{24}+x_{34} = 1 & &  \\
 &x_{15}+x_{25}+x_{35} = 1 & &  
 \end{array}   A^{\prime \prime}   x \ge b^{\prime \prime} \,\, {\rm
-constraints}x \ge 0 \,\, {\rm constraints}
+constraints}
 \]
   
   
@@ -506,14 +529,7 @@ constraints}x \ge 0 \,\, {\rm constraints}
 && x_{31} + x_{32} + 1 x_{33} +  +       y_{3} \\
 \end{eqnarray*}
 
-\[
-\begin{array}{llll}
-{\rm s.t.} &x_{11}+x_{21}+x_{31} = 1 & & \\
-&x_{12}+x_{22}+x_{32} = 1 & &   \\
-&x_{13}+x_{23}+x_{33} = 1 & &
-\end{array}   Ax \ge b \,\, {\rm constraints}
-  \]
-  
+
   
 \begin{eqnarray*}
 \begin{array}{lll}
@@ -527,9 +543,21 @@ x_{31}\leq y_{3}\leq 1 & & \\
 x_{32}\leq y_{3}\leq 1 & &\\
 x_{33}\leq y_{3}\leq 1 & &\\ 
 \end{array}
- Bx \ge b \,\, {\rm constraints} \\
+A^{\prime}   x \ge b^{\prime} \,\, {\rm
+constraints} \\
 x_{ij},y_{i}\ge 0 , \,\, i = 1, \ldots, n, \, \, j = 1, \ldots, m.   
 \end{eqnarray*}
+
+\[
+\begin{array}{llll}
+{\rm s.t.} &x_{11}+x_{21}+x_{31} = 1 & & \\
+&x_{12}+x_{22}+x_{32} = 1 & &   \\
+&x_{13}+x_{23}+x_{33} = 1 & &
+\end{array}  A^{\prime \prime}   x \ge b^{\prime \prime} \,\, {\rm
+constraints}
+  \]
+  
+
 
 
 
@@ -568,10 +596,12 @@ $$
 $$
 
 The objective function (\ref{eq:gapobj}) is to minimize the total assignment cost.  Constraint
-(\ref{eq:gapassign}) requires that each task is assigned a server.  The requirement that the
-server capacity not be exceeded is given in (\ref{eq:gapcapacity}). 
-
-The test problem
+(\ref{eq:gapassign}) requires that each task is assigned a server.  These
+constraints correspond to the $A^{\prime \prime} x \ge b^{\prime \prime}$
+constraints.   The requirement that the server capacity not be exceeded is given
+in (\ref{eq:gapcapacity}). These corresspond to the $A^{\prime} x \ge
+b^{\prime}$ constraints that are used to define ${\cal P}$. The test problem
+used in the file {\tt genAssign.osil} is:
 
 
 \begin{verbatim}
@@ -618,7 +648,6 @@ the third block corresponds to variables for the third plant.
 
 
 
-
 {\small
 \begin{figure}[hp]
    \small {\obeyspaces\let =\
@@ -630,14 +659,14 @@ the third block corresponds to variables for the third plant.
 5      </general>\\
 6      <optimization>\\
 7         <variables numberOfOtherVariableOptions="6">\\
-8         <other name="initialCol" solver="Dip" numberOfVar="6" value="0">\\
-9            <var idx="0" value="1"/>\\
-10           <var idx="1" value="1"/>\\
-11           <var idx="2" value="1"/>\\
-12           <var idx="3" value="1"/>\\
-13           <var idx="4" value="1"/>\\
-14           <var idx="15" value="1"/>\\
-15        </other>\\
+8            <other name="initialCol" solver="Dip" numberOfVar="6" value="0">\\
+9               <var idx="0" value="1"/>\\
+10              <var idx="1" value="1"/>\\
+11              <var idx="2" value="1"/>\\
+12              <var idx="3" value="1"/>\\
+13              <var idx="4" value="1"/>\\
+14              <var idx="15" value="1"/>\\
+15           </other>\\
 16           <other name="initialCol" solver="Dip" numberOfVar="6" value="1">\\
 17              <var idx="5" value="1"/>\\
 18              <var idx="6" value="1"/>\\
@@ -682,6 +711,24 @@ constraints. This is done in lines 58-64. The core constraints are indexed by
 (\ref{eq:lockdemand}). 
 
 
+Notice also that in lines 32, 40, and 48 there is an attribute {\tt value} in
+the {\tt <other>} variable element with the attribute {\tt name} equal to {\tt
+variableBlockSet}.  The attribute {\tt value} should be the name of the solver
+factory that should be assigned to solve that block. For example, if the
+optimization problem that results from solving a linear objective over the
+constraints defining the first block is solved using {\tt MySolver1} then this
+must correspond to a 
+
+\begin{verbatim}
+OSDipBlockSolverFactory::factories["MySolver1"] = new
+MySolver1::Factory;
+\end{verbatim}
+
+in the file {\bf OSDipFactoryInitializer.h}.
+
+
+
+
 {\small
 \begin{figure}[hp]
    \small {\obeyspaces\let =\
@@ -711,6 +758,24 @@ constraints. This is done in lines 58-64. The core constraints are indexed by
 \end{figure}
 } %end small
  
+One can use the OSoL file to specify a set of starting columns for the initial
+restricted master. In Figure \ref{figure:parinc-osil} see lines 8-31.  In and OS
+option file (OSoL) there is {\tt <variables>} element that has {\tt <other>}
+children. Initial columns are specified using the {\tt <other>} elements. This
+is done by using  the {\tt name} attribute and setting its value to {\tt
+initialCol}. Then the children of the tag contain index-value pairs that specify
+the column. For example, the first initial column corresponds to setting:
+
+\begin{eqnarray*}
+x_{11} = 1, \quad  x_{12} = 1, \quad  x_{13} = 1, \quad  x_{14} = 1, \quad
+x_{15} = 1, \quad y_{1} = 1
+\end{eqnarray*}
+
+
+Finally note that in all of this discussion we know to apply the options to {\bf
+Dip} because the attribute {\tt solver} always had value {\tt Dip}. It is
+critical to set this attribute in all of the option tags. 
+
 
 \section{The Dip Parameter File}\label{section:paramaterfile}
 
