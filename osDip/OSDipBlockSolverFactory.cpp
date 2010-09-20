@@ -43,3 +43,15 @@ OSDipBlockSolver* OSDipBlockSolverFactory::createOSDipBlockSolver(const string &
 	}
 	
 }//end 
+
+
+/**
+ *
+ * Default Constructor. 
+ */	
+OSDipBlockSolverFactory::OSDipBlockSolverFactory(){
+	
+}
+ 
+ OSDipBlockSolverFactory::~OSDipBlockSolverFactory(){
+ }

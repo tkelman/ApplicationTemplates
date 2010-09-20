@@ -95,6 +95,14 @@ public:
 	class Factory : public OSDipBlockSolverFactory{
 		
 	public:
+
+		Factory(){
+			
+		}
+		
+		~Factory(){
+			
+		}
 		
 		OSDipBlockSolver* create() {  return new OSDipBlockSlpSolver(  osinstance); };
 		

@@ -90,11 +90,19 @@ public:
 	 * Default destructor. 
 	 */	
 	~OSDipBlockCoinSolver();	
-	
+
 	class Factory;
 	class Factory : public OSDipBlockSolverFactory{
 		
 	public:
+
+		Factory(){
+			
+		}
+		
+		~Factory(){
+			
+		}
 		
 		OSDipBlockSolver* create() {  return new OSDipBlockCoinSolver( osinstance); };
 		

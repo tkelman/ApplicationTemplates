@@ -46,6 +46,19 @@ public:
 	virtual  OSDipBlockSolver* create() = 0;
 	static  std::map<std::string, OSDipBlockSolverFactory*> factories;
 	static 	OSDipBlockSolver* createOSDipBlockSolver(const string &solverName) throw(ErrorClass);
+
+	/**
+	 *
+	 * Default Constructor. 
+	 */	
+	OSDipBlockSolverFactory();
+	
+	/**
+	 *
+	 * Default destructor. 
+	 */	
+	virtual ~OSDipBlockSolverFactory() = 0;
+	
 };
 
 #endif
