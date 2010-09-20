@@ -463,10 +463,6 @@ AC_COIN_VPATH_LINK(template/template.cpp)
 AC_COIN_VPATH_LINK(osDip/OSDip_Main.cpp)
 AC_COIN_VPATH_LINK(osDip/OSDipApp.cpp)
 AC_COIN_VPATH_LINK(osDip/OSDipApp.h)
-AC_COIN_VPATH_LINK(osDip/OSDipBlockCoinSolver.cpp)
-AC_COIN_VPATH_LINK(osDip/OSDipBlockCoinSolver.h)
-AC_COIN_VPATH_LINK(osDip/OSDipBlockSlpSolver.cpp)
-AC_COIN_VPATH_LINK(osDip/OSDipBlockSlpSolver.h)
 AC_COIN_VPATH_LINK(osDip/OSDipBlockSolver.cpp)
 AC_COIN_VPATH_LINK(osDip/OSDipBlockSolver.h)
 AC_COIN_VPATH_LINK(osDip/OSDipFactoryInitializer.h)
@@ -478,6 +474,11 @@ AC_COIN_VPATH_LINK(osDip/OSDipParam.h)
 AC_COIN_VPATH_LINK(osDip/own.sty)
 AC_COIN_VPATH_LINK(osDip/osDip.tex)
 AC_COIN_VPATH_LINK(osDip/osDip.pdf)
+
+AC_COIN_VPATH_LINK(osDip/solvers/OSDipBlockCoinSolver.cpp)
+AC_COIN_VPATH_LINK(osDip/solvers/OSDipBlockCoinSolver.h)
+AC_COIN_VPATH_LINK(osDip/solvers/OSDipBlockSlpSolver.cpp)
+AC_COIN_VPATH_LINK(osDip/solvers/OSDipBlockSlpSolver.h)
 
 
 ##############################################################################

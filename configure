@@ -25226,26 +25226,6 @@ fi
 
 
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files osDip/OSDipBlockCoinSolver.cpp"
-fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files osDip/OSDipBlockCoinSolver.h"
-fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files osDip/OSDipBlockSlpSolver.cpp"
-fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files osDip/OSDipBlockSlpSolver.h"
-fi
-
-
-if test $coin_vpath_config = yes; then
   coin_vpath_link_files="$coin_vpath_link_files osDip/OSDipBlockSolver.cpp"
 fi
 
@@ -25297,6 +25277,27 @@ fi
 
 if test $coin_vpath_config = yes; then
   coin_vpath_link_files="$coin_vpath_link_files osDip/osDip.pdf"
+fi
+
+
+
+if test $coin_vpath_config = yes; then
+  coin_vpath_link_files="$coin_vpath_link_files osDip/solvers/OSDipBlockCoinSolver.cpp"
+fi
+
+
+if test $coin_vpath_config = yes; then
+  coin_vpath_link_files="$coin_vpath_link_files osDip/solvers/OSDipBlockCoinSolver.h"
+fi
+
+
+if test $coin_vpath_config = yes; then
+  coin_vpath_link_files="$coin_vpath_link_files osDip/solvers/OSDipBlockSlpSolver.cpp"
+fi
+
+
+if test $coin_vpath_config = yes; then
+  coin_vpath_link_files="$coin_vpath_link_files osDip/solvers/OSDipBlockSlpSolver.h"
 fi
 
 

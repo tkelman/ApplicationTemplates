@@ -20,9 +20,9 @@ OBJS          = OSDip_Main.@OBJEXT@
 OBJS         += OSDipInterface.@OBJEXT@
 OBJS         += OSDipApp.@OBJEXT@
 OBJS         += OSDipBlockSolver.@OBJEXT@
-OBJS         += OSDipBlockCoinSolver.@OBJEXT@
-OBJS         += OSDipBlockSlpSolver.@OBJEXT@
 OBJS         += OSDipBlockSolverFactory.@OBJEXT@
+OBJS         += solvers/OSDipBlockCoinSolver.@OBJEXT@
+OBJS         += solvers/OSDipBlockSlpSolver.@OBJEXT@
 
 
 
@@ -33,7 +33,7 @@ ADDLIBS =
 
 
 # CHANGEME: Additional flags for compilation (e.g., include flags)
-ADDINCFLAGS =  -I${prefix}/include
+ADDINCFLAGS =  -I${prefix}/include  -I./solvers -I./
 
 
 
