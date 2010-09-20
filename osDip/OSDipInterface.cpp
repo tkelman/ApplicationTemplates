@@ -668,6 +668,7 @@ OS_DipInterface::OS_DipInterface():
 		m_blockVariableIndexesProcessed( false),
 		m_coreConstraintIndexesProcessed( false),
 		m_blockConstraintIndexesProcessed( false),
+		m_blockOSInstancesProcessed( false),
 		m_blockFactoriesProcessed( false) {
 
 }
