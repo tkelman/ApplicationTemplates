@@ -43,6 +43,14 @@ OSDipBlockSlpSolver::OSDipBlockSlpSolver( OSInstance *osinstance) {
 OSDipBlockSlpSolver::~OSDipBlockSlpSolver(){
 	
 	std::cout << "INSIDED ~OSDipBlockSlpSolver()" << std::endl;
+	struct IndexValuePair *primalValPair;
+
+	std::vector<IndexValuePair*>::iterator  vit;
+	
+	for (vit = m_primalVals.begin(); vit != m_primalVals.end(); vit++) {
+		
+		delete *vit;
+	}
 	//if(m_osrlreader != NULL) delete m_osrlreader;
 }//end ~OSDipBlockSlpSolver
 

@@ -21,7 +21,9 @@ OBJS         += OSDipInterface.@OBJEXT@
 OBJS         += OSDipApp.@OBJEXT@
 OBJS         += OSDipBlockSolver.@OBJEXT@
 OBJS         += OSDipBlockCoinSolver.@OBJEXT@
+OBJS         += OSDipBlockSlpSolver.@OBJEXT@
 OBJS         += OSDipBlockSolverFactory.@OBJEXT@
+
 
 
 
