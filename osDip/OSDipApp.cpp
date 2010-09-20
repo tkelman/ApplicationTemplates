@@ -561,6 +561,7 @@ DecompSolverStatus OSDipApp::solveRelaxed(const int whichBlock,
 	std::vector<IndexValuePair*> solIndexValPair;
 
 
+
 	double *cost = NULL;
 	int index;
 
@@ -578,7 +579,10 @@ DecompSolverStatus OSDipApp::solveRelaxed(const int whichBlock,
 	
 	try{
 		m_osDipBlockSolver[whichBlock]->solve(cost, &solIndexValPair, &varRedCost);
-		kount = 0;		
+		kount = 0;	
+		
+		std::cout << "NUMBER OF VARIABLES = " <<  solIndexValPair.size() << std::endl;
+		
 		for (sit = blockVar.begin(); sit != blockVar.end(); sit++) {
 			//kipp be careful here -- the the dimension of the cost vector
 			//is the same as the number of variable in the block -- NOT in the model
@@ -599,6 +603,7 @@ DecompSolverStatus OSDipApp::solveRelaxed(const int whichBlock,
 
 		
 		}
+
 	
 	} catch (const ErrorClass& eclass) {
 

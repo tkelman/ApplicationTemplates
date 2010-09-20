@@ -30,7 +30,7 @@
 				<var idx="14" value="1"/>
 				<var idx="17" value="1"/>
 			</other>
-			<other name="variableBlockSet" solver="Dip" numberOfVar="6" value="OSDipBlockCoinSolver">
+			<other name="variableBlockSet" solver="Dip" numberOfVar="6" value="OSDipBlockSlpSolver">
 				<var idx="0"/>
 				<var idx="1"/>
 				<var idx="2"/>

@@ -16,6 +16,7 @@
  */
 #include<map>
 #include "OSDipBlockCoinSolver.h"
+#include "OSDipBlockSlpSolver.h"
 //#include "MyBlockSolver.h"
 #include "OSDipBlockSolverFactory.h"
 #include <string>
@@ -29,6 +30,7 @@ public:
 		// user edit this, e.g
 		//OSDipBlockSolverFactory::factories["MyBlockSolver"] = new MyBlockSolver::Factory;
 		OSDipBlockSolverFactory::factories["OSDipBlockCoinSolver"] = new OSDipBlockCoinSolver::Factory;
+		OSDipBlockSolverFactory::factories["OSDipBlockSlpSolver"] = new OSDipBlockSlpSolver::Factory;
 	}
 	
 	
