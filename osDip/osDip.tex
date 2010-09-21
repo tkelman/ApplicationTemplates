@@ -131,17 +131,16 @@ x \in {\cal P}, \, \, x \in \mathbb{R}^{n}  \}
 \end{eqnarray}
 
 
-Using the Optimization Services (OS) project jointly with the Decomposition in
-Integer Programming (Dip) project, we implement a generic block-angluar
-decomposition algorithm. We call this the OS Dip solver.  It has the following
-features:
+A generic block-angular decomposition algorithm is now available. It is 
+based on the Decomposition in Integer Programming (Dip) project jointly with the Optimization Services (OS) project. 
+We call this the OS Dip solver.  It has the following features:
 
 \begin{itemize}
 \item[1.]  All subproblems are solved via an oracle; either the default oracle
 contained in our distribution or one provided by the user.
 
 \item[2.] The OS Dip Solver code is independent of the oracle used to optimize
-the subporblems.
+the subproblems.
 
 \item[3.] Variables are assigned to blocks using an OS option file, the block
 definition and  assignment of variables to these blocks has no effect on the OS
