@@ -392,9 +392,9 @@ std::vector<OSInstance* > OS_DipInterface::getBlockOSInstances(){
 	//constraint stuff
 	int numberCon;
 	std::string* conNames = NULL;
-	double* conLowerBounds;
-	double* conUpperBounds;
-	double* conConstants;
+	double* conLowerBounds = NULL;
+	double* conUpperBounds = NULL;
+	double* conConstants = NULL;
 	
 	int idx;
 
@@ -470,13 +470,30 @@ std::vector<OSInstance* > OS_DipInterface::getBlockOSInstances(){
 
 			osinstance->setVariables( numberVar, varNames, varLowerBounds, varUpperBounds, varTypes);
 			
+						// now the objective function
+			osinstance->setObjectiveNumber( 1);
+			// now the coefficient
+			osinstance->addObjective(-1, "objfunction", m_osinstance->getObjectiveMaxOrMins()[ 0], 
+					0.0, 1.0, objcoeff);
+			
+			
+			conMap = blockConstraintIndexes[ whichBlock];
+			numberCon = conMap.size();
+			
+			
+			
+			
+			if( numberCon > 0){
+			
+			
+			
 			starts = new int[ numberVar + 1];  
 			indexes = new int[ numNonz] ;
 			values = new double[ numNonz] ;
 			kount = 0;
 			starts[ kount] = 0;
 			
-			conMap = blockConstraintIndexes[ whichBlock];
+			
 			numNonz = 0;
 			for (sit = varSet.begin(); sit != varSet.end(); sit++) {
 				
@@ -507,26 +524,13 @@ std::vector<OSInstance* > OS_DipInterface::getBlockOSInstances(){
 				
 			}
 			
-			//numNonz--;
-			
+						//now the constraints
 
-			
-			// now the objective function
-			osinstance->setObjectiveNumber( 1);
-			// now the coefficient
-			osinstance->addObjective(-1, "objfunction", m_osinstance->getObjectiveMaxOrMins()[ 0], 
-					0.0, 1.0, objcoeff);
-			
-			
-			//now the constraints
 
-			numberCon = conMap.size();
 			osinstance->setConstraintNumber( numberCon);
 			conLowerBounds = new double[ numberCon];
 			conUpperBounds = new double[ numberCon];
 			conConstants = new double[ numberCon];
-			
-		
 			
 			for (mit = conMap.begin(); mit != conMap.end(); mit++) {
 				
@@ -543,6 +547,18 @@ std::vector<OSInstance* > OS_DipInterface::getBlockOSInstances(){
 			osinstance->setLinearConstraintCoefficients(numNonz, true, values, 0, numNonz - 1, 
 			indexes, 0, numNonz - 1,  starts, 0, numberVar );
 			
+			}
+			//numNonz--;
+			
+
+			
+
+			
+
+		
+			
+
+			
 			//add the osinstance
 			m_blockOSInstances.push_back( osinstance);
 			
@@ -552,18 +568,18 @@ std::vector<OSInstance* > OS_DipInterface::getBlockOSInstances(){
 			
 			objcoeff->bDeleteArrays = true;
 			delete objcoeff;		
-			delete []varLowerBounds;
-			delete []varUpperBounds;
-			delete []varTypes;
-			delete []varNames;
+			if(varLowerBounds != NULL ) delete []varLowerBounds;
+			if(varUpperBounds != NULL ) delete []varUpperBounds;
+			if(varTypes != NULL ) delete []varTypes;
+			if(varNames != NULL ) delete []varNames;
 			
 			//delete []starts;
 			//delete []indexes;
 			//delete []values;
 			
-			delete []conLowerBounds;
-			delete []conUpperBounds;
-			delete []conConstants;
+			if( conLowerBounds != NULL ) delete []conLowerBounds;
+			if( conUpperBounds != NULL ) delete []conUpperBounds;
+			if( conConstants  != NULL ) delete []conConstants;
 			
 			whichBlock++;
 			
