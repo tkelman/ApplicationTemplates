@@ -76,31 +76,14 @@ A Generic Block-Angluar Decomposition Implementation}
 
 \begin{abstract}
 In this document we describe how to use the Decomposition in Integer Programming
-(Dip) package with the Optimization Services (OS) package.  The code for this
-example is contained in the folder {\tt  ApplicationTemplates/osDip.}
+(Dip) package with the Optimization Services (OS) package. In particular,  we
+describe the OS Dip solver which is  a generic block-angluar
+decomposition algorithm. An easy user-hook is provided for users that wish to
+provide their own algorithm to sovle the subproblems.  The code for this example
+is contained in the folder {\tt ApplicationTemplates/osDip.}
 
 
-The OS Dip solver:
 
-1. Assumes the subproblems are solved via an oracle
-
-2. The OS Dip Solver code is independent of the oracle used to optimize the
-subporblems
-
-3. Variables are assigned to blocks using an OS option file, the assignment of
-variables and blocks has no effect on the OS Dip Solver code
-
-4. Different blocks can be assigned different solution oracles in the OS Option
-file
-
-5. There is a default oracle implemented (called OSDipBockCoinSolver) that
-currently uses Cbc
-
-6. Users can add their own oracles without altering the OS Dip Solver code. This
-is done via polymorphic factories. The user creates a separate file containing
-the Oracle class. The user provided Oracle class simply inherits from the
-OSDipBlockSolver class. Just 1) add the object file name to the Makefile, and 2)
-add the necessary line to OSDipFactoryInitializer.h
 
 \end{abstract}
 
@@ -116,6 +99,82 @@ add the necessary line to OSDipFactoryInitializer.h
 
 %\noindent\hrulefill
 \newpage
+
+\section{Introduction and Motivation}
+
+We follow the notation of Galati and Ralphs. The integer program of interest is:
+
+\begin{eqnarray}
+z_{IP} &=&  \min  \{c^{\top} x \, | \, A^{\prime} x \ge b^{\prime},  \,\, 
+A^{\prime \prime} x \ge b^{\prime \prime}, \, \, x \in \mathbb{Z}^{n}  \}
+\end{eqnarray}
+The problem is divided into two constraint sets $A^{\prime} x \ge b^{\prime}$
+which we refer to as the relaxed, coupling, or block constraints and the core
+constraints $A^{\prime \prime} x \ge b^{\prime \prime}.$  We then define the
+following polyhedron based on the relaxed constraints.
+\begin{eqnarray}
+{\cal P} &=&  {\rm conv} ( \{ x \in \mathbb{Z}^{n} \, | \, A^{\prime} x \ge
+b^{\prime}
+\})
+\end{eqnarray}
+ The LP relaxation of the origianl problem is:
+\begin{eqnarray}
+z_{LP} &=&  \min  \{c^{\top} x \, | \, A^{\prime} x \ge b^{\prime},  \,\, 
+A^{\prime \prime} x \ge b^{\prime \prime}, \, \, x \in \mathbb{R}^{n}  \}
+\end{eqnarray}
+Ideally,  the constraints $A^{\prime} x \ge b^{\prime}$
+should be selected so that solving $Z_{D}$ is an easy {\it hard problem} and
+provides better bounds than $Z_{LP}.$
+\begin{eqnarray}
+z_{D} &=&  \min  \{c^{\top} x \, | \, A^{\prime} x \ge b^{\prime},  \,\, 
+x \in {\cal P}, \, \, x \in \mathbb{R}^{n}  \}
+\end{eqnarray}
+
+
+Using the Optimization Services (OS) project jointly with the Decomposition in
+Integer Programming (Dip) project, we implement a generic block-angluar
+decomposition algorithm. We call this the OS Dip solver.  It has the following
+features:
+
+\begin{itemize}
+\item[1.]  All subproblems are solved via an oracle; either the default oracle
+contained in our distribution or one provided by the user.
+
+\item[2.] The OS Dip Solver code is independent of the oracle used to optimize
+the subporblems.
+
+\item[3.] Variables are assigned to blocks using an OS option file, the block
+definition and  assignment of variables to these blocks has no effect on the OS
+Dip Solver code.
+
+\item[4.] Different blocks can be assigned different solver oracles in the OS
+option file.
+
+\item[5.] There is a default oracle implemented (called OSDipBockCoinSolver)
+that currently uses Cbc.
+
+\item[6.] Users can add their own oracles without altering the OS Dip Solver
+code. This is done via polymorphic factories. The user creates a separate file containing
+the oracle class. The user-provided Oracle class  inherits from the generic
+OSDipBlockSolver class. The user need only: 1) add the object file name for the
+new oracle to the Makefile, and 2) add the necessary line to
+OSDipFactoryInitializer.h indicating that the new oracle is present. 
+
+\end{itemize}
+
+In particular, the  implementation of the OS Dip solver provides a virtual class
+{\tt OSDipBlockSolver} with a pure virtual function {\tt solve()}.  The user is
+expected to provide a class that inherits from {\tt OSDipBlockSolver} and
+implements the method {\tt solve()}.  The {\tt solve()} method should optimize a
+linear objective function over ${\cal P}.$ More details are provided in Section
+\ref{section:osdipsolver}. The implementation is such  that the user only has to
+provide a class with a solve method. The user does not have to edit or alter 
+any of the OS Dip Solver code.
+By using polymorphic factories the actual solver details are hidden from the OS
+Solver.  A default solver, {\tt OSDipBlockCoinSolver}, is provided. This default
+solver takes no advantage of special structure and simply calls COIN-OR {bf
+Cbc.}
+ 
 
 \section{Building and Testing the OS-Dip Example}\label{section:build}
 
@@ -188,56 +247,13 @@ work, I almost certainly did something stupid and forget to fix it.  The file
 explained in Section \ref{section:paramaterfile}.
 
 
-\section{The OS Dip Solver -- Code Description}\label{section:osdipsolver}
+\section{The OS Dip Solver -- Code Description and
+Key Classes}\label{section:osdipsolver}
 
 The OS Dip Solver uses {\bf Dip} to implement a Dantzig-Wofe decomposition
-algorithm for block-angular integer programs. 
-
-\subsection{General Philosophy}
+algorithm for block-angular integer programs. Here are some key classes.
 
 
-\begin{eqnarray}
-z_{IP} &=&  \min  \{c^{\top} x \, | \, A^{\prime} x \ge b^{\prime},  \,\, 
-A^{\prime \prime} x \ge b^{\prime \prime}, \, \, x \in \mathbb{Z}^{n}  \}
-\end{eqnarray}
-
-\begin{eqnarray}
-{\cal P} &=&  {\rm conv} ( \{ x \in \mathbb{Z}^{n} \, | \, A^{\prime} x \ge
-b^{\prime}
-\})
-\end{eqnarray}
-
-
-\begin{eqnarray}
-z_{LP} &=&  \min  \{c^{\top} x \, | \, A^{\prime} x \ge b^{\prime},  \,\, 
-A^{\prime \prime} x \ge b^{\prime \prime}, \, \, x \in \mathbb{R}^{n}  \}
-\end{eqnarray}
-
-
-\begin{eqnarray}
-z_{D} &=&  \min  \{c^{\top} x \, | \, A^{\prime} x \ge b^{\prime},  \,\, 
-x \in {\cal P}, \, \, x \in \mathbb{R}^{n}  \}
-\end{eqnarray}
-
-The implementation of the OS Dip solver provides a virtual class {\tt
-OSDipBlockSolver} with a pure virtual function {\tt solve()}.  The user is
-expected to provide a class that inherits from {\tt OSDipBlockSolver} and
-implements the method {\tt solve()}.  The {\tt solve()} method should optimize a
-linear objective function over ${\cal P}.$ More details are provided below. The
-implementation is such so that the user only has to provide a class with a solve
-method. The user does not have to edit or alter any of the OS Dip Solver code.
-By using polymorphic factories the actual solver details are hidden from the OS
-Solver.  A default solver, {\tt OSDipBlockCoinSolver}, is provided. This default
-solver takes no advantage of special structure and simply calls COIN-OR {bf
-Cbc.}
-
-\subsection{The Code}
-
-
-
-
-
-{\bf Key classes}
 
 
 \vskip 8pt
@@ -329,7 +345,7 @@ blocks etc. The {\bf OSDipInterface} class reads the input OSiL and OSoL files
 and creates in-memory data structures based on these files. 
 
 
-
+  
 \vskip 8pt
 \noindent {\bf OSDipBlockCoinSolver:}  This class inherits from the {\bf
 OSDipBlockSolver} class. It is meant to illustrate how to create a solver class.
@@ -372,7 +388,12 @@ OSDipBlockSolverFactory} and implements the {\tt create()} method,
    \item[4.] alter the Makefile to include the new source code.
  \end{itemize}
  
+ \vskip 8pt
  
+ {\bf Important -- Directory Structure:} In order to keep things clean, there is
+ a directory {\bf solvers} in the {\bf osDip} folder. We suggest using the {\bf
+ solvers} directory for all of the solvers that inherit from {\bf
+ OSDipBlockSolver}.
  
  \section{Simple Plant/Lockbox Location Example}
 
@@ -427,9 +448,8 @@ $A^{\prime \prime} x \ge b^{\prime \prime}$ constraints.
 
 \vskip 8pt
 
-\begin{table}[ht]\label{table:spl3by5data}
+\begin{table}[ht]
 \centering
-\caption{Data for a 3 plant, 5 customer problem}
 \vskip 8pt
 \begin{tabular}{|cc|c|c|} \hline
        &    & CUSTOMER &         \\
@@ -441,9 +461,11 @@ $A^{\prime \prime} x \ge b^{\prime \prime}$ constraints.
              4  &  3  &  1  &  2  &  6 \end{tabular} &  3  \\    
        & 3   &\begin{tabular}{ccccc}
             5   &  4  &  2  &  1  &  3 \end{tabular} &  3  \\   \hline
-\end{tabular}     
+\end{tabular}  
+\caption{Data for a 3 plant, 5 customer problem} 
+\label{table:spl3by5data}  
 \end{table}  
-
+  
 
 \vskip 10pt
 \begin{eqnarray*}
@@ -500,10 +522,8 @@ constraints}
 \vskip 8pt
 
 
-\begin{table}[ht]\label{table:spl3by3data}
+\begin{table}[ht]
 \centering
-\caption{Data for a three plant, three customer problem}
-\vskip 8pt
 \begin{tabular}{|cc|c|c|} \hline
        &    & CUSTOMER &         \\
       &     &\begin{tabular}{ccc}
@@ -518,10 +538,12 @@ constraints}
        & 3   &\begin{tabular}{ccc}
             1   &  1  &  2   
             \end{tabular} &  1  \\   \hline
-\end{tabular}     
+\end{tabular} 
+\caption{Data for a three plant, three customer problem} 
+\label{table:spl3by3data}   
 \end{table}  
 
- 
+  
 \vskip 8pt
 \begin{eqnarray*}
 \min  && 2x_{11} + x_{12} + x_{13}  +  y_{1} + \\
@@ -564,7 +586,7 @@ constraints}
 
 
 
-\section{Generalized Assignment Problem Example}
+\section{Generalized Assignment Problem Example}\label{section:genass}
 
 A problem that plays a prominent role in
 vehicle routing is the {\it generalized assignment problem.}    The problem is to assign each of $n$
@@ -604,20 +626,17 @@ b^{\prime}$ constraints that are used to define ${\cal P}$. The test problem
 used in the file {\tt genAssign.osil} is:
 
 
-\begin{verbatim}
- min     2 X11 + 11 X12 + 7 X21 + 7 X22 + 20 X31 + 
-2 X32 + 5 X41 + 5 X42
-s.t.
-X11 + X12 =    1
-X21 + X22 =    1
-X31 + X32 =    1
-X41 + X42 =    1
-
-3 X11 + 6 X21 + 5 X31 + 7 X41 <=   13
-2 X12 + 4 X22 + 10 X32 + 4 X42 <=   10
-\end{verbatim}
  
-
+\begin{eqnarray*}
+{\rm min} \quad 2 x_{11} + 11 x_{12} + 7 x_{21} + 7 x_{22} && \\
++ 20 x_{31} + 2 x_{32} + 5 x_{41} + 5x_{42} && \\
+x_{11} + x_{12}  &=&    1  \\
+x_{21} + x_{22}  &=&    1 \\
+x_{31} + x_{32} &=&    1 \\
+x_{41} + x_{42} &=&    1 \\
+3 x_{11} + 6 x_{21} + 5 x_{31} + 7 x_{41} &\le&   13 \\
+2 x_{12} + 4 x_{22} + 10 x_{32} + 4 x_{42} &\le&   10
+\end{eqnarray*}
  
 
 \section{Defining the Problem Instance and Blocks}\label{section:defineinstance}
@@ -636,7 +655,7 @@ In order to use the OS Dip solver it is necessary to: 1) define the set of
 variables in each block and 2) define the set of constraints that constitute the
 core or coupling constraints. This information is communicated to the OS Dip
 solver using Optimization Services option Language (OSoL). The OSoL input file
-for the example in Table \ref{table:spl3by5data} appears in Figures
+for the example in  Table \ref{table:spl3by5data} appears in Figures
 \ref{figure:parinc-osil} and \ref{figure:parinc-osil2}.  See lines 32-55. There
 is an {\tt <other>} option with {\tt name="variableBlockSet"} for each block.
 Each block then lists the variables in the block. For example, the first block
@@ -646,7 +665,7 @@ Likewise the second block corresponds to the variable for the second plant and
 the third block corresponds to variables for the third plant.
 
 
-
+  
 
 {\small
 \begin{figure}[hp]
@@ -782,28 +801,86 @@ critical to set this attribute in all of the option tags.
 
 \section{The Dip Parameter File}\label{section:paramaterfile}
 
-Look at the osdip.parm file. You can see by commenting and uncommenting you can
-run one of three problems that will also get downloaded.
+The {\bf Dip} solver has a utility class {\bf UtilParameters},  for parsing
+a parameter file. The {\bf UtilParameters} class constructor takes a parameter
+file as an argument. In the case of the OS Dip solver the name of the parameter
+file is {\bf osdip.parm} and the parameter is read in at the command line with
+the command
 
-sp1.osil -- a simple plant location problem spl2.osil -- a second simple plant
-location problem genAssign.osil -- a generalize assignment problem
+\begin{verbatim}
+./osdip -param osdip.parm
+\end{verbatim}
 
-The osol files (the option files) determine behavior. For example, if you use
+The {\bf UtilParameters} class has a method {\bf GetSetting()} for reading the
+paramater values. In the OS Dip implementation there is a class {\bf OSDipParam}
+that has a data memmbers key paramaters such as the name of the input OSiL file
+and input OSoL file. The {\bf OSDipParam} class has a method
+{\bf getSettings()} that takes as an argument a pointer to an object in the {\bf
+UtilParameters} and uses {\bf GetSetting()} method to return the relevant
+paramater values. For example:
 
-osolFiles/spl1-b.osol
+\begin{verbatim}
+OSiLFile = utilParam.GetSetting("OSiLFile", "", common); 
+OSoLFile = utilParam.GetSetting("OSoLFile", "", common);
+\end{verbatim}
 
-then the assingment constraints are the block constraints. If you use
+In the current {\bf osdip.parm} file we have:
 
-osolFiles/spl1.osol
+\begin{verbatim}
+#first simple plant location problem
+OSiLFile = spl1.osil
+#setup constraints as blocks
+OSoLFile = spl1.osol
+#assignment constraints as blocks
+#OSoLFile = spl1-b.osol
 
-then the setup forcing constraints are the block constraints.  This  new  example
-also exhibits the problems I filed ticked on.
+#second simple plant location problem
+#OSiLFile = spl2.osil
+#setup constraints as blocks
+#OSoLFile = spl2.osol
+#assignment constraints as blocks
+#OSoLFile = spl2-b.osol
+
+#generalized assignment problem
+#OSiLFile = genAssign.osil
+#OSoLFile = genAssign.osol
+
+#Martin textbook example
+#OSiLFile = smallIPBook.osil
+#OSoLFile = smallIPBook.osol
+\end{verbatim}
+ 
+By commenting and uncommenting you can run one of four problems that are in the
+{\bf data} directory. The first example, {\bf spl1.osil}, corresponds to the
+simple plant location model given Table \ref{table:spl3by5data}. Using the
+option file {\bf spl1.osol} treats the setup forcing constraints
+\ref{eq:locksetup} as the $A^{\prime} x \ge b^{\prime}$ constraints. Using the
+option file {\bf spl1-b.osol} treats the demand constraints
+\ref{eq:lockdemand} as the $A^{\prime} x \ge b^{\prime}$ constraints. Likewise
+for the problem {\bf spl2.osil} which correponds to the simple plant location
+data given in Table \ref{table:spl3by3data}.
+
+The {\bf genAssign.osil} file corresponds to the generalized assignment problem
+given in Section \ref{section:genass}.  The option file {\bf genAssign.osol} 
+treats the capacity constraints \ref{eq:gapcapacity} as the $A^{\prime} x \ge
+b^{\prime}$ constraints. 
+
+The last problem defined in the file {\bf smallIPBook.osil} is based on Example
+16.3 on page 567 in {\it Large Scale Linear and Integer Optimization}.  The
+option file treats the constraints
+$$
+4x_{1} + 9 x_{2} \le 18, \quad -2x_{1} + 4 x_{2} \le 4
+$$
+as the $A^{\prime} x \ge b^{\prime}$ constraints.
+
+The user should also be aware of the parameter {\tt solverFactory}. This
+parameter is the name of the default solver Factory. If a solver is not named
+for a block in the OSoL file this value is used. We have set the value of this
+string to be {\tt OSDipBlockCoinSolver}.
 
 
-kippster -- mention default solver
-\section{Implementing A Block Solver}
+   
 
-Describe the Factory Code
 
 \section{Issues to Fix}
 
@@ -811,8 +888,13 @@ Describe the Factory Code
   \item Enhance solveRelaxed to allow parallel processing of blocks. See ticket
   30.
   \item Does not work when there are 0 integer variables. See ticket 31.
-  \item Be able to set options in C++ code. See ticket 41.
+  
+  \item Be able to set options in C++ code. See ticket 41.  It would be nice to
+  be able to read all the options from a generic options file. It seems like
+  right now options for the {\bf DecompAlgo } class cannot be set inside C++.
+  
   \item Problem with Alps  bounds at node 0. See ticket 43
+  
   \item Figure out how to use BranchEnforceInMaster or BranchEnforceInSubProb so
   I don't get the large bonds on the variables. See ticket 47.
 \end{itemize}
