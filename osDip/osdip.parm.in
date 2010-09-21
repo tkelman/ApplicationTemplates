@@ -62,6 +62,11 @@ OSoLFile = spl1.osol
 #assignment constraints as blocks
 #OSoLFile = spl2-b.osol
 
+#third simple plant location problem -- block matrix data not used
+#OSiLFile = spl3.osil
+#setup constraints as blocks
+#OSoLFile = spl3.osol
+
 #generalized assignment problem
 #OSiLFile = genAssign.osil
 #OSoLFile = genAssign.osol

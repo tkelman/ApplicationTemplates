@@ -25484,6 +25484,11 @@ fi
 
 
 if test $coin_vpath_config = yes; then
+  coin_vpath_link_files="$coin_vpath_link_files data/spl3.osil"
+fi
+
+
+if test $coin_vpath_config = yes; then
   coin_vpath_link_files="$coin_vpath_link_files data/genAssign.osil"
 fi
 
@@ -25506,6 +25511,11 @@ fi
 
 if test $coin_vpath_config = yes; then
   coin_vpath_link_files="$coin_vpath_link_files data/spl2.osol"
+fi
+
+
+if test $coin_vpath_config = yes; then
+  coin_vpath_link_files="$coin_vpath_link_files data/spl3.osol"
 fi
 
 
