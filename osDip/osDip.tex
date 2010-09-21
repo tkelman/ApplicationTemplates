@@ -76,11 +76,11 @@ A Generic Block-Angluar Decomposition Implementation}
 
 \begin{abstract}
 In this document we describe how to use the Decomposition in Integer Programming
-(Dip) package with the Optimization Services (OS) package. In particular,  we
+(Dip) project with the Optimization Services (OS) project. In particular,  we
 describe the OS Dip solver which is  a generic block-angluar
-decomposition algorithm. An easy user-hook is provided for users that wish to
-provide their own algorithm to sovle the subproblems.  The code for this example
-is contained in the folder {\tt ApplicationTemplates/osDip.}
+decomposition algorithm. The OS Dip solver allows users to provide their own
+algorithm to solve the subproblems.  The code for this example is contained 
+in the folder {\tt ApplicationTemplates/osDip.}
 
 
 
@@ -147,8 +147,8 @@ the subporblems.
 definition and  assignment of variables to these blocks has no effect on the OS
 Dip Solver code.
 
-\item[4.] Different blocks can be assigned different solver oracles in the OS
-option file.
+\item[4.] Different blocks can be assigned different solver oracles based on the
+option values given in the OSoL file. 
 
 \item[5.] There is a default oracle implemented (called OSDipBockCoinSolver)
 that currently uses Cbc.
@@ -827,6 +827,7 @@ OSoLFile = utilParam.GetSetting("OSoLFile", "", common);
 In the current {\bf osdip.parm} file we have:
 
 \begin{verbatim}
+
 #first simple plant location problem
 OSiLFile = spl1.osil
 #setup constraints as blocks
@@ -841,6 +842,11 @@ OSoLFile = spl1.osol
 #assignment constraints as blocks
 #OSoLFile = spl2-b.osol
 
+#third simple plant location problem -- block matrix data not used
+#OSiLFile = spl3.osil
+#setup constraints as blocks
+#OSoLFile = spl3.osol
+
 #generalized assignment problem
 #OSiLFile = genAssign.osil
 #OSoLFile = genAssign.osol
@@ -852,13 +858,21 @@ OSoLFile = spl1.osol
  
 By commenting and uncommenting you can run one of four problems that are in the
 {\bf data} directory. The first example, {\bf spl1.osil}, corresponds to the
-simple plant location model given Table \ref{table:spl3by5data}. Using the
+simple plant location model given in Table \ref{table:spl3by5data}. Using the
 option file {\bf spl1.osol} treats the setup forcing constraints
 \ref{eq:locksetup} as the $A^{\prime} x \ge b^{\prime}$ constraints. Using the
 option file {\bf spl1-b.osol} treats the demand constraints
 \ref{eq:lockdemand} as the $A^{\prime} x \ge b^{\prime}$ constraints. Likewise
 for the problem {\bf spl2.osil} which correponds to the simple plant location
 data given in Table \ref{table:spl3by3data}.
+
+In both examples {\bf spl1.osil} and {\bf spl2.osil} the $A^{\prime} x \ge
+b^{\prime}$ constraints are explicitly represented in the OSiL file. However,
+this is not necessary. The solver Factory {\bf OSDipBlockSlpSolver} is a special
+oracle that only needs the objective function coefficients and pegs variables
+based on the sign of the objective function coefficients. The {\bf spl3.osil} is
+the example given in Table \ref{table:spl3by5data} but without the setup forcing
+constraints. Each block uses the {\bf OSDipBlockSlpSolver} oracle. 
 
 The {\bf genAssign.osil} file corresponds to the generalized assignment problem
 given in Section \ref{section:genass}.  The option file {\bf genAssign.osol} 
