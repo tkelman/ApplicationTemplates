@@ -116,6 +116,9 @@ int main(int argc, char ** argv){
          timer.start();     
          std::cout << std::endl << std::endl << std::endl << std::endl;
          std::cout << "***************START SOLVE***************" << std::endl;
+         
+    
+         
          status = alpsModel.solve();
          std::cout << "FINISH SOLVE" << std::endl;
          timer.stop();

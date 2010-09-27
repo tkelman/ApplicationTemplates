@@ -38,7 +38,7 @@
 				<var idx="4"/>
 				<var idx="15"/>
 			</other>
-			<other name="variableBlockSet" solver="Dip" numberOfVar="6" value="OSDipBlockCoinSolver">
+			<other name="variableBlockSet" solver="Dip" numberOfVar="6" value="OSDipBlockCoinSolver" >
 				<var idx="5"/>
 				<var idx="6"/>
 				<var idx="7"/>
@@ -47,22 +47,28 @@
 				<var idx="16"/>
 			</other>
 
-			<other name="variableBlockSet" solver="Dip" numberOfVar="6" value="OSDipBlockCoinSolver">
+			<other name="variableBlockSet" solver="Dip" numberOfVar="6" value="OSDipBlockCoinSolver" >
+		 
 				<var idx="10"/>
 				<var idx="11"/>
 				<var idx="12"/>
 				<var idx="13"/>
 				<var idx="14"/>
 				<var idx="17"/>
-			</other>
-
+			
+</other>
 
 		</variables>
 
-		<constraints numberOfOtherConstraintOptions="1">
-			<other name="constraintSet" solver="Dip" numberOfCon="5" type="Core">
+		<constraints numberOfOtherConstraintOptions="2">
+			<other name="constraintSet" solver="Dip" numberOfCon="2" type="Core">
 				<con idx="15"/>
 				<con idx="16"/>
+
+			</other>
+			
+			<other name="constraintSet" solver="Dip" numberOfCon="3" type="Core">
+
 				<con idx="17"/>
 				<con idx="18"/>
 				<con idx="19"/>

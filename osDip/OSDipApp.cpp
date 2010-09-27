@@ -553,9 +553,9 @@ DecompSolverStatus OSDipApp::solveRelaxed(const int whichBlock,
 	
 	std::set<int> blockVar;
 	
-	std::cout << "WHICH BLOCK " << whichBlock << std::endl;
+	
 	blockVar = m_blockVars[ whichBlock];
-	std::cout << "NUMBER OF VARIABLES =  " << blockVar.size() << std::endl;
+	
 	
 	std::set<int>::iterator sit;
 	std::vector<IndexValuePair*> solIndexValPair;
@@ -572,7 +572,7 @@ DecompSolverStatus OSDipApp::solveRelaxed(const int whichBlock,
 	for (sit = blockVar.begin(); sit != blockVar.end(); sit++) {
 
 		cost[index] = redCostX[*sit];
-		std::cout  << "cost[index] =  " << cost[index] << std::endl;
+		//std::cout  << "cost[index] =  " << cost[index] << std::endl;
 		index++;
 
 	}
@@ -581,7 +581,7 @@ DecompSolverStatus OSDipApp::solveRelaxed(const int whichBlock,
 		m_osDipBlockSolver[whichBlock]->solve(cost, &solIndexValPair, &varRedCost);
 		kount = 0;	
 		
-		std::cout << "NUMBER OF VARIABLES = " <<  solIndexValPair.size() << std::endl;
+		//std::cout << "NUMBER OF VARIABLES = " <<  solIndexValPair.size() << std::endl;
 		
 		for (sit = blockVar.begin(); sit != blockVar.end(); sit++) {
 			//kipp be careful here -- the the dimension of the cost vector
@@ -593,16 +593,15 @@ DecompSolverStatus OSDipApp::solveRelaxed(const int whichBlock,
 		
 		  solEls.push_back(  solIndexValPair[ kount]->value ) ;
 		  
-		  std::cout << "SOLUTION INDEX MODEL = " << *sit ;
-		  std::cout << "  SOLUTION INDEX SUBPROBLEM = " << kount ;
-		  std::cout << "  VARIABLE VALUE  = " << solIndexValPair[ kount]->value << std::endl;
+		  //std::cout << "SOLUTION INDEX: = " << *sit << std::endl;
+		  //std::cout << "  SOLUTION INDEX SUBPROBLEM = " << kount ;
+		  //std::cout << "  VARIABLE VALUE  = " << solIndexValPair[ kount]->value << std::endl;
 		  
 		  varOrigCost +=  m_objective[ *sit]*solIndexValPair[ kount]->value;
 		  kount++;
-		  
-
-		
+		 
 		}
+
 
 	
 	} catch (const ErrorClass& eclass) {
@@ -612,14 +611,17 @@ DecompSolverStatus OSDipApp::solveRelaxed(const int whichBlock,
 	}
 
 	
-	std::cout << "Convex Dual = " << convexDual << std::endl;
-	std::cout << "ORIGINAL COST =  = " <<  varOrigCost << std::endl;
-	std::cout << "SUPROBLEM OPT VAL  = " <<  varRedCost << std::endl;
+
 
 	UTIL_DEBUG(m_appParam.LogLevel, 2,
+			std::cout << "WHICH BLOCK " << whichBlock << std::endl;
+			std::cout << "Convex Dual = " << convexDual << std::endl;
+			std::cout << "ORIGINAL COST =  = " <<  varOrigCost << std::endl;
+			std::cout << "SUPROBLEM OPT VAL  = " <<  varRedCost << std::endl;
 			printf("PUSH var with RC = %g\n", varRedCost - convexDual);
 	);
 
+	
 	DecompVar * var = new DecompVar(solInd, solEls, varRedCost - convexDual,
 			varOrigCost);
 	

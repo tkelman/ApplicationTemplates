@@ -159,13 +159,12 @@ double OS_DipInterface::getObjectiveOffset() {
 }// end getObjectiveOffset
 
 
-
-
-std::vector<std::string > OS_DipInterface::getBlockFactories() {
+std::vector<std::string> OS_DipInterface::getBlockFactories() {
 
 	//get the factory solver for each block in the model
 
-	if(m_blockFactoriesProcessed == true) return m_blockFactories;
+	if (m_blockFactoriesProcessed == true)
+		return m_blockFactories;
 
 	try {
 		if (m_osoption == NULL)
@@ -173,7 +172,7 @@ std::vector<std::string > OS_DipInterface::getBlockFactories() {
 
 		std::vector<OtherVariableOption*> otherVariableOptions;
 		std::vector<OtherVariableOption*>::iterator vit;
-		
+
 		if (m_osoption != NULL && m_osoption->getNumberOfOtherVariableOptions()
 				> 0) {
 
@@ -181,26 +180,26 @@ std::vector<std::string > OS_DipInterface::getBlockFactories() {
 			//iterate over the vector of variable options
 			for (vit = otherVariableOptions.begin(); vit
 					!= otherVariableOptions.end(); vit++) {
-				
+
 				// right now we assume blocks are ordered  -- we ignor value
 				if ((*vit)->name.compare("variableBlockSet") == 0) {
-												
-					if( (*vit)->value.size() > 0){
-						
-						 m_blockFactories.push_back( (*vit)->value );
-						 
-					}else{
-						
-						 m_blockFactories.push_back( "" );
+
+					if ((*vit)->value.size() > 0) {
+
+						m_blockFactories.push_back((*vit)->value);
+
+					} else {
+
+						m_blockFactories.push_back("");
 					}
-				
+
 				}
-				
+
 			}
 		}
-		
+
 	}//end try
-	
+
 	catch (const ErrorClass& eclass) {
 
 		std::cout << eclass.errormsg << std::endl;
@@ -215,7 +214,8 @@ std::vector<std::set<int> > OS_DipInterface::getBlockVarIndexes() {
 
 	//get the variable indexes for each block in the model
 	std::set<int> varSet; //variables indexes in a specific block
-	if(m_blockVariableIndexesProcessed == true) return m_blockVariableIndexes;
+	if (m_blockVariableIndexesProcessed == true)
+		return m_blockVariableIndexes;
 
 	try {
 		if (m_osoption == NULL)
@@ -236,7 +236,7 @@ std::vector<std::set<int> > OS_DipInterface::getBlockVarIndexes() {
 
 				// right now we assume blocks are ordered  -- we ignor value
 				if ((*vit)->name.compare("variableBlockSet") == 0) {
-					
+
 					// see if we have a set of block variables
 					// if so we insert into our vector of sets
 					varSet.clear();
@@ -260,9 +260,9 @@ std::vector<std::set<int> > OS_DipInterface::getBlockVarIndexes() {
 
 			}//end for over constraint options
 		}// if on ospton null
-		
-		
-		if (m_blockVariableIndexes.size() <= 0 )
+
+
+		if (m_blockVariableIndexes.size() <= 0)
 			throw ErrorClass("someting wrong -- no variables in the blocks");
 
 	} //end try
@@ -278,33 +278,29 @@ std::vector<std::set<int> > OS_DipInterface::getBlockVarIndexes() {
 }//end getBlockVarIndexes
 
 
-
-
 std::vector<std::map<int, int> > OS_DipInterface::getBlockConstraintIndexes() {
 
-	
-	if(m_blockConstraintIndexesProcessed == true) return m_blockConstraintIndexes;
+	if (m_blockConstraintIndexesProcessed == true)
+		return m_blockConstraintIndexes;
 	//get the variable indexes for each block in the model
 	std::map<int, int> conMap; //constraint indexes in a specific block
 	std::set<int> varSet; //constraint indexes in a specific block
 	std::set<int> coreConstraintIndexes;
 	std::vector<std::set<int> > blockVariableIndexes;
-	
+
 	int *starts = NULL;
 	int *indexes = NULL;
 	int kount;
 
 	try {
-		
+
 		// first get the block variable indexes, these are necessary
 		blockVariableIndexes = getBlockVarIndexes();
 		// get the core constraint indexes
 		coreConstraintIndexes = getCoreConstraintIndexes();
-		
-		if (blockVariableIndexes.size() <= 0 )
+
+		if (blockVariableIndexes.size() <= 0)
 			throw ErrorClass("someting wrong -- no variables in the blocks");
-
-
 
 		std::vector<std::set<int> >::iterator vit;
 		std::set<int>::iterator sit;
@@ -312,34 +308,40 @@ std::vector<std::map<int, int> > OS_DipInterface::getBlockConstraintIndexes() {
 
 		for (vit = blockVariableIndexes.begin(); vit
 				!= blockVariableIndexes.end(); vit++) {
-			
+
 			varSet.clear();
 			conMap.clear();
-			
+
 			varSet = *vit;
 			//now get the nonzeros for the variables in
 			//varSet and see which nonzeros are in non-core
 			//constraints
 			kount = 0;
 			for (sit = varSet.begin(); sit != varSet.end(); sit++) {
-			
-				starts = m_osinstance->getLinearConstraintCoefficientsInColumnMajor()->starts;
-				indexes = m_osinstance->getLinearConstraintCoefficientsInColumnMajor()->indexes;	
-				
-				for(i = starts[*sit]; i < starts[*sit + 1]; i++){
-				
+
+				starts
+						= m_osinstance->getLinearConstraintCoefficientsInColumnMajor()->starts;
+				indexes
+						= m_osinstance->getLinearConstraintCoefficientsInColumnMajor()->indexes;
+
+				for (i = starts[*sit]; i < starts[*sit + 1]; i++) {
+
 					//add the row index if not in a core constraint
-					
-					if (coreConstraintIndexes.find( indexes[ i])  == coreConstraintIndexes.end()) {
+					//don't count same index twice
+					if (coreConstraintIndexes.find(indexes[i])
+							== coreConstraintIndexes.end() && 
+							(conMap.find(indexes[i] ) == conMap.end()  )
+					) {
 						//we have a new constraint index
-						conMap.insert(make_pair( indexes[ i], kount));
+
+						conMap.insert(make_pair(indexes[i], kount));
 						kount++;
-					}	
-				}		
+					}
+				}
 			}
 
-			 m_blockConstraintIndexes.push_back( conMap);
-			
+			m_blockConstraintIndexes.push_back(conMap);
+
 		}//end for iterator
 
 
@@ -352,25 +354,25 @@ std::vector<std::map<int, int> > OS_DipInterface::getBlockConstraintIndexes() {
 
 	}
 	m_blockConstraintIndexesProcessed = true;
-	return  m_blockConstraintIndexes;
+	return m_blockConstraintIndexes;
 }//end getBlockConstraintIndexes
 
 
-std::vector<OSInstance* > OS_DipInterface::getBlockOSInstances(){
+std::vector<OSInstance*> OS_DipInterface::getBlockOSInstances() {
 	//get the OSInstance for each block
-	if( m_blockOSInstancesProcessed == true) return  m_blockOSInstances;
-	
+	if (m_blockOSInstancesProcessed == true)
+		return m_blockOSInstances;
+
 	std::map<int, int> conMap; //constraint indexes in a specific block
 	std::set<int> varSet; //constraint indexes in a specific block
 	std::vector<std::map<int, int> > blockConstraintIndexes;
 	std::set<int> coreConstraintIndexes;
 	std::vector<std::set<int> > blockVariableIndexes;
-	
-	
+
 	int *starts = NULL;
 	int *indexes = NULL;
 	double *values = NULL;
-	
+
 	OSInstance *osinstance;
 	std::vector<std::set<int> >::iterator vit;
 	std::set<int>::iterator sit;
@@ -381,208 +383,210 @@ std::vector<OSInstance* > OS_DipInterface::getBlockOSInstances(){
 	int whichBlock;
 	int numNonz;
 	int k1, k2;
-	
+
 	//variable stuff
 	int numberVar;
 	std::string* varNames = NULL;
 	char* varTypes = NULL;
 	double* varLowerBounds = NULL;
 	double* varUpperBounds = NULL;
-	
+
 	//constraint stuff
 	int numberCon;
 	std::string* conNames = NULL;
 	double* conLowerBounds = NULL;
 	double* conUpperBounds = NULL;
 	double* conConstants = NULL;
-	
+
 	int idx;
 
 	try {
-		
+
 		// first get the block variable indexes, these are necessary
 		blockVariableIndexes = getBlockVarIndexes();
 		// get the core constraint indexes
 
 		coreConstraintIndexes = getCoreConstraintIndexes();
 		// get the block constraint indexes
-		
-		blockConstraintIndexes = getBlockConstraintIndexes();
-		
 
-		
-		if (blockVariableIndexes.size() <= 0 )
-			throw ErrorClass("someting wrong in getBlockOSInstances() -- no variables in the blocks");
-	
+		blockConstraintIndexes = getBlockConstraintIndexes();
+
+		if (blockVariableIndexes.size() <= 0)
+			throw ErrorClass(
+					"someting wrong in getBlockOSInstances() -- no variables in the blocks");
+
 		//
 		//loop over each block
 		//
 		whichBlock = 0;
 		for (vit = blockVariableIndexes.begin(); vit
 				!= blockVariableIndexes.end(); vit++) {
-			
+
 			varSet.clear();
 			conMap.clear();
 			varSet = *vit;
-			
+
 			osinstance = new OSInstance();
 			//define variable arrays
 			numberVar = varSet.size();
-			varTypes = new char[ numberVar];
-			varNames = new string[ numberVar];
-			varLowerBounds = new double[ numberVar];
-			varUpperBounds = new double[ numberVar];
-			
+			varTypes = new char[numberVar];
+			varNames = new string[numberVar];
+			varLowerBounds = new double[numberVar];
+			varUpperBounds = new double[numberVar];
+
 			//now get the nonzeros for the variables in
 			//varSet and see which nonzeros are in non-core
 			//constraints
 			kount = 0;
 
+			osinstance->setVariableNumber(numberVar);
 
-			osinstance->setVariableNumber( numberVar);
-			
-			
 			SparseVector *objcoeff;
-			objcoeff = new SparseVector( numberVar);   
+			objcoeff = new SparseVector(numberVar);
 
 			//need to count the number  of nonzero elements
 			//in the block constraints
 			numNonz = 0;
-			
+
 			for (sit = varSet.begin(); sit != varSet.end(); sit++) {
-				
-				
-				varTypes[ kount] = m_osinstance->getVariableTypes()[ *sit];
-				varLowerBounds[ kount] = m_osinstance->getVariableLowerBounds()[ *sit];
-				varUpperBounds[ kount] = m_osinstance->getVariableUpperBounds()[ *sit];
-				
-				varNames[ kount] = m_osinstance->getVariableNames()[ *sit];
-				
-				objcoeff->indexes[ kount] = kount;
-				objcoeff->values[ kount] = 0.0;
-				
-				numNonz += m_osinstance->getLinearConstraintCoefficientsInColumnMajor()->starts[*sit + 1] 
-				   - m_osinstance->getLinearConstraintCoefficientsInColumnMajor()->starts[*sit ];
-				
+
+				varTypes[kount] = m_osinstance->getVariableTypes()[*sit];
+				varLowerBounds[kount]
+						= m_osinstance->getVariableLowerBounds()[*sit];
+				varUpperBounds[kount]
+						= m_osinstance->getVariableUpperBounds()[*sit];
+
+				varNames[kount] = m_osinstance->getVariableNames()[*sit];
+
+				objcoeff->indexes[kount] = kount;
+				objcoeff->values[kount] = 0.0;
+
+				numNonz
+						+= m_osinstance->getLinearConstraintCoefficientsInColumnMajor()->starts[*sit
+								+ 1]
+								- m_osinstance->getLinearConstraintCoefficientsInColumnMajor()->starts[*sit];
+
 				kount++;
-				
+
 			}//end of loop over the variables in this block
 
-			osinstance->setVariables( numberVar, varNames, varLowerBounds, varUpperBounds, varTypes);
-			
-						// now the objective function
-			osinstance->setObjectiveNumber( 1);
+			osinstance->setVariables(numberVar, varNames, varLowerBounds,
+					varUpperBounds, varTypes);
+
+			// now the objective function
+			osinstance->setObjectiveNumber(1);
 			// now the coefficient
-			osinstance->addObjective(-1, "objfunction", m_osinstance->getObjectiveMaxOrMins()[ 0], 
-					0.0, 1.0, objcoeff);
-			
-			
-			conMap = blockConstraintIndexes[ whichBlock];
+			osinstance->addObjective(-1, "objfunction",
+					m_osinstance->getObjectiveMaxOrMins()[0], 0.0, 1.0,
+					objcoeff);
+
+			conMap = blockConstraintIndexes[whichBlock];
 			numberCon = conMap.size();
-			
-			
-			
-			
-			if( numberCon > 0){
-			
-			
-			
-			starts = new int[ numberVar + 1];  
-			indexes = new int[ numNonz] ;
-			values = new double[ numNonz] ;
-			kount = 0;
-			starts[ kount] = 0;
-			
-			
-			numNonz = 0;
-			for (sit = varSet.begin(); sit != varSet.end(); sit++) {
-				
-				
-				
-				k2 = m_osinstance->getLinearConstraintCoefficientsInColumnMajor()->starts[*sit + 1];
-				k1 = m_osinstance->getLinearConstraintCoefficientsInColumnMajor()->starts[*sit];
-				
-		
-				for(i = k1;  i < k2; i++){
-					
-					idx = m_osinstance->getLinearConstraintCoefficientsInColumnMajor()->indexes[ i ];
-					
-					//check to make sure we are not in a core constraint
-					if (coreConstraintIndexes.find( idx )  == coreConstraintIndexes.end()) {
-						
-						indexes[ numNonz ] = conMap[ idx ];
-						values[ numNonz ] = m_osinstance->getLinearConstraintCoefficientsInColumnMajor()->values[ i ];
-						numNonz++;
+
+			if (numberCon > 0) {
+
+				starts = new int[numberVar + 1];
+				indexes = new int[numNonz];
+				values = new double[numNonz];
+				kount = 0;
+				starts[kount] = 0;
+
+				numNonz = 0;
+				for (sit = varSet.begin(); sit != varSet.end(); sit++) {
+
+					k2
+							= m_osinstance->getLinearConstraintCoefficientsInColumnMajor()->starts[*sit
+									+ 1];
+					k1
+							= m_osinstance->getLinearConstraintCoefficientsInColumnMajor()->starts[*sit];
+
+					for (i = k1; i < k2; i++) {
+
+						idx
+								= m_osinstance->getLinearConstraintCoefficientsInColumnMajor()->indexes[i];
+
+						//check to make sure we are not in a core constraint
+						if (coreConstraintIndexes.find(idx)
+								== coreConstraintIndexes.end()) {
+
+							indexes[numNonz] = conMap[idx];
+							values[numNonz]
+									= m_osinstance->getLinearConstraintCoefficientsInColumnMajor()->values[i];
+							numNonz++;
+						}
+
 					}
-					
-				
-					
+					starts[kount + 1] = numNonz;
+
+					kount++;
+
 				}
-				starts[ kount + 1] = numNonz;
-				
-				kount++;
-				
-			}
-			
-						//now the constraints
+
+				//now the constraints
 
 
-			osinstance->setConstraintNumber( numberCon);
-			conLowerBounds = new double[ numberCon];
-			conUpperBounds = new double[ numberCon];
-			conConstants = new double[ numberCon];
-			
-			for (mit = conMap.begin(); mit != conMap.end(); mit++) {
-				
-				conLowerBounds[ mit->second] = m_osinstance->getConstraintLowerBounds()[ mit->first];
-				conUpperBounds[ mit->second] = m_osinstance->getConstraintUpperBounds()[ mit->first];
-				conConstants[ mit->second] = 1.0;
+				osinstance->setConstraintNumber(numberCon);
+				conLowerBounds = new double[numberCon];
+				conUpperBounds = new double[numberCon];
+				conConstants = new double[numberCon];
+
+				for (mit = conMap.begin(); mit != conMap.end(); mit++) {
+
+					conLowerBounds[mit->second]
+							= m_osinstance->getConstraintLowerBounds()[mit->first];
+					conUpperBounds[mit->second]
+							= m_osinstance->getConstraintUpperBounds()[mit->first];
+					conConstants[mit->second] = 1.0;
+
+
+
+				}
+
+				std::cout << "Call setConstraints " << numberCon << std::endl;
+
+				osinstance->setConstraints(numberCon, conNames, conLowerBounds,
+						conUpperBounds, conConstants);
+
+				osinstance->setLinearConstraintCoefficients(numNonz, true,
+						values, 0, numNonz - 1, indexes, 0, numNonz - 1,
+						starts, 0, numberVar);
 
 			}
 			
-			
-			osinstance->setConstraints(numberCon, conNames, conLowerBounds, conUpperBounds, conConstants);
-			
-			
-			osinstance->setLinearConstraintCoefficients(numNonz, true, values, 0, numNonz - 1, 
-			indexes, 0, numNonz - 1,  starts, 0, numberVar );
-			
-			}
 			//numNonz--;
-			
 
-			
 
-			
-
-		
-			
-
-			
 			//add the osinstance
-			m_blockOSInstances.push_back( osinstance);
-			
+			m_blockOSInstances.push_back(osinstance);
+
 			//see what this puppy looks like
-			
+
 			//std::cout << osinstance->printModel( ) << std::endl;
-			
+
 			objcoeff->bDeleteArrays = true;
-			delete objcoeff;		
-			if(varLowerBounds != NULL ) delete []varLowerBounds;
-			if(varUpperBounds != NULL ) delete []varUpperBounds;
-			if(varTypes != NULL ) delete []varTypes;
-			if(varNames != NULL ) delete []varNames;
-			
+			delete objcoeff;
+			if (varLowerBounds != NULL)
+				delete[] varLowerBounds;
+			if (varUpperBounds != NULL)
+				delete[] varUpperBounds;
+			if (varTypes != NULL)
+				delete[] varTypes;
+			if (varNames != NULL)
+				delete[] varNames;
+
 			//delete []starts;
 			//delete []indexes;
 			//delete []values;
-			
-			if( conLowerBounds != NULL ) delete []conLowerBounds;
-			if( conUpperBounds != NULL ) delete []conUpperBounds;
-			if( conConstants  != NULL ) delete []conConstants;
-			
+
+			if (conLowerBounds != NULL)
+				delete[] conLowerBounds;
+			if (conUpperBounds != NULL)
+				delete[] conUpperBounds;
+			if (conConstants != NULL)
+				delete[] conConstants;
+
 			whichBlock++;
-			
+
 		}//end for iterator for the blocks
 
 
@@ -596,15 +600,15 @@ std::vector<OSInstance* > OS_DipInterface::getBlockOSInstances(){
 	}
 	m_blockOSInstancesProcessed = true;
 	return m_blockOSInstances;
-	
-	
+
 }//end getBlockOSInstances()
 
 std::set<int> OS_DipInterface::getCoreConstraintIndexes() {
 
 	//get the indexes of the core constraints
 
-	if( m_coreConstraintIndexesProcessed == true) return m_coreConstraintIndexes;
+	if (m_coreConstraintIndexesProcessed == true)
+		return m_coreConstraintIndexes;
 	try {
 		if (m_osoption == NULL)
 			throw ErrorClass("we have a null osoption");
@@ -649,7 +653,9 @@ std::set<int> OS_DipInterface::getCoreConstraintIndexes() {
 
 		}//end of if on osptio null
 
-		if(m_coreConstraintIndexes.size() <= 0)throw ErrorClass("there were no core constraints listed in the option file");
+		if (m_coreConstraintIndexes.size() <= 0)
+			throw ErrorClass(
+					"there were no core constraints listed in the option file");
 	}// end of try
 
 
@@ -673,23 +679,17 @@ double* OS_DipInterface::getObjectiveFunctionCoeff() {
 }// end getObjectiveFunctionCoeff()
 
 
-
 /** Default constructor. */
-OS_DipInterface::OS_DipInterface():
-		
-		m_isProvenOptimal( false),
-		m_bestKnownLB( -1.e20 ),
-		m_bestKnownUB( 1.e20),
-		m_coinpm( NULL ),
-		m_blockVariableIndexesProcessed( false),
-		m_coreConstraintIndexesProcessed( false),
-		m_blockConstraintIndexesProcessed( false),
-		m_blockOSInstancesProcessed( false),
-		m_blockFactoriesProcessed( false) {
+OS_DipInterface::OS_DipInterface() :
+
+	m_isProvenOptimal(false), m_bestKnownLB(-1.e20), m_bestKnownUB(1.e20),
+			m_coinpm(NULL), m_blockVariableIndexesProcessed(false),
+			m_coreConstraintIndexesProcessed(false),
+			m_blockConstraintIndexesProcessed(false),
+			m_blockOSInstancesProcessed(false),
+			m_blockFactoriesProcessed(false) {
 
 }
-
-
 
 OS_DipInterface::~OS_DipInterface() {
 	std::cout << "INSIDE OS DIP INTERFACE DESTRUCTOR" << std::endl;
@@ -698,13 +698,12 @@ OS_DipInterface::~OS_DipInterface() {
 	if (m_osolreader != NULL)
 		delete m_osolreader;
 	delete m_coinpm;
-	
-	std::vector<OSInstance* >::iterator vit;
-	
-	if(m_blockOSInstances.size()  > 0 ){
-		for (vit =  m_blockOSInstances.begin(); vit
-			!=  m_blockOSInstances.end(); vit++) {
-		
+
+	std::vector<OSInstance*>::iterator vit;
+
+	if (m_blockOSInstances.size() > 0) {
+		for (vit = m_blockOSInstances.begin(); vit != m_blockOSInstances.end(); vit++) {
+
 			delete *vit;
 		}
 	}

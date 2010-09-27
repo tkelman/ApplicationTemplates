@@ -45,6 +45,7 @@ public:
 	int m_numberOfVar;
 	// first declare a generic solver
 	CoinSolver *m_solver ;
+
 	
 	/**
 	 * <p>

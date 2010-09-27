@@ -112,7 +112,7 @@ void OSDipBlockCoinSolver::solve(double *cost, std::string *osrl){
 		//we have already built the model
 		m_solver->osiSolver->setObjective( cost);
 		
-		std::cout << m_osinstance->printModel( ) << std::endl;
+		//std::cout << m_osinstance->printModel( ) << std::endl;
 		//solve the model
 		m_solver->solve();
 		//std::cout << "MODEL BEING SOLVED " << std::endl;
