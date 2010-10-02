@@ -15,10 +15,13 @@
  * 
  */
 #include<map>
+#include "OSDipBlockSolverFactory.h"
 #include "OSDipBlockCoinSolver.h"
 #include "OSDipBlockSlpSolver.h"
+#include "OSDipBlockBearcatSolver.h"
 //#include "MyBlockSolver.h"
-#include "OSDipBlockSolverFactory.h"
+
+
 #include <string>
 
 
@@ -31,6 +34,7 @@ public:
 		//OSDipBlockSolverFactory::factories["MyBlockSolver"] = new MyBlockSolver::Factory;
 		OSDipBlockSolverFactory::factories["OSDipBlockCoinSolver"] = new OSDipBlockCoinSolver::Factory;
 		OSDipBlockSolverFactory::factories["OSDipBlockSlpSolver"] = new OSDipBlockSlpSolver::Factory;
+		OSDipBlockSolverFactory::factories["OSDipBlockBearcatSolver"] = new OSDipBlockBearcatSolver::Factory;
 	}
 	
 	
