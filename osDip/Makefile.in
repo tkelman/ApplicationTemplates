@@ -23,6 +23,7 @@ OBJS         += OSDipBlockSolver.@OBJEXT@
 OBJS         += OSDipBlockSolverFactory.@OBJEXT@
 OBJS         += solvers/OSDipBlockCoinSolver.@OBJEXT@
 OBJS         += solvers/OSDipBlockSlpSolver.@OBJEXT@
+OBJS         += solvers/OSDipBlockBearcatSolver.@OBJEXT@
 
 
 

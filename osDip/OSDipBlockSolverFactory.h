@@ -20,6 +20,7 @@
 
 // --------------------------------------------------------------------- //
 #include "OSInstance.h"
+#include "OSOption.h"
 #include "OSResult.h"
 #include "OSDataStructures.h"
 #include "OSErrorClass.h"
@@ -43,6 +44,8 @@ class OSDipBlockSolverFactory{
 	
 public:
 	OSInstance *osinstance;
+	OSOption *osoption;
+	
 	virtual  OSDipBlockSolver* create() = 0;
 	static  std::map<std::string, OSDipBlockSolverFactory*> factories;
 	static 	OSDipBlockSolver* createOSDipBlockSolver(const string &solverName) throw(ErrorClass);

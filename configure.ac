@@ -479,6 +479,8 @@ AC_COIN_VPATH_LINK(osDip/solvers/OSDipBlockCoinSolver.cpp)
 AC_COIN_VPATH_LINK(osDip/solvers/OSDipBlockCoinSolver.h)
 AC_COIN_VPATH_LINK(osDip/solvers/OSDipBlockSlpSolver.cpp)
 AC_COIN_VPATH_LINK(osDip/solvers/OSDipBlockSlpSolver.h)
+AC_COIN_VPATH_LINK(osDip/solvers/OSDipBlockBearcatSolver.cpp)
+AC_COIN_VPATH_LINK(osDip/solvers/OSDipBlockBearcatSolver.h)
 
 
 ##############################################################################

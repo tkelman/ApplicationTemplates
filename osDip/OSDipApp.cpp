@@ -88,7 +88,7 @@ void OSDipApp::initializeApp(UtilParameters & utilParam) {
 				solverFactory =  m_blockFactories[ kount];
 				
 			}else{
-				
+				//give it the default factory in the parameter file
 				solverFactory =  m_appParam.solverFactory;
 				
 			}
@@ -97,6 +97,7 @@ void OSDipApp::initializeApp(UtilParameters & utilParam) {
 			
 			
 			OSDipBlockSolverFactory::factories[ solverFactory]->osinstance = *vit1;
+			OSDipBlockSolverFactory::factories[ solverFactory]->osoption = m_osInterface.m_osoption;
 			solver = OSDipBlockSolverFactory::factories[ solverFactory]->create();
 			
 			
@@ -578,6 +579,9 @@ DecompSolverStatus OSDipApp::solveRelaxed(const int whichBlock,
 	}
 	
 	try{
+		
+		
+		m_osDipBlockSolver[whichBlock]->m_whichBlock;
 		m_osDipBlockSolver[whichBlock]->solve(cost, &solIndexValPair, &varRedCost);
 		kount = 0;	
 		
