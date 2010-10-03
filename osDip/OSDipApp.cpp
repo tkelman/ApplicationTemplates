@@ -74,7 +74,7 @@ void OSDipApp::initializeApp(UtilParameters & utilParam) {
 		std::vector<OSInstance*>::iterator vit1;
 		
 		std::string solverFactory;
-		int kount = 0;
+		int whichBlock = 0;
 
 		OSDipBlockSolver *solver = NULL;
 		factoryInit  = new OSDipFactoryInitializer();
@@ -83,9 +83,9 @@ void OSDipApp::initializeApp(UtilParameters & utilParam) {
 				!= m_blockOSInstances.end(); vit1++) {
 			
 			//kipp check for a valid name here -- 
-			if( m_blockFactories[ kount].size()  > 0){
+			if( m_blockFactories[ whichBlock].size()  > 0){
 				
-				solverFactory =  m_blockFactories[ kount];
+				solverFactory =  m_blockFactories[ whichBlock];
 				
 			}else{
 				//give it the default factory in the parameter file
@@ -93,15 +93,16 @@ void OSDipApp::initializeApp(UtilParameters & utilParam) {
 				
 			}
 			
-			kount++;
+			
 			
 			
 			OSDipBlockSolverFactory::factories[ solverFactory]->osinstance = *vit1;
 			OSDipBlockSolverFactory::factories[ solverFactory]->osoption = m_osInterface.m_osoption;
 			solver = OSDipBlockSolverFactory::factories[ solverFactory]->create();
-			
-			
+			solver->m_whichBlock  = whichBlock;
 			m_osDipBlockSolver.push_back( solver);
+			
+			whichBlock++;
 
 		}
 
@@ -542,6 +543,9 @@ int OSDipApp::generateInitVars(DecompVarList & initVars) {
 DecompSolverStatus OSDipApp::solveRelaxed(const int whichBlock,
 		const double * redCostX, const double convexDual,
 		list<DecompVar*> & vars) {
+	
+	exit( 1);
+	
 
 	UtilPrintFuncBegin(m_osLog, m_classTag, "solveRelaxed()",
 			m_appParam.LogLevel, 2);
@@ -582,6 +586,8 @@ DecompSolverStatus OSDipApp::solveRelaxed(const int whichBlock,
 		
 		
 		m_osDipBlockSolver[whichBlock]->m_whichBlock;
+		
+	
 		m_osDipBlockSolver[whichBlock]->solve(cost, &solIndexValPair, &varRedCost);
 		kount = 0;	
 		

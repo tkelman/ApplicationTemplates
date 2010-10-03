@@ -40,8 +40,17 @@ public:
 	
 
 	OSInstance *m_osinstance;
+	OSOption *m_osoption;
 	OSResult *m_osresult;
+	
+	//variables for the dynamic programming solution
 	int m_numberOfVar;
+	int m_numHubs;
+	int m_numNodes;
+	int m_totalDemand;
+	int m_minDemand;
+	int* m_demand;
+	//end variables for the dynamic programming solution
 	
 	std::vector<IndexValuePair*>  m_primalVals;
 
@@ -83,7 +92,7 @@ public:
 	 *
 	 * Create the solver with the instance. 
 	 */	
-	OSDipBlockBearcatSolver( OSInstance *osinstance);
+	OSDipBlockBearcatSolver( OSInstance *osinstance, OSOption *osoption);
 	
 	/**
 	 *
@@ -104,7 +113,7 @@ public:
 			
 		}
 		
-		OSDipBlockSolver* create() {  return new OSDipBlockBearcatSolver(  osinstance); };
+		OSDipBlockSolver* create() {  return new OSDipBlockBearcatSolver(  osinstance, osoption); };
 		
 	};// end class OSDipBlockSolverFactory
 	

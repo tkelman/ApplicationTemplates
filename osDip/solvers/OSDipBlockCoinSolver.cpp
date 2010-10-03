@@ -74,7 +74,7 @@ void OSDipBlockCoinSolver::solve(double *cost, std::vector<IndexValuePair*> *sol
 		std::cout << m_osinstance->printModel( ) << std::endl;
 		//
 		
-		
+	
 		//solve the model
 		m_solver->solve();
 		m_osresult = m_solver->osresult;

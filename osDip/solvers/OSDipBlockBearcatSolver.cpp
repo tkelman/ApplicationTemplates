@@ -18,6 +18,8 @@
 #include "OSErrorClass.h" 
 #include "OSDataStructures.h"
 
+#include <sstream>;
+using std::ostringstream;
 
 
 OSDipBlockBearcatSolver::OSDipBlockBearcatSolver():
@@ -26,12 +28,87 @@ OSDipBlockBearcatSolver::OSDipBlockBearcatSolver():
 }//end OSDipBlockBearcatSolver
 
 
-OSDipBlockBearcatSolver::OSDipBlockBearcatSolver( OSInstance *osinstance) {
-	
+OSDipBlockBearcatSolver::OSDipBlockBearcatSolver( OSInstance *osinstance,  OSOption *osoption) {
+	  std::cout << "INSIDE OSDipBlockBearcatSolver CONSTRUCTOR" << std::endl;
+	  std::cout << "whichBlock = " << m_whichBlock<< std::endl;
 	try{
 		m_osinstance = osinstance;
 		m_numberOfVar = m_osinstance->getVariableNumber();
-	
+		
+		m_osoption = osoption;
+		m_demand = NULL;
+		//now get data
+		std::vector<SolverOption*> solverOptions;
+		std::vector<SolverOption*>::iterator vit;
+		std::vector<int >demand;
+
+		
+		solverOptions = m_osoption->getSolverOptions("Dip");
+		//iterate over the vector
+		
+		int tmpVal;
+
+		for (vit = solverOptions.begin(); vit != solverOptions.end(); vit++) {
+			
+			
+			std::cout << (*vit)->name << std::endl;
+			
+			//(*vit)->name.compare("initialCol") == 0
+			//if(rowNames[ i3].find("routeCapacity(1)") == string::npos )
+			
+			if( (*vit)->name.find("numHubs") !=  std::string::npos){
+				
+				std::istringstream buffer( (*vit)->value);
+				buffer >> m_numHubs;
+				std::cout << "numHubs = " << m_numHubs <<  std::endl;
+				
+			}else{
+				
+				if((*vit)->name.find("numNodes") !=  std::string::npos){
+					
+					std::istringstream buffer( (*vit)->value);
+					buffer >> m_numNodes;
+					std::cout << "numNodes = " <<  m_numNodes <<  std::endl;
+					
+				}else{
+					if((*vit)->name.find("totalDemand") !=  std::string::npos){
+						
+						std::istringstream buffer( (*vit)->value);
+						buffer >> m_totalDemand;
+						std::cout << "m_totalDemand = " << m_totalDemand <<  std::endl;
+						
+					}else{
+						if((*vit)->name.find("minDemand") !=  std::string::npos){
+							
+							std::istringstream buffer( (*vit)->value);
+							buffer >> m_minDemand;
+							std::cout << "m_minDemand = " << m_minDemand <<  std::endl;
+						
+						}else{
+							if( (*vit)->name.find("demand") !=  std::string::npos ){
+								
+								std::istringstream buffer( (*vit)->value);
+								buffer >> tmpVal;
+								demand.push_back( tmpVal);
+								std::cout << "demand = " << tmpVal <<  std::endl;
+								
+							}
+						}
+					}
+				}
+			}//end if on solver options
+			
+		}//end for loop on options
+		
+		//now fill in demand
+		m_demand = new int[ m_numNodes];
+		if(m_numNodes != demand.size( ) ) throw ErrorClass("inconsistent number of demand nodes");
+		int i;
+		for (i = 0; i < m_numNodes; i++) {
+			
+			m_demand[ i] = demand[i];
+			
+		}
 	} catch (const ErrorClass& eclass) {
 
 		throw ErrorClass(eclass.errormsg);
@@ -51,6 +128,8 @@ OSDipBlockBearcatSolver::~OSDipBlockBearcatSolver(){
 		
 		delete *vit;
 	}
+	
+	if(m_demand != NULL) delete[] m_demand;
 	//if(m_osrlreader != NULL) delete m_osrlreader;
 }//end ~OSDipBlockBearcatSolver
 
