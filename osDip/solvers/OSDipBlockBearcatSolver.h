@@ -50,9 +50,20 @@ public:
 	int m_totalDemand;
 	int m_minDemand;
 	int* m_demand;
+	
+	double** m_u; 
+	double** m_v;
+	int** m_px;
+	int** m_tx;
+	double** m_g;
+	
+	int* m_varIdx;
 	//end variables for the dynamic programming solution
 	
 	std::vector<IndexValuePair*>  m_primalVals;
+	
+	
+	double qrouteCost(const int& k, const int& l, double* c, int* kountVar) ;
 
 	
 	/**

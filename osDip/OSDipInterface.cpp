@@ -459,11 +459,10 @@ std::vector<OSInstance*> OS_DipInterface::getBlockOSInstances() {
 				varNames[kount] = m_osinstance->getVariableNames()[*sit];
 
 				objcoeff->indexes[kount] = kount;
-				objcoeff->values[kount] = 0.0;
-
+				//objcoeff->values[kount] = 0.0;
+				objcoeff->values[kount] =  m_osinstance->getDenseObjectiveCoefficients()[0][ *sit];
 				numNonz
-						+= m_osinstance->getLinearConstraintCoefficientsInColumnMajor()->starts[*sit
-								+ 1]
+						+= m_osinstance->getLinearConstraintCoefficientsInColumnMajor()->starts[*sit + 1]
 								- m_osinstance->getLinearConstraintCoefficientsInColumnMajor()->starts[*sit];
 
 				kount++;

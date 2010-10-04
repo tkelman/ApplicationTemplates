@@ -362,7 +362,7 @@ void OSDipApp::createModels() {
 
 			if (m_blockVarsAll.find(i) == m_blockVarsAll.end()) {
 				modelCore->masterOnlyCols.push_back(i);
-				std::cout << "MASTER ONLY VARIABLE " << i << std::endl;
+				//std::cout << "MASTER ONLY VARIABLE " << i << std::endl;
 			}
 		}
 
@@ -544,9 +544,6 @@ DecompSolverStatus OSDipApp::solveRelaxed(const int whichBlock,
 		const double * redCostX, const double convexDual,
 		list<DecompVar*> & vars) {
 	
-	exit( 1);
-	
-
 	UtilPrintFuncBegin(m_osLog, m_classTag, "solveRelaxed()",
 			m_appParam.LogLevel, 2);
 
@@ -564,6 +561,7 @@ DecompSolverStatus OSDipApp::solveRelaxed(const int whichBlock,
 	
 	std::set<int>::iterator sit;
 	std::vector<IndexValuePair*> solIndexValPair;
+	std::vector<IndexValuePair*>::iterator vit;
 
 
 
@@ -573,10 +571,14 @@ DecompSolverStatus OSDipApp::solveRelaxed(const int whichBlock,
 	cost = new double[ blockVar.size()];
 
 	index = 0;
-
+	int* reverseMap;
+	int reverseMapSize = blockVar.size();
+	reverseMap = new int[ reverseMapSize];
+	
 	for (sit = blockVar.begin(); sit != blockVar.end(); sit++) {
 
 		cost[index] = redCostX[*sit];
+		reverseMap[ index] = *sit;
 		//std::cout  << "cost[index] =  " << cost[index] << std::endl;
 		index++;
 
@@ -592,27 +594,35 @@ DecompSolverStatus OSDipApp::solveRelaxed(const int whichBlock,
 		kount = 0;	
 		
 		//std::cout << "NUMBER OF VARIABLES = " <<  solIndexValPair.size() << std::endl;
-		
+		//kipp -- change this!!! Pushing back even the zero variables -- crazy!!!
+		/*
 		for (sit = blockVar.begin(); sit != blockVar.end(); sit++) {
 			//kipp be careful here -- the the dimension of the cost vector
 			//is the same as the number of variable in the block -- NOT in the model
-			if(solIndexValPair.size() != blockVar.size() ) throw ErrorClass("an inconsistent number of block variables");
-			  
+			if(solIndexValPair.size() != blockVar.size() ) throw ErrorClass("an inconsistent number of block variables"); 
 		  solInd.push_back(  *sit ) ; //  again -- subproblem only sees variable in blockVar
-		  
-		
-		  solEls.push_back(  solIndexValPair[ kount]->value ) ;
-		  
 		  //std::cout << "SOLUTION INDEX: = " << *sit << std::endl;
 		  //std::cout << "  SOLUTION INDEX SUBPROBLEM = " << kount ;
-		  //std::cout << "  VARIABLE VALUE  = " << solIndexValPair[ kount]->value << std::endl;
-		  
+		  //std::cout << "  VARIABLE VALUE  = " << solIndexValPair[ kount]->value << std::endl;		
+		  solEls.push_back(  solIndexValPair[ kount]->value ) ;
 		  varOrigCost +=  m_objective[ *sit]*solIndexValPair[ kount]->value;
 		  kount++;
 		 
 		}
+		*/
 
+		for (vit = solIndexValPair.begin(); vit != solIndexValPair.end(); vit++) {
+			
+			//kipp -- check to make sure the variable indexed by (*vit)->idx is in the set blockVar
+			solInd.push_back( reverseMap[ (*vit)->idx] ) ;
+			solEls.push_back(  (*vit)->value ) ;
+			
+			 varOrigCost +=  m_objective[ reverseMap[ (*vit)->idx]]*(*vit)->value;
+			
+		}
 
+		
+		delete[] reverseMap;
 	
 	} catch (const ErrorClass& eclass) {
 
@@ -631,7 +641,7 @@ DecompSolverStatus OSDipApp::solveRelaxed(const int whichBlock,
 			printf("PUSH var with RC = %g\n", varRedCost - convexDual);
 	);
 
-	
+	//exit( 1);
 	DecompVar * var = new DecompVar(solInd, solEls, varRedCost - convexDual,
 			varOrigCost);
 	
