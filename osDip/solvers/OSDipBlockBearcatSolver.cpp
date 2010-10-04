@@ -18,7 +18,7 @@
 #include "OSErrorClass.h" 
 #include "OSDataStructures.h"
 
-#include <sstream>;
+#include <sstream>
 using std::ostringstream;
 
 

@@ -47,6 +47,8 @@ public:
 	CoinSolver *m_solver ;
 
 	
+
+	
 	/**
 	 * <p>
 	 * Calculate the function value given the current variable values.
