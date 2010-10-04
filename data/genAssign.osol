@@ -36,7 +36,7 @@
         	</variables>
 	
         	
-        <constraints numberOfOtherConstraintOptions="3">
+        <constraints numberOfOtherConstraintOptions="1">
         	<other name="constraintSet" solver="Dip" numberOfCon="4" type="Core">
         		<con idx="0" />
         		<con idx="1"/>
@@ -44,7 +44,7 @@
         		<con idx="3"/>
         	</other>
     
-        	</other>
+      
         	
 
         	
