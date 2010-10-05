@@ -705,4 +705,12 @@ DecompSolverStatus OSDipApp::solveRelaxed(const int whichBlock,
 	return DecompSolStatOptimal;
 }//end solveRelaxed
 
+int OSDipApp::generateCuts(const double  * x, 
+			    DecompCutList & newCuts){
+	
+	std::cout  << "I AM INSIDE GENERATE CUTS, IT WAS CALLED" << std::endl;
+
+	exit( 1);
+	return 0;
+}//end generateCuts
 

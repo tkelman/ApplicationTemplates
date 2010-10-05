@@ -97,7 +97,11 @@ public:
 	   DecompSolverStatus solveRelaxed(const int             whichBlock,
 					   const double        * redCostX,
 					   const double          convexDual,
-					   list<DecompVar*>    & vars);   
+					   list<DecompVar*>    & vars);  
+	   
+	   
+	   int generateCuts(const double  * x, 
+				    DecompCutList & newCuts);
 
 	/** Default constructor. Takes an instance of UtilParameters */
 	OSDipApp(UtilParameters & utilParam) :
