@@ -248,26 +248,60 @@ void OSDipBlockBearcatSolver::solve(double *cost, std::vector<IndexValuePair*> *
 		*optVal = qrouteCost(m_whichBlock,  bestl,  cost,  &kountVar);
 		std::cout <<   "best reduced cost = " << *optVal << std::endl;
 		
+		std::map<int, int> indexCount;
+		
+		std::map<int, int>::iterator mit;
+		
+		
+		for(i = 0; i < kountVar; i++){
+			
+			if( indexCount.find(  m_varIdx[ i]) == indexCount.end()  ){
+				
+				indexCount[ m_varIdx[ i]] = 1;
+				
+			}else{
+				
+				indexCount[ m_varIdx[ i]] += 1;
+				
+			}
+				
+				
+		}
+		
+		for (mit = indexCount.begin(); mit != indexCount.end(); mit++){
+			
+			//std::cout << "Variable Index " << mit->first << " Count =  " << mit->second << std::endl;
+			
+			//std::cout << "Variable Name = " << m_osinstance->getVariableNames()[   mit->first]  << std::endl;
+			
+			// get unique indexes
+			primalValPair = new IndexValuePair();
+			
+			primalValPair->value =  mit->second;
+			primalValPair->idx =  mit->first;
+	
+			
+			m_primalVals.push_back( primalValPair);
+		}
+		
+		/*** old way could lead to duplicate indexes
 		for (i = 0; i < kountVar; i++){
 			
 			//std::cout << "Variable Number = " << m_varIdx[ i] << std::endl;
-			//std::cout << "Variable Name = " << m_osinstance->getVariableNames()[  m_varIdx[ i]]  << std::endl;
+			std::cout << "Variable Name = " << m_osinstance->getVariableNames()[  m_varIdx[ i]]  << std::endl;
 			
-			
+			// get unique indexes
 			primalValPair = new IndexValuePair();
 			
 			primalValPair->value = 1.0;
 			primalValPair->idx = m_varIdx[ i];
-			
-		
 	
 			
 			m_primalVals.push_back( primalValPair);
 			
 			
-			
 		}
-
+	*/
 		
 		 *solIndexValPair = m_primalVals;
 
@@ -490,11 +524,7 @@ double OSDipBlockBearcatSolver::qrouteCost(const int& k, const int& l, double* c
 					if(  m_u[i][l2] + *(c + i*(m_numNodes-1) + k )  < rcost){
 						
 						rcost = m_u[i][l2] + *(c + i*(m_numNodes-1) + k );
-						
-						//std::cout << " m_u[i][l2] = "  << m_u[i][l2] << std::endl;
-						
-						//std::cout << " *(c + i*(m_numNodes-1) + k ) = "  << *(c + i*(m_numNodes-1) + k ) << std::endl;
-						//push node back
+
 						bestLastNode = i;
 					}
 					

@@ -527,6 +527,53 @@ int OSDipApp::generateInitVars(DecompVarList & initVars) {
 			}
 
 		}
+		
+		//for bearcat
+		/**
+		std::map<int, std::vector< int> > indexMap;
+		std::map<int, std::vector< int> >::iterator mit;
+		std::vector<int>::iterator vit2;
+		
+
+		indexMap = m_osInterface.generateInitialMaster();
+		
+
+		int kount;
+		std::string* varNames;
+		varNames =  m_osInterface.m_osinstance->getVariableNames();
+		
+		
+		for (mit = indexMap.begin(); mit != indexMap.end(); mit++) {
+			
+			kount = 0;
+			whichBlock = 0;
+			objValue = 0.0;
+			
+			index = new int[ mit->second.size() ];
+			value = new double[ mit->second.size()];
+			
+			for (vit2 = mit->second.begin(); vit2 != mit->second.end(); vit2++) {
+				index[ kount] = *vit2;
+				value[ kount] = 1.0;
+				std::cout << varNames[ *vit2]  << std::endl;
+				objValue += m_objective[ *vit2];
+				kount++;
+			}
+			
+			
+			var = new DecompVar(mit->second.size(), index, value, objValue);
+			
+			var->setBlockId(whichBlock);
+			initVars.push_back(var);
+			//free local memory
+			UTIL_DELARR(index);
+			UTIL_DELARR(value);
+			
+		}
+			
+
+		//exit( 1);
+		*/
 
 	}//end try
 	catch (const ErrorClass& eclass) {

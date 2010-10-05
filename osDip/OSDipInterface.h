@@ -236,6 +236,9 @@ public:
 	 */
 	inline const std::string* getConstraintNames() const {return m_osinstance->getConstraintNames();} 
 	
+	
+	std::map<int, std::vector< int> > generateInitialMaster();
+	
 	//end wrapper methods
 
 	/** class constructor */

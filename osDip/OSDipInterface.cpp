@@ -707,3 +707,168 @@ OS_DipInterface::~OS_DipInterface() {
 		}
 	}
 }
+
+
+
+std::map<int, std::vector< int> > OS_DipInterface::generateInitialMaster(){
+	
+	
+	// define the classes
+	FileUtil *fileUtil = NULL;
+	OSiLReader *osilreader = NULL;
+	DefaultSolver *solver  = NULL;
+	OSInstance *osinstance = NULL;
+	OSOption *osoption = NULL;
+
+	// end classes    
+
+	std::string testFileName;
+	std::string osil;
+	
+	
+	std::map<int, std::vector< int> > indexMap;
+	std::vector< int> indexes;
+	fileUtil = new FileUtil();
+
+
+	try {
+		testFileName = "../data/restrictedMaster5.osil";
+		
+		osil = fileUtil->getFileAsString(testFileName.c_str());
+
+#ifdef MY_DEBUG
+		std::cout << "Done reading the file" << std::endl;
+#endif
+
+		osilreader = new OSiLReader();
+		
+		//create the osption 
+		osoption = new OSOption();
+
+#ifdef MY_DEBUG
+		parsingTestResult << "Reading files successfully" << std::endl;
+#endif
+
+		osinstance = osilreader->readOSiL(osil);
+		
+		solver = new CoinSolver();
+		solver->sSolverName ="cbc"; 
+		solver->osinstance = osinstance;
+		solver->osoption = osoption;	
+		std::cout << "CALLING SOLVE FOR RESTRICTED MASTER" << std::endl;
+		solver->solve();
+		int i;
+		int j;
+		int k;
+		int vecSize;
+		// now get the primal solution
+		std::vector<IndexValuePair*> primalValPair;
+		primalValPair = solver->osresult->getOptimalPrimalVariableValues( 0);
+		vecSize = primalValPair.size();
+		
+		
+		int numNodes = 5;
+		int numHubs = 1;
+		int totalDemand = 4;
+		
+		
+		
+		int* routeDemand = NULL;
+		int startPnt;
+		
+		routeDemand = new int[ numHubs];
+		int kount;
+		
+		std::string* varNames;
+		varNames =  osinstance->getVariableNames();
+		
+		//get route demands
+		kount = 0;
+		for(k = 0; k < numHubs; k++){
+			
+			routeDemand[k ] = primalValPair[ kount]->value;
+			
+			std::cout << "Route Demand = " << routeDemand[k] << std::endl;
+			kount++;
+		
+		}
+		
+		//now get x variable values
+		
+		for(k = 0; k < numHubs; k++){
+			
+			startPnt = k*totalDemand*(numNodes*numNodes - numNodes) + (routeDemand[ k] - 1)*(numNodes*numNodes - numNodes);
+			
+			for(i = 0; i < numNodes; i++){
+				
+				
+				for(j = 0; j < i; j++){
+					
+					if( primalValPair[ kount]->value > .1){
+						
+						std::cout << varNames[ kount] << std::endl;
+						indexes.push_back(startPnt +  i*(numNodes-1) + j    );
+						
+						
+					}
+					
+					kount++;
+					
+				}
+				
+				for(j = i + 1; j < numNodes; j++){
+					
+					
+					if( primalValPair[ kount]->value > .1){
+						std::cout << varNames[ kount] << std::endl;
+						indexes.push_back(startPnt +  i*(numNodes-1) + j -1   );
+						
+						
+					}
+					
+					
+					kount++;
+					
+				}
+				
+			}
+			
+			//create the map
+			
+			indexMap.insert(make_pair(k, indexes));
+			
+		}//end loop on k -- hubs
+		
+		
+		std::cout << "DONE CALLING SOLVE FOR RESTRICTED MASTER" << std::endl;
+
+		
+		
+		delete[] routeDemand;
+		
+		
+		delete osilreader;
+		osilreader = NULL;
+		delete solver;
+		solver = NULL;
+		delete osoption;
+		osoption = NULL;
+		
+
+	} catch (const ErrorClass& eclass) {
+		cout << endl << endl << endl;
+		if (osilreader != NULL)
+			delete osilreader;
+		if (solver != NULL)
+			delete solver;
+		if (osoption != NULL)
+			delete osoption;
+		//  Problem with the parser
+		throw ErrorClass(eclass.errormsg);
+	}
+
+	delete fileUtil;
+	fileUtil = NULL;
+	return indexMap;
+	
+}//end generateInitialMaster
