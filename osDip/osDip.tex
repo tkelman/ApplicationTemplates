@@ -923,10 +923,31 @@ string to be {\tt OSDipBlockCoinSolver}.
 nodeLimit = 1
 \end{verbatim}
 
+More from Matt:
+
+
+
+\begin{verbatim}
+Kipp - the example you sent finds the optimal solution after a few passes of pricing and therefore never calls the cut generator. By default, the PC solver, in the root node starts with pricing, and does not stop until it prices out (or finds optimal, or within gap limits).If it prices out and has not yet found optimal, then it will proceed to cuts.This is parameter driven.You'll see in the log file (LogDebugLevel = 3),PRICE_AND_CUT  LimitRoundCutIters       2147483647PRICE_AND_CUT  LimitRoundPriceIters     2147483647This is the number of Price/Cut iterations to take before switching off (i.e., MAXINT).To force it to cut before pricing out, change this parameter in the parm file. For example, if you change to :[DECOMP]LimitRoundPriceIters = 1LimitRoundCutIters   = 1It will then go into your generateCuts after one pricing iteration.
+\end{verbatim}
+
+
+
 \section{Setting Options}
 
 Kipp -- put in information on how to set options for the {\tt AlpsDecompModel}
 
+
+Some options to get output
+
+\begin{verbatim}
+Turn up the log levels to see when that happens:[DECOMP]LogDebugLevel    = 3LogLevel         = 3LogDumpModel     = 2LogLpLevel       = 1
+\end{verbatim}
+
+
+\begin{verbatim}
+Yes - it is also used to solve the master problem as an IP. That is, it periodically changes the variables in the master problem (lambda) to integers and solves the master as an integer program. This is a heuristic to try and get incumbent solutions for the entire problem. This, in my thesis, is called Price-and-Branch.
+\end{verbatim}
 \end{document}
 
 configure - using command line or configure file
