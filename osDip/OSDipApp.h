@@ -100,8 +100,10 @@ public:
 					   list<DecompVar*>    & vars);  
 	   
 	   
-	   int generateCuts(const double  * x, 
-				    DecompCutList & newCuts);
+	   int generateCuts(const double* x, DecompCutList & newCuts);
+	   
+	   bool APPisUserFeasible(const double* x, const int n_cols,
+			   const double tolZero);
 
 	/** Default constructor. Takes an instance of UtilParameters */
 	OSDipApp(UtilParameters & utilParam) :
@@ -128,7 +130,14 @@ public:
 		
 		delete factoryInit;
 	}
+	
+	
+	
+
+
 
 };
+
+
 
 #endif

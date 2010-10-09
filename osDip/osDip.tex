@@ -928,7 +928,34 @@ More from Matt:
 
 
 \begin{verbatim}
-Kipp - the example you sent finds the optimal solution after a few passes of pricing and therefore never calls the cut generator. By default, the PC solver, in the root node starts with pricing, and does not stop until it prices out (or finds optimal, or within gap limits).If it prices out and has not yet found optimal, then it will proceed to cuts.This is parameter driven.You'll see in the log file (LogDebugLevel = 3),PRICE_AND_CUT  LimitRoundCutIters       2147483647PRICE_AND_CUT  LimitRoundPriceIters     2147483647This is the number of Price/Cut iterations to take before switching off (i.e., MAXINT).To force it to cut before pricing out, change this parameter in the parm file. For example, if you change to :[DECOMP]LimitRoundPriceIters = 1LimitRoundCutIters   = 1It will then go into your generateCuts after one pricing iteration.
+Kipp - the example you sent finds the optimal solution after a few passes of pricing and therefore never calls the cut generator. By default, the PC solver, in the root node starts with pricing, and does not stop until it prices out (or finds optimal, or within gap limits).
+
+If it prices out and has not yet found optimal, then it will proceed to cuts.
+
+This is parameter driven.
+
+
+You'll see in the log file (LogDebugLevel = 3),
+PRICE_AND_CUT  LimitRoundCutIters       2147483647
+PRICE_AND_CUT  LimitRoundPriceIters     2147483647
+
+This is the number of Price/Cut iterations to take before switching off (i.e., MAXINT).
+
+To force it to cut before pricing out, change this parameter in the parm file. For example, if you change to :
+
+[DECOMP]
+LimitRoundPriceIters = 1
+LimitRoundCutIters   = 1
+
+It will then go into your generateCuts after one pricing iteration.
+
+\vskip 12pt
+
+If there is an integer solution at the root node, it may be the case that we are still not optimal. A perfect example is where you want to add tour-breaking constraints. There could be an integer solution, but you still violate a tour-breaking constraint. Here is what Matt says:
+``By default, DIP assumes, that if problem is LP feasible to the linear system and IP feasible, then it is feasible. In the case where the user knows something that DIP does not (e.g., that the linear system does not define the entire valid constraint system, as in TSP), then they must provide a derivation of this function APPisUserFeasible. Then, DIP will check LP feasible, IP feasible and lastly, APPisUserFeasible before declaring a point a feasible solution.''
+
+For an example of using this see, \url{https://projects.coin-or.org/Dip/browser/trunk/Dip/examples/TSP/TSP_DecompApp.cpp}.
+
 \end{verbatim}
 
 
@@ -941,7 +968,12 @@ Kipp -- put in information on how to set options for the {\tt AlpsDecompModel}
 Some options to get output
 
 \begin{verbatim}
-Turn up the log levels to see when that happens:[DECOMP]LogDebugLevel    = 3LogLevel         = 3LogDumpModel     = 2LogLpLevel       = 1
+Turn up the log levels to see when that happens:
+[DECOMP]
+LogDebugLevel    = 3
+LogLevel         = 3
+LogDumpModel     = 2
+LogLpLevel       = 1
 \end{verbatim}
 
 
