@@ -470,7 +470,7 @@ ac_includes_default="\
 # include <unistd.h>
 #endif"
 
-ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS build build_cpu build_vendor build_os ADDLIBS FADDLIBS ALWAYS_FALSE_TRUE ALWAYS_FALSE_FALSE CDEFS ADD_CFLAGS DBG_CFLAGS OPT_CFLAGS sol_cc_compiler CC CFLAGS LDFLAGS CPPFLAGS ac_ct_CC EXEEXT OBJEXT MPICC CXXDEFS ADD_CXXFLAGS DBG_CXXFLAGS OPT_CXXFLAGS CXX CXXFLAGS ac_ct_CXX MPICXX F77 ADD_FFLAGS DBG_FFLAGS OPT_FFLAGS FFLAGS ac_ct_F77 MPIF77 FLIBS EGREP INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W PACKAGE VERSION ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM mkdir_p AWK SET_MAKE am__leading_dot AMTAR am__tar am__untar DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE CXXDEPMODE am__fastdepCXX_TRUE am__fastdepCXX_FALSE MAINTAINER_MODE_TRUE MAINTAINER_MODE_FALSE MAINT LIBTOOLM4 have_autoconf have_automake have_svn BUILDTOOLSDIR AUX_DIR abs_source_dir abs_lib_dir abs_include_dir abs_bin_dir HAVE_EXTERNALS_TRUE HAVE_EXTERNALS_FALSE host host_cpu host_vendor host_os LN_S ECHO AR ac_ct_AR RANLIB ac_ct_RANLIB CPP CXXCPP LIBTOOL ac_c_preproc_warn_flag ac_cxx_preproc_warn_flag RPATH_FLAGS LT_LDFLAGS OSSRCDIR OSOBJDIR OSDOCDIR COIN_HAS_OS_TRUE COIN_HAS_OS_FALSE BCPSRCDIR BCPOBJDIR BCPDOCDIR COIN_HAS_BCP_TRUE COIN_HAS_BCP_FALSE COINUTILSSRCDIR COINUTILSOBJDIR COINUTILSDOCDIR COIN_HAS_COINUTILS_TRUE COIN_HAS_COINUTILS_FALSE OSISRCDIR OSIOBJDIR OSIDOCDIR COIN_HAS_OSI_TRUE COIN_HAS_OSI_FALSE CLPSRCDIR CLPOBJDIR CLPDOCDIR COIN_HAS_CLP_TRUE COIN_HAS_CLP_FALSE CBCSRCDIR CBCOBJDIR CBCDOCDIR COIN_HAS_CBC_TRUE COIN_HAS_CBC_FALSE CGLSRCDIR CGLOBJDIR CGLDOCDIR COIN_HAS_CGL_TRUE COIN_HAS_CGL_FALSE SYMPHONYSRCDIR SYMPHONYOBJDIR SYMPHONYDOCDIR COIN_HAS_SYMPHONY_TRUE COIN_HAS_SYMPHONY_FALSE DYLPSRCDIR DYLPOBJDIR DYLPDOCDIR COIN_HAS_DYLP_TRUE COIN_HAS_DYLP_FALSE VOLSRCDIR VOLOBJDIR VOLDOCDIR COIN_HAS_VOL_TRUE COIN_HAS_VOL_FALSE IPOPTSRCDIR IPOPTOBJDIR IPOPTDOCDIR COIN_HAS_IPOPT_TRUE COIN_HAS_IPOPT_FALSE COUENNESRCDIR COUENNEOBJDIR COUENNEDOCDIR COIN_HAS_COUENNE_TRUE COIN_HAS_COUENNE_FALSE BONMINSRCDIR BONMINOBJDIR BONMINDOCDIR COIN_HAS_BONMIN_TRUE COIN_HAS_BONMIN_FALSE CPPADSRCDIR CPPADOBJDIR CPPADDOCDIR COIN_HAS_CPPAD_TRUE COIN_HAS_CPPAD_FALSE GAMSUTILSSRCDIR GAMSUTILSOBJDIR GAMSUTILSDOCDIR COIN_HAS_GAMSUTILS_TRUE COIN_HAS_GAMSUTILS_FALSE COMPILE_BONCOUENNE_TRUE COMPILE_BONCOUENNE_FALSE coinutilslib clplib osiclplib cbclib osicbclib cgllib osilib osiglpklib dylplib osidylplib vollib osivollib bcplib symphonylib osisymphonylib ipoptlib couennelib bonminlib oslib MSCL__TRUE MSCL__FALSE EXAMPLESROOT_DIR USE_ASL_LIB ASLLIB ASL_CPPFLAGS COIN_HAS_ASL_TRUE COIN_HAS_ASL_FALSE LIBEXT VPATH_DISTCLEANFILES LIBOBJS LTLIBOBJS'
+ac_subst_vars='SHELL PATH_SEPARATOR PACKAGE_NAME PACKAGE_TARNAME PACKAGE_VERSION PACKAGE_STRING PACKAGE_BUGREPORT exec_prefix prefix program_transform_name bindir sbindir libexecdir datadir sysconfdir sharedstatedir localstatedir libdir includedir oldincludedir infodir mandir build_alias host_alias target_alias DEFS ECHO_C ECHO_N ECHO_T LIBS build build_cpu build_vendor build_os ADDLIBS PCADDLIBS FADDLIBS ALWAYS_FALSE_TRUE ALWAYS_FALSE_FALSE have_svnversion _SVN_REV CDEFS ADD_CFLAGS DBG_CFLAGS OPT_CFLAGS sol_cc_compiler CC CFLAGS LDFLAGS CPPFLAGS ac_ct_CC EXEEXT OBJEXT MPICC CXXDEFS ADD_CXXFLAGS DBG_CXXFLAGS OPT_CXXFLAGS CXX CXXFLAGS ac_ct_CXX MPICXX F77 ADD_FFLAGS DBG_FFLAGS OPT_FFLAGS FFLAGS ac_ct_F77 MPIF77 FLIBS EGREP INSTALL_PROGRAM INSTALL_SCRIPT INSTALL_DATA CYGPATH_W PACKAGE VERSION ACLOCAL AUTOCONF AUTOMAKE AUTOHEADER MAKEINFO install_sh STRIP ac_ct_STRIP INSTALL_STRIP_PROGRAM mkdir_p AWK SET_MAKE am__leading_dot AMTAR am__tar am__untar DEPDIR am__include am__quote AMDEP_TRUE AMDEP_FALSE AMDEPBACKSLASH CCDEPMODE am__fastdepCC_TRUE am__fastdepCC_FALSE CXXDEPMODE am__fastdepCXX_TRUE am__fastdepCXX_FALSE MAINTAINER_MODE_TRUE MAINTAINER_MODE_FALSE MAINT LIBTOOLM4 have_autoconf have_automake have_svn BUILDTOOLSDIR AUX_DIR abs_source_dir abs_lib_dir abs_include_dir abs_bin_dir HAVE_EXTERNALS_TRUE HAVE_EXTERNALS_FALSE host host_cpu host_vendor host_os LN_S ECHO AR ac_ct_AR RANLIB ac_ct_RANLIB CPP CXXCPP LIBTOOL ac_c_preproc_warn_flag ac_cxx_preproc_warn_flag RPATH_FLAGS LT_LDFLAGS OSSRCDIR OSOBJDIR OSDOCDIR COIN_HAS_OS_TRUE COIN_HAS_OS_FALSE BCPSRCDIR BCPOBJDIR BCPDOCDIR COIN_HAS_BCP_TRUE COIN_HAS_BCP_FALSE COINUTILSSRCDIR COINUTILSOBJDIR COINUTILSDOCDIR COIN_HAS_COINUTILS_TRUE COIN_HAS_COINUTILS_FALSE OSISRCDIR OSIOBJDIR OSIDOCDIR COIN_HAS_OSI_TRUE COIN_HAS_OSI_FALSE CLPSRCDIR CLPOBJDIR CLPDOCDIR COIN_HAS_CLP_TRUE COIN_HAS_CLP_FALSE CBCSRCDIR CBCOBJDIR CBCDOCDIR COIN_HAS_CBC_TRUE COIN_HAS_CBC_FALSE CGLSRCDIR CGLOBJDIR CGLDOCDIR COIN_HAS_CGL_TRUE COIN_HAS_CGL_FALSE SYMPHONYSRCDIR SYMPHONYOBJDIR SYMPHONYDOCDIR COIN_HAS_SYMPHONY_TRUE COIN_HAS_SYMPHONY_FALSE DYLPSRCDIR DYLPOBJDIR DYLPDOCDIR COIN_HAS_DYLP_TRUE COIN_HAS_DYLP_FALSE VOLSRCDIR VOLOBJDIR VOLDOCDIR COIN_HAS_VOL_TRUE COIN_HAS_VOL_FALSE IPOPTSRCDIR IPOPTOBJDIR IPOPTDOCDIR COIN_HAS_IPOPT_TRUE COIN_HAS_IPOPT_FALSE COUENNESRCDIR COUENNEOBJDIR COUENNEDOCDIR COIN_HAS_COUENNE_TRUE COIN_HAS_COUENNE_FALSE BONMINSRCDIR BONMINOBJDIR BONMINDOCDIR COIN_HAS_BONMIN_TRUE COIN_HAS_BONMIN_FALSE CPPADSRCDIR CPPADOBJDIR CPPADDOCDIR COIN_HAS_CPPAD_TRUE COIN_HAS_CPPAD_FALSE GAMSUTILSSRCDIR GAMSUTILSOBJDIR GAMSUTILSDOCDIR COIN_HAS_GAMSUTILS_TRUE COIN_HAS_GAMSUTILS_FALSE COMPILE_BONCOUENNE_TRUE COMPILE_BONCOUENNE_FALSE coinutilslib clplib osiclplib cbclib osicbclib cgllib osilib osiglpklib dylplib osidylplib vollib osivollib bcplib symphonylib osisymphonylib ipoptlib couennelib bonminlib oslib MSCL__TRUE MSCL__FALSE EXAMPLESROOT_DIR USE_ASL_LIB ASLLIB ASL_CPPFLAGS COIN_HAS_ASL_TRUE COIN_HAS_ASL_FALSE LIBEXT VPATH_DISTCLEANFILES ABSBUILDDIR LIBOBJS LTLIBOBJS'
 ac_subst_files=''
 
 # Initialize some variables set by options.
@@ -1689,6 +1689,12 @@ build_os=`echo $ac_cv_build | sed 's/^\([^-]*\)-\([^-]*\)-\(.*\)$/\3/'`
 ADDLIBS="-lm $LIBS"
 
 
+# Initialize the PCADDLIBS variable.
+# This variable is used to setup library flags for the "Libs:" section in a .pc file.
+# In certain cases, it may contain more flags than the ADDLIBS variable.
+PCADDLIBS=""
+
+
 # As backup, we make sure we don't loose an FLIBS if it has been set
 # by the user
 save_FLIBS="$FLIBS"
@@ -1714,8 +1720,68 @@ fi
 # that we are in a project main directory
 coin_projectdir=yes
 
-# Set the project's version number. Use m4_ifval here to avoid defining
-# _VERSION when the user has not supplied a parameter.
+# Set the project's version number
+if test "x" != x; then
+
+cat >>confdefs.h <<_ACEOF
+#define _VERSION "$PACKAGE_VERSION"
+_ACEOF
+
+fi
+
+# Set the project's SVN revision number. The complicated sed expression
+# (made worse by quadrigraphs) ensures that things like 4123:4168MS end up
+# as a single number.
+# Extract the first word of "svnversion", so it can be a program name with args.
+set dummy svnversion; ac_word=$2
+echo "$as_me:$LINENO: checking for $ac_word" >&5
+echo $ECHO_N "checking for $ac_word... $ECHO_C" >&6
+if test "${ac_cv_prog_have_svnversion+set}" = set; then
+  echo $ECHO_N "(cached) $ECHO_C" >&6
+else
+  if test -n "$have_svnversion"; then
+  ac_cv_prog_have_svnversion="$have_svnversion" # Let the user override the test.
+else
+as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
+for as_dir in $PATH
+do
+  IFS=$as_save_IFS
+  test -z "$as_dir" && as_dir=.
+  for ac_exec_ext in '' $ac_executable_extensions; do
+  if $as_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
+    ac_cv_prog_have_svnversion="yes"
+    echo "$as_me:$LINENO: found $as_dir/$ac_word$ac_exec_ext" >&5
+    break 2
+  fi
+done
+done
+
+  test -z "$ac_cv_prog_have_svnversion" && ac_cv_prog_have_svnversion="no"
+fi
+fi
+have_svnversion=$ac_cv_prog_have_svnversion
+if test -n "$have_svnversion"; then
+  echo "$as_me:$LINENO: result: $have_svnversion" >&5
+echo "${ECHO_T}$have_svnversion" >&6
+else
+  echo "$as_me:$LINENO: result: no" >&5
+echo "${ECHO_T}no" >&6
+fi
+
+if test "x$have_svnversion" = xyes && test "x" != x; then
+
+  svn_rev_tmp=`cd $srcdir/$coin_has_ ; svnversion`
+  _SVN_REV=`echo $svn_rev_tmp | sed -n -e 's/^[0-9]*://' -e 's/\([0-9]\)[^0-9]*$/\1/p'`
+  if test $_SVN_REV != exported; then
+
+cat >>confdefs.h <<_ACEOF
+#define _SVN_REV $_SVN_REV
+_ACEOF
+
+  fi
+fi
+
+# Capture libtool library version, if given.
 
 
 
@@ -2735,7 +2801,7 @@ if test x"$CFLAGS" = x; then
       icc* | */icc*)
         ;;
       *)
-        coin_opt_cflags="-O3 -fomit-frame-pointer"
+        coin_opt_cflags="-O3"
         coin_add_cflags="-pipe"
         coin_dbg_cflags="-g"
         coin_warn_cflags="-Wimplicit -Wparentheses -Wsequence-point -Wreturn-type -Wcast-qual -Wall -Wno-unknown-pragmas"
@@ -3647,7 +3713,7 @@ if test x"$CXXFLAGS" = x; then
         ;;
       *)
 # ToDo decide about unroll-loops
-        coin_opt_cxxflags="-O3 -fomit-frame-pointer"
+        coin_opt_cxxflags="-O3"
         coin_add_cxxflags="-pipe"
         coin_dbg_cxxflags="-g"
         coin_warn_cxxflags="-Wimplicit -Wparentheses -Wreturn-type -Wcast-qual -Wall -Wpointer-arith -Wwrite-strings -Wconversion -Wno-unknown-pragmas"
@@ -4299,7 +4365,7 @@ fi
 
 
 # Provide some information about the compiler.
-echo "$as_me:4302:" \
+echo "$as_me:4368:" \
      "checking for Fortran 77 compiler version" >&5
 ac_compiler=`set X $ac_compile; echo $2`
 { (eval echo "$as_me:$LINENO: \"$ac_compiler --version </dev/null >&5\"") >&5
@@ -4465,7 +4531,7 @@ if test "$F77" != "unavailable" && test x"$FFLAGS" = x ; then
   coin_warn_fflags=
 
   if test "$G77" = "yes"; then
-    coin_opt_fflags="-O3 -fomit-frame-pointer"
+    coin_opt_fflags="-O3"
     coin_add_fflags="-pipe"
     coin_dbg_fflags="-g"
     case $enable_doscompile in
@@ -4865,7 +4931,7 @@ _ACEOF
 # flags.
 ac_save_FFLAGS=$FFLAGS
 FFLAGS="$FFLAGS $ac_verb"
-(eval echo $as_me:4868: \"$ac_link\") >&5
+(eval echo $as_me:4934: \"$ac_link\") >&5
 ac_f77_v_output=`eval $ac_link 5>&1 2>&1 | grep -v 'Driving:'`
 echo "$ac_f77_v_output" >&5
 FFLAGS=$ac_save_FFLAGS
@@ -4943,7 +5009,7 @@ _ACEOF
 # flags.
 ac_save_FFLAGS=$FFLAGS
 FFLAGS="$FFLAGS $ac_cv_prog_f77_v"
-(eval echo $as_me:4946: \"$ac_link\") >&5
+(eval echo $as_me:5012: \"$ac_link\") >&5
 ac_f77_v_output=`eval $ac_link 5>&1 2>&1 | grep -v 'Driving:'`
 echo "$ac_f77_v_output" >&5
 FFLAGS=$ac_save_FFLAGS
@@ -5655,16 +5721,18 @@ else
   # In its original version, it linked in libifcorert.lib or libifcorertd.lib on Windows/ifort explicitly.
   # However, this seem to create a dependency on libifcorert.dll (or libifcorertd.dll) in the executables.
   # This is seem to be unnecessary, libifcorert(d).lib has been removed from the link line.
+  # Further, excluding libc.lib from the default libs seemed to be necessary only for VS < 8.
+  # Since the corresponding flag seems to make more trouble that it avoid, it has been removed now.
      *-cygwin* | *-mingw*)
        case "$F77" in
-         ifort* | */ifort* | IFORT* | */IFORT*)
-           FLIBS="-link $LIBS /NODEFAULTLIB:libc.lib"
+#         ifort* | */ifort* | IFORT* | */IFORT*)
+#           FLIBS="-link $LIBS /NODEFAULTLIB:libc.lib"
 #           if "$coin_debug_compile" = true ; then
 #             FLIBS="-link $LIBS /NODEFAULTLIB:libc.lib /NODEFAULTLIB:libcmt.lib"
 #           else
 #             FLIBS="-link $LIBS /NODEFAULTLIB:libc.lib /NODEFAULTLIB:libcmtd.lib"
 #           fi
-           ;;
+#           ;;
          compile_f2c*)
            FLIBS=`$F77 -FLIBS` ;;
        esac;;
@@ -5676,7 +5744,7 @@ else
        case "$F77" in
          pgf77* | */pgf77* | pgf90* | */pgf90*)
 # ask linker to go through the archives multiple times
-# (the Fortran compiler seems to do that automatically...
+# (the Fortran compiler seems to do that automatically...)
            FLIBS="-Wl,--start-group $FLIBS -Wl,--end-group" ;;
        esac
   esac
@@ -6851,7 +6919,7 @@ else
 fi
 full_prefix=`cd $full_prefix ; pwd`
 
-abs_lib_dir=$full_prefix/lib
+abs_lib_dir=$full_prefix/lib/coin
 
 abs_include_dir=$full_prefix/include
 
@@ -7435,7 +7503,7 @@ ia64-*-hpux*)
   ;;
 *-*-irix6*)
   # Find out which ABI we are using.
-  echo '#line 7438 "configure"' > conftest.$ac_ext
+  echo '#line 7506 "configure"' > conftest.$ac_ext
   if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   (eval $ac_compile) 2>&5
   ac_status=$?
@@ -9415,11 +9483,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:9418: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:9486: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:9422: \$? = $ac_status" >&5
+   echo "$as_me:9490: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -9683,11 +9751,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:9686: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:9754: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:9690: \$? = $ac_status" >&5
+   echo "$as_me:9758: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -9787,11 +9855,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:9790: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:9858: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:9794: \$? = $ac_status" >&5
+   echo "$as_me:9862: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -12204,7 +12272,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<EOF
-#line 12207 "configure"
+#line 12275 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -12304,7 +12372,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<EOF
-#line 12307 "configure"
+#line 12375 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -14664,11 +14732,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:14667: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:14735: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:14671: \$? = $ac_status" >&5
+   echo "$as_me:14739: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -14768,11 +14836,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:14771: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:14839: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:14775: \$? = $ac_status" >&5
+   echo "$as_me:14843: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -16338,11 +16406,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:16341: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:16409: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:16345: \$? = $ac_status" >&5
+   echo "$as_me:16413: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -16442,11 +16510,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:16445: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:16513: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:16449: \$? = $ac_status" >&5
+   echo "$as_me:16517: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -18649,11 +18717,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:18652: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:18720: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:18656: \$? = $ac_status" >&5
+   echo "$as_me:18724: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -18917,11 +18985,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:18920: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:18988: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:18924: \$? = $ac_status" >&5
+   echo "$as_me:18992: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -19021,11 +19089,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:19024: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:19092: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:19028: \$? = $ac_status" >&5
+   echo "$as_me:19096: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -21836,7 +21904,7 @@ if test $enable_shared = yes; then
     *-linux-*)
       if test "$GXX" = "yes"; then
         RPATH_FLAGS=
-        for dir in $abs_lib_dir; do
+        for dir in $abs_lib_dir $abs_lib_dir/ThirdParty; do
           RPATH_FLAGS="$RPATH_FLAGS -Wl,--rpath -Wl,$dir"
         done
       fi ;;
@@ -21853,7 +21921,7 @@ if test $enable_shared = yes; then
         RPATH_FLAGS=nothing ;;
     *-*-solaris*)
         RPATH_FLAGS=
-        for dir in $abs_lib_dir; do
+        for dir in $abs_lib_dir $abs_lib_dir/ThirdParty; do
           RPATH_FLAGS="$RPATH_FLAGS -R$dir"
         done
   esac
@@ -21921,6 +21989,19 @@ fi
 # not yet set up that way.  But we need to fix this, when we want
 # to comile DLLs under Windows.
 LT_LDFLAGS=
+
+# Check if we want to set the library version
+echo "$as_me:$LINENO: checking if library version is set" >&5
+echo $ECHO_N "checking if library version is set... $ECHO_C" >&6
+if test x"$coin_libversion" != x; then
+  LT_LDFLAGS="$LT_LDFLAGS -version-info $coin_libversion"
+  echo "$as_me:$LINENO: result: $coin_libversion" >&5
+echo "${ECHO_T}$coin_libversion" >&6
+else
+  echo "$as_me:$LINENO: result: no" >&5
+echo "${ECHO_T}no" >&6
+fi
+
 
 
 #END
@@ -23669,7 +23750,7 @@ _ACEOF
 
   OSOBJDIR=`pwd`/$coin_has_os
 
-  OSDOCDIR=$abs_lib_dir/../share/doc/coin/OS
+  OSDOCDIR=$abs_lib_dir/../../share/doc/coin/OS
 fi
 
   # Define the Makefile conditional
@@ -23727,7 +23808,7 @@ _ACEOF
 
   BCPOBJDIR=`pwd`/$coin_has_bcp
 
-  BCPDOCDIR=$abs_lib_dir/../share/doc/coin/Bcp
+  BCPDOCDIR=$abs_lib_dir/../../share/doc/coin/Bcp
 fi
 
   # Define the Makefile conditional
@@ -23785,7 +23866,7 @@ _ACEOF
 
   COINUTILSOBJDIR=`pwd`/$coin_has_coinutils
 
-  COINUTILSDOCDIR=$abs_lib_dir/../share/doc/coin/CoinUtils
+  COINUTILSDOCDIR=$abs_lib_dir/../../share/doc/coin/CoinUtils
 fi
 
   # Define the Makefile conditional
@@ -23843,7 +23924,7 @@ _ACEOF
 
   OSIOBJDIR=`pwd`/$coin_has_osi
 
-  OSIDOCDIR=$abs_lib_dir/../share/doc/coin/Osi
+  OSIDOCDIR=$abs_lib_dir/../../share/doc/coin/Osi
 fi
 
   # Define the Makefile conditional
@@ -23901,7 +23982,7 @@ _ACEOF
 
   CLPOBJDIR=`pwd`/$coin_has_clp
 
-  CLPDOCDIR=$abs_lib_dir/../share/doc/coin/Clp
+  CLPDOCDIR=$abs_lib_dir/../../share/doc/coin/Clp
 fi
 
   # Define the Makefile conditional
@@ -23959,7 +24040,7 @@ _ACEOF
 
   CBCOBJDIR=`pwd`/$coin_has_cbc
 
-  CBCDOCDIR=$abs_lib_dir/../share/doc/coin/Cbc
+  CBCDOCDIR=$abs_lib_dir/../../share/doc/coin/Cbc
 fi
 
   # Define the Makefile conditional
@@ -24017,7 +24098,7 @@ _ACEOF
 
   CGLOBJDIR=`pwd`/$coin_has_cgl
 
-  CGLDOCDIR=$abs_lib_dir/../share/doc/coin/Cgl
+  CGLDOCDIR=$abs_lib_dir/../../share/doc/coin/Cgl
 fi
 
   # Define the Makefile conditional
@@ -24075,7 +24156,7 @@ _ACEOF
 
   SYMPHONYOBJDIR=`pwd`/$coin_has_symphony
 
-  SYMPHONYDOCDIR=$abs_lib_dir/../share/doc/coin/SYMPHONY
+  SYMPHONYDOCDIR=$abs_lib_dir/../../share/doc/coin/SYMPHONY
 fi
 
   # Define the Makefile conditional
@@ -24133,7 +24214,7 @@ _ACEOF
 
   DYLPOBJDIR=`pwd`/$coin_has_dylp
 
-  DYLPDOCDIR=$abs_lib_dir/../share/doc/coin/DyLP
+  DYLPDOCDIR=$abs_lib_dir/../../share/doc/coin/DyLP
 fi
 
   # Define the Makefile conditional
@@ -24191,7 +24272,7 @@ _ACEOF
 
   VOLOBJDIR=`pwd`/$coin_has_vol
 
-  VOLDOCDIR=$abs_lib_dir/../share/doc/coin/Vol
+  VOLDOCDIR=$abs_lib_dir/../../share/doc/coin/Vol
 fi
 
   # Define the Makefile conditional
@@ -24249,7 +24330,7 @@ _ACEOF
 
   IPOPTOBJDIR=`pwd`/$coin_has_ipopt
 
-  IPOPTDOCDIR=$abs_lib_dir/../share/doc/coin/Ipopt
+  IPOPTDOCDIR=$abs_lib_dir/../../share/doc/coin/Ipopt
 fi
 
   # Define the Makefile conditional
@@ -24307,7 +24388,7 @@ _ACEOF
 
   COUENNEOBJDIR=`pwd`/$coin_has_couenne
 
-  COUENNEDOCDIR=$abs_lib_dir/../share/doc/coin/Couenne
+  COUENNEDOCDIR=$abs_lib_dir/../../share/doc/coin/Couenne
 fi
 
   # Define the Makefile conditional
@@ -24365,7 +24446,7 @@ _ACEOF
 
   BONMINOBJDIR=`pwd`/$coin_has_bonmin
 
-  BONMINDOCDIR=$abs_lib_dir/../share/doc/coin/Bonmin
+  BONMINDOCDIR=$abs_lib_dir/../../share/doc/coin/Bonmin
 fi
 
   # Define the Makefile conditional
@@ -24423,7 +24504,7 @@ _ACEOF
 
   CPPADOBJDIR=`pwd`/$coin_has_cppad
 
-  CPPADDOCDIR=$abs_lib_dir/../share/doc/coin/cppad
+  CPPADDOCDIR=$abs_lib_dir/../../share/doc/coin/cppad
 fi
 
   # Define the Makefile conditional
@@ -24481,7 +24562,7 @@ _ACEOF
 
   GAMSUTILSOBJDIR=`pwd`/$coin_has_gamsutils
 
-  GAMSUTILSDOCDIR=$abs_lib_dir/../share/doc/coin/GamsUtils
+  GAMSUTILSDOCDIR=$abs_lib_dir/../../share/doc/coin/GamsUtils
 fi
 
   # Define the Makefile conditional
@@ -24539,7 +24620,7 @@ _ACEOF
 
   OSOBJDIR=`pwd`/$coin_has_os
 
-  OSDOCDIR=$abs_lib_dir/../share/doc/coin/OS
+  OSDOCDIR=$abs_lib_dir/../../share/doc/coin/OS
 fi
 
   # Define the Makefile conditional
@@ -25135,6 +25216,7 @@ fi
 #AC_PROG_LN_S
 #For this project we want hard links
 LN_S='ln'
+
 echo "$as_me:$LINENO: checking whether this is a VPATH configuration" >&5
 echo $ECHO_N "checking whether this is a VPATH configuration... $ECHO_C" >&6
 if test `cd $srcdir; pwd` != `pwd`; then
@@ -25150,164 +25232,314 @@ echo "${ECHO_T}$coin_vpath_config" >&6
 # input files for the examples are available in the VPATH directory.
 #### EXAMPLE SOURCE CODE
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files osSolverDemo/OSSolverDemo.cpp"
+  cvl_tmp="osSolverDemo/OSSolverDemo.cpp"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files cglCuts/OSCglCuts.cpp"
+  cvl_tmp="cglCuts/OSCglCuts.cpp"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files cglCuts/OSCglCuts.cpp"
+  cvl_tmp="cglCuts/OSCglCuts.cpp"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files algorithmicDiff/OSAlgorithmicDiffTest.cpp"
+  cvl_tmp="algorithmicDiff/OSAlgorithmicDiffTest.cpp"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files instanceGenerator/OSInstanceGenerator.cpp"
+  cvl_tmp="instanceGenerator/OSInstanceGenerator.cpp"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files osModificationDemo/OSModificationDemo.cpp"
+  cvl_tmp="osModificationDemo/OSModificationDemo.cpp"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files instanceGenerator/OSInstanceGenerator.cpp"
+  cvl_tmp="instanceGenerator/OSInstanceGenerator.cpp"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files osRemoteTest/OSRemoteTest.cpp"
+  cvl_tmp="osRemoteTest/OSRemoteTest.cpp"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files osResultDemo/OSResultDemo.cpp"
+  cvl_tmp="osResultDemo/OSResultDemo.cpp"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files template/template.cpp"
+  cvl_tmp="template/template.cpp"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files osDip/OSDip_Main.cpp"
-fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files osDip/OSDipApp.cpp"
-fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files osDip/OSDipApp.h"
-fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files osDip/OSDipBlockSolver.cpp"
-fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files osDip/OSDipBlockSolver.h"
-fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files osDip/OSDipFactoryInitializer.h"
-fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files osDip/OSDipBlockSolverFactory.h"
-fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files osDip/OSDipBlockSolverFactory.cpp"
-fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files osDip/OSDipInterface.cpp"
-fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files osDip/OSDipInterface.h"
-fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files osDip/OSDipParam.h"
-fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files osDip/own.sty"
-fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files osDip/osDip.tex"
-fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files osDip/osDip.pdf"
+  cvl_tmp="osDip/OSDip_Main.cpp"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
 
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files osDip/solvers/OSDipBlockCoinSolver.cpp"
+  cvl_tmp="osDip/OSDipApp.cpp"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files osDip/solvers/OSDipBlockCoinSolver.h"
+  cvl_tmp="osDip/OSDipApp.h"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files osDip/solvers/OSDipBlockSlpSolver.cpp"
+  cvl_tmp="osDip/OSDipBlockSolver.cpp"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files osDip/solvers/OSDipBlockSlpSolver.h"
+  cvl_tmp="osDip/OSDipBlockSolver.h"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files osDip/solvers/OSDipBlockBearcatSolver.cpp"
+  cvl_tmp="osDip/OSDipFactoryInitializer.h"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files osDip/solvers/OSDipBlockBearcatSolver.h"
+  cvl_tmp="osDip/OSDipBlockSolverFactory.h"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="osDip/OSDipBlockSolverFactory.cpp"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="osDip/OSDipInterface.cpp"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="osDip/OSDipInterface.h"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="osDip/OSDipParam.h"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="osDip/own.sty"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="osDip/osDip.tex"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="osDip/osDip.pdf"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="osDip/solvers/OSDipBlockCoinSolver.cpp"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="osDip/solvers/OSDipBlockCoinSolver.h"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="osDip/solvers/OSDipBlockSlpSolver.cpp"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="osDip/solvers/OSDipBlockSlpSolver.h"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="osDip/solvers/OSDipBlockBearcatSolver.cpp"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="osDip/solvers/OSDipBlockBearcatSolver.h"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
@@ -25407,140 +25639,275 @@ fi
 ##############################################################################
 #### EXAMPLE DATA FILES
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files data/CoinOS.opt"
-fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files data/CppADTestLag.osil"
-fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files data/bonminEx1.nl"
-fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files data/eastborne.gms"
-fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files data/eastborne.mod"
-fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files data/eastborne.nl"
-fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files data/eastborne.osil"
-fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files data/knock.ospl"
-fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files data/nonconvex.osil"
-fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files data/p0033.osil"
-fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files data/parinc.mps"
-fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files data/parincLinear.osil"
-fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files data/rosenbrockmod.osil"
-fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files data/sendWithJobID.osol"
-fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files data/wayneQuadratic.osil"
+  cvl_tmp="data/CoinOS.opt"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
 
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files data/spl1.osil"
-fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files data/spl2.osil"
-fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files data/spl3.osil"
-fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files data/genAssign.osil"
-fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files data/smallIPBook.osil"
+  cvl_tmp="data/CppADTestLag.osil"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
 
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files data/spl1.osol"
+  cvl_tmp="data/bonminEx1.nl"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files data/spl1-b.osol"
+  cvl_tmp="data/eastborne.gms"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files data/spl2.osol"
+  cvl_tmp="data/eastborne.mod"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files data/spl3.osol"
+  cvl_tmp="data/eastborne.nl"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files data/spl2-b.osol"
+  cvl_tmp="data/eastborne.osil"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files data/genAssign.osol"
+  cvl_tmp="data/knock.ospl"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files data/smallIPBook.osol"
+  cvl_tmp="data/nonconvex.osil"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/p0033.osil"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/parinc.mps"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/parincLinear.osil"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/rosenbrockmod.osil"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/sendWithJobID.osol"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/wayneQuadratic.osil"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/spl1.osil"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/spl2.osil"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/spl3.osil"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/genAssign.osil"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/smallIPBook.osil"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/spl1.osol"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/spl1-b.osol"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/spl2.osol"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/spl3.osol"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/spl2-b.osol"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/genAssign.osol"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/smallIPBook.osol"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
@@ -25549,23 +25916,43 @@ fi
 #                   VPATH links for Excel files                              #
 ##############################################################################
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files Excel/OSWebServiceGUI.xlsm"
+  cvl_tmp="Excel/OSWebServiceGUI.xlsm"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files Excel/clsws_OSSolverServiceServic.cls"
+  cvl_tmp="Excel/clsws_OSSolverServiceServic.cls"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files Excel/parIncVBA.xlsm"
+  cvl_tmp="Excel/parIncVBA.xlsm"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files Excel/clsOSInstance.cls"
+  cvl_tmp="Excel/clsOSInstance.cls"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
@@ -25574,13 +25961,23 @@ fi
 #                   VPATH links for other files                              #
 ##############################################################################
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files AUTHORS"
+  cvl_tmp="AUTHORS"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files README"
+  cvl_tmp="README"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
@@ -25590,65 +25987,114 @@ fi
 ##############################################################################
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files MSVisualStudioOSExamples/algorithmicDiff.vcproj"
+  cvl_tmp="MSVisualStudioOSExamples/algorithmicDiff.vcproj"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files MSVisualStudioOSExamples/branchCutPrice.vcproj"
+  cvl_tmp="MSVisualStudioOSExamples/branchCutPrice.vcproj"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files MSVisualStudioOSExamples/cglCuts.vcproj"
+  cvl_tmp="MSVisualStudioOSExamples/cglCuts.vcproj"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files MSVisualStudioOSExamples/instanceGenerator.vcproj"
+  cvl_tmp="MSVisualStudioOSExamples/instanceGenerator.vcproj"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files MSVisualStudioOSExamples/osModificationDemo.vcproj"
+  cvl_tmp="MSVisualStudioOSExamples/osModificationDemo.vcproj"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files MSVisualStudioOSExamples/osRemoteTest.vcproj"
+  cvl_tmp="MSVisualStudioOSExamples/osRemoteTest.vcproj"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files MSVisualStudioOSExamples/osResultDemo.vcproj"
+  cvl_tmp="MSVisualStudioOSExamples/osResultDemo.vcproj"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files MSVisualStudioOSExamples/osSolverDemo.vcproj"
+  cvl_tmp="MSVisualStudioOSExamples/osSolverDemo.vcproj"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files MSVisualStudioOSExamples/template.vcproj"
+  cvl_tmp="MSVisualStudioOSExamples/template.vcproj"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files MSVisualStudioOSExamples/VISUALSTUDIOREADME.txt"
+  cvl_tmp="MSVisualStudioOSExamples/VISUALSTUDIOREADME.txt"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
 
 
+
+# Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files MSVisualStudioOSExamples/osExamples.sln"
+  cvl_tmp="MSVisualStudioOSExamples/osExamples.sln"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
 fi
-
-
-if test $coin_vpath_config = yes; then
-  coin_vpath_link_files="$coin_vpath_link_files MSVisualStudioOSExamples/osExamples.suo"
-fi
-
 
 
 ##############################################################################
@@ -25689,6 +26135,7 @@ if test x$coin_skip_ac_output != xyes; then
   if test x"$coin_need_flibs" = xyes; then
     ADDLIBS="$ADDLIBS $FLIBS"
   fi
+  PCADDLIBS="$PCADDLIBS $ADDLIBS"
 
   # library extension
 
@@ -25719,6 +26166,16 @@ if test x$coin_skip_ac_output != xyes; then
       fi
     done
     subdirs="$new_subdirs"
+  fi
+
+  # need to come before AC_OUTPUT
+  if test x$coin_projectdir != xyes; then
+    # write coin_subdirs to a file so that project configuration knows where to find uninstalled projects
+    echo $coin_subdirs > coin_subdirs.txt
+  else
+    # substitute for OBJDIR, needed to setup .pc file for uninstalled project
+    ABSBUILDDIR="`pwd`"
+
   fi
 
   cat >confcache <<\_ACEOF
@@ -26559,9 +27016,12 @@ s,@build_cpu@,$build_cpu,;t t
 s,@build_vendor@,$build_vendor,;t t
 s,@build_os@,$build_os,;t t
 s,@ADDLIBS@,$ADDLIBS,;t t
+s,@PCADDLIBS@,$PCADDLIBS,;t t
 s,@FADDLIBS@,$FADDLIBS,;t t
 s,@ALWAYS_FALSE_TRUE@,$ALWAYS_FALSE_TRUE,;t t
 s,@ALWAYS_FALSE_FALSE@,$ALWAYS_FALSE_FALSE,;t t
+s,@have_svnversion@,$have_svnversion,;t t
+s,@_SVN_REV@,$_SVN_REV,;t t
 s,@CDEFS@,$CDEFS,;t t
 s,@ADD_CFLAGS@,$ADD_CFLAGS,;t t
 s,@DBG_CFLAGS@,$DBG_CFLAGS,;t t
@@ -26764,6 +27224,7 @@ s,@COIN_HAS_ASL_TRUE@,$COIN_HAS_ASL_TRUE,;t t
 s,@COIN_HAS_ASL_FALSE@,$COIN_HAS_ASL_FALSE,;t t
 s,@LIBEXT@,$LIBEXT,;t t
 s,@VPATH_DISTCLEANFILES@,$VPATH_DISTCLEANFILES,;t t
+s,@ABSBUILDDIR@,$ABSBUILDDIR,;t t
 s,@LIBOBJS@,$LIBOBJS,;t t
 s,@LTLIBOBJS@,$LTLIBOBJS,;t t
 CEOF

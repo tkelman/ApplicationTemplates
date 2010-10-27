@@ -581,8 +581,6 @@ AC_COIN_VPATH_LINK(MSVisualStudioOSExamples/osSolverDemo.vcproj)
 AC_COIN_VPATH_LINK(MSVisualStudioOSExamples/template.vcproj)
 AC_COIN_VPATH_LINK(MSVisualStudioOSExamples/VISUALSTUDIOREADME.txt)
 AC_COIN_VPATH_LINK(MSVisualStudioOSExamples/osExamples.sln)
-AC_COIN_VPATH_LINK(MSVisualStudioOSExamples/osExamples.suo)
-
 
 ##############################################################################
 #                   Finishing up by writing all the output                   #
