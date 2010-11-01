@@ -58,55 +58,43 @@ endif
 OSINCDIR = @includedir@/coin
 
 # Directory with the libraries
-INSTALLIBDIR = @libdir@
+INSTALLIBDIR = @libdir@/coin
 exec_prefix = @exec_prefix@
 
 
 # Libraries necessary to link with OS
 
 # Libraries necessary to link
-LIBS = @oslib@   
+LIBS = `pkg-config --libs os` 
+@COIN_HAS_COUENNE_TRUE@LIBS += `pkg-config --libs couenne` 
+@COIN_HAS_BONMIN_TRUE@LIBS += `pkg-config --libs bonmin`
+@COIN_HAS_IPOPT_TRUE@LIBS += `pkg-config --libs ipopt`
 
-@COIN_HAS_COUENNE_TRUE@LIBS += @couennelib@
-
-@COIN_HAS_BONMIN_TRUE@LIBS += @bonminlib@
-
-
-
-#ADDITIONAL IPOPT LIBS
-ADDIPOPTLIBS = `cat $(prefix)/share/doc/coin/Ipopt/ipopt_addlibs_cpp.txt`
-@COIN_HAS_IPOPT_TRUE@LIBS += @ipoptlib@ $(ADDIPOPTLIBS)
-
-LIBS += @ADDLIBS@
-
+LIBS += `pkg-config --libs osi-cbc`
+@COIN_HAS_SYMPHONY_TRUE@LIBS += `pkg-config --libs osi-sym`
+@COIN_HAS_DYLP_TRUE@LIBS += `pkg-config --libs osi-dylp`
+@COIN_HAS_VOL_TRUE@LIBS += `pkg-config --libs osi-vol`
+LIBS += `pkg-config --libs osi-clp`
+LIBS += `pkg-config --libs osi`
+LIBS += `pkg-config --libs cbc`
+LIBS += `pkg-config --libs cgl`
+LIBS += `pkg-config --libs clp`
+@COIN_HAS_SYMPHONY_TRUE@LIBS += `pkg-config --libs symphony`
+@COIN_HAS_DYLP_TRUE@LIBS += `pkg-config --libs dylp`
+@COIN_HAS_VOL_TRUE@LIBS += `pkg-config --libs vol`
 #
-#ADD ALL THE LIBS
-#
-LIBS += @osicbclib@
-@COIN_HAS_SYMPHONY_TRUE@LIBS += @osisymphonylib@
-LIBS += @osiclplib@ 
-@COIN_HAS_DYLP_TRUE@LIBS += @osidylplib@
-@COIN_HAS_VOL_TRUE@LIBS += @osivollib@ 
-@COIN_HAS_GLPK_TRUE@LIBS += @osiglpklib@ 
-LIBS += @cbclib@
-@COIN_HAS_SYMPHONY_TRUE@LIBS += @symphonylib@
-LIBS += @cgllib@
-LIBS += @osilib@
-LIBS += @clplib@ 
-@COIN_HAS_DYLP_TRUE@LIBS += @dylplib@ 
-@COIN_HAS_VOL_TRUE@LIBS += @vollib@
-#
-
-LIBS += @coinutilslib@ 
-
+LIBS += `pkg-config --libs coinutils`
 
 ifeq ($(WIN),gw)
   KLUDGE =  /FORCE:MULTIPLE
 endif
 
-LIBS += $(ASLLIB) $(KLUDGE)
+@COIN_HAS_ASL_TRUE@LIBS += `pkg-config --libs coinasl`  $(KLUDGE)
+@COIN_HAS_BLAS_TRUE@LIBS += `pkg-config --libs coinblas`
+@COIN_HAS_MUMPS_TRUE@LIBS += `pkg-config --libs coinmumps`
+@COIN_LAPACK_VOL_TRUE@LIBS += `pkg-config --libs coinlapack`
 
- 
+#@COIN_HAS_GLPK_TRUE@LIBS += @osiglpklib@ 
 #DONE ADDING LIBS
 
  
