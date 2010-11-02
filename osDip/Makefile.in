@@ -34,34 +34,23 @@ ADDLIBS =
 
 
 # CHANGEME: Additional flags for compilation (e.g., include flags)
-ADDINCFLAGS =  -I${prefix}/include  -I./solvers -I./
+ADDINCFLAGS =  -I${prefix}/include  -I./solvers  -I./
 
 
 
-prefix = ../../
+# CHANGEME: Additional libraries
+ADDLIBS = 
 
 
 
-# Directory with OS header files
-OSINCDIR = @includedir@/
-# Directory with OS LIB files
-OSLIBDIR = ${prefix}/lib
+prefix = ../..
 
-# CHANGEME:
-#must change to location of Dip project
-DIPPATH = /Users/kmartin/coin/dip-trunk/vpath-debug/
-
-
-
-
-#
-#
 ##########################################################################
 #  Usually, you don't have to change anything below.  Note that if you   #
 #  change certain compiler options, you might have to recompile OS.   #
 ##########################################################################
 
-# C++ Compiler command
+# C++ Compiler command, for example g++
 CXX = @CXX@
 
 DEFS = -DHAVE_CONFIG_H
@@ -69,8 +58,8 @@ DEFS = -DHAVE_CONFIG_H
 # C++ Compiler options
 CXXFLAGS = @CXXFLAGS@  $(DEFS)
 
-
-
+CXXFLAGS += `pkg-config --cflags os dip`
+ 
 DARWIN=$(findstring darwin, @build_os@)
 WIN=$(findstring gw, @build_os@)
 
@@ -82,171 +71,18 @@ ifeq ($(DARWIN),darwin)
 endif
 
 
-
-# Directory with the libraries
-INSTALLIBDIR = @libdir@
-exec_prefix = @exec_prefix@
-#===========================================================================#
-# directory with COIN header files
-
-COININCDIR = $(DIPPATH)include/coin
+#ADD LIBRARIES
+# Libraries necessary to link
+LIBS = `pkg-config --libs os dip` 
+#DONE ADDING LIBS
 
 
-# directory with COIN libraries
-COINLIBDIR = $(DIPPATH)lib
+# Necessary Include dirs (we use the CYGPATH_W variables to allow
+# compilation with Windows compilers)
+INCL =  `$(CYGPATH_W)` $(ADDINCFLAGS)  
 
-
-# includes, use the CYGPATH_W variables to allow compilation with win
-INCL =  -I`$(CYGPATH_W) $(COININCDIR)` $(ADDINCFLAGS)
-
-
-###########################################################################
-# define DECOMP libs
-###########################################################################
-LIBS = -L$(COINLIBDIR) \
-	-lDecomp       \
-	-lm 
-
-ADDINCFLAGS += -DCOIN_ASSERT
-
-###########################################################################
-#define vars for ALPS
-###########################################################################
-LIBS += -lAlps `cat $(DIPPATH)Dip/../Alps/alps_addlibs.txt`
-
-###########################################################################
-# define the directory for LP/IP solver determined at configure
-###########################################################################
-CPXINCDIR  = 
-
-###########################################################################
-# define vars for which IP solver was chosen in configure
-###########################################################################
-CBC_IP_SOLVER    = TRUE
-CPLEX_IP_SOLVER  = #TRUE
-
-ifeq ($(CBC_IP_SOLVER),TRUE)
-LIBS += -lOsiCbc -lCbcSolver -lCbc `cat $(DIPPATH)Dip/../Cbc/cbc_addlibs.txt`
-ADDINCFLAGS += -D__DECOMP_IP_CBC__
-endif
-
-ifeq ($(CPLEX_IP_SOLVER),TRUE)
-INCL += -I`$(CYGPATH_W) $(CPXINCDIR)`
-LIBS += -lOsiCpx -lcplex
-ADDINCFLAGS += -D__DECOMP_IP_CPX__
-endif
-
-###########################################################################
-# define vars for which LP solver was chosen in configure
-###########################################################################
-CLP_LP_SOLVER    = TRUE
-CPLEX_LP_SOLVER  = #TRUE
-
-ifeq ($(CLP_LP_SOLVER),TRUE)
-LIBS += -lOsiClp -lClp `cat $(DIPPATH)Dip/../Clp/clp_addlibs.txt`
-ADDINCFLAGS += -D__DECOMP_LP_CLP__
-endif
-
-ifeq ($(CPLEX_LP_SOLVER),TRUE)
-INCL += -I`$(CYGPATH_W) $(CPXINCDIR)`
-LIBS += -lOsiCpx -lcplex
-ADDINCFLAGS += -D__DECOMP_LP_CPX__
-endif
-
-
-###########################################################################
-# define OS libs
-###########################################################################
-LIBS += -L$(OSLIBDIR) -lOS
-
-INCL += -I$(OSINCDIR)/coin
-INCL += -I$(OSINCDIR)/coin/include
-
-
-
-###########################################################################
-# define DECOMP libs
-###########################################################################
-LIBS = -L$(COINLIBDIR) \
-	-lDecomp       \
-	-lm 
-
-ADDINCFLAGS += -DCOIN_ASSERT
-
-###########################################################################
-#define vars for ALPS
-###########################################################################
-LIBS += -lAlps `cat $(DIPPATH)Dip/../Alps/alps_addlibs.txt`
-
-###########################################################################
-# define the directory for LP/IP solver determined at configure
-###########################################################################
-CPXINCDIR  = 
-
-###########################################################################
-# define vars for which IP solver was chosen in configure
-###########################################################################
-CBC_IP_SOLVER    = TRUE
-CPLEX_IP_SOLVER  = #TRUE
-
-ifeq ($(CBC_IP_SOLVER),TRUE)
-LIBS += -lOsiCbc -lCbcSolver -lCbc `cat @CBCOBJDIR@/cbc_addlibs.txt`
-ADDINCFLAGS += -D__DECOMP_IP_CBC__
-endif
-
-ifeq ($(CPLEX_IP_SOLVER),TRUE)
-INCL += -I`$(CYGPATH_W) $(CPXINCDIR)`
-LIBS += -lOsiCpx -lcplex
-ADDINCFLAGS += -D__DECOMP_IP_CPX__
-endif
-
-###########################################################################
-# define vars for which LP solver was chosen in configure
-###########################################################################
-CLP_LP_SOLVER    = TRUE
-CPLEX_LP_SOLVER  = #TRUE
-
-ifeq ($(CLP_LP_SOLVER),TRUE)
-LIBS += -lOsiClp -lClp `cat @CLPOBJDIR@/clp_addlibs.txt`
-ADDINCFLAGS += -D__DECOMP_LP_CLP__
-endif
-
-ifeq ($(CPLEX_LP_SOLVER),TRUE)
-INCL += -I`$(CYGPATH_W) $(CPXINCDIR)`
-LIBS += -lOsiCpx -lcplex
-ADDINCFLAGS += -D__DECOMP_LP_CPX__
-endif
-
-
-###########################################################################
-# define OS libs
-###########################################################################
-LIBS += -L$(OSLIBDIR) -lOS
-###########################################################################
-# define COIN libs
-###########################################################################
-LIBS += -L$(COINLIBDIR) -lCgl -lOsi  \
-	`cat @CGLOBJDIR@/cgl_addlibs.txt` \
-	`cat @OSIOBJDIR@/osi_addlibs.txt` \
-	`cat @COINUTILSOBJDIR@/coinutils_addlibs.txt`
-#NOTE: CGL depends on CLP
-LIBS += -lOsiClp -lClp -lCoinUtils `cat @CLPOBJDIR@/clp_addlibs.txt`
-
-
-@COIN_HAS_SYMPHONY_TRUE@LIBS += -L$(COINLIBDIR) @osisymphonylib@
-@COIN_HAS_DYLP_TRUE@LIBS += -L$(COINLIBDIR) @osidylplib@
-@COIN_HAS_VOL_TRUE@LIBS += -L$(COINLIBDIR) @osivollib@ 
-@COIN_HAS_GLPK_TRUE@LIBS += -L$(COINLIBDIR) @osiglpklib@ 
-@COIN_HAS_SYMPHONY_TRUE@LIBS += -L$(COINLIBDIR) @symphonylib@
-@COIN_HAS_DYLP_TRUE@LIBS += -L$(COINLIBDIR) @dylplib@ 
-@COIN_HAS_VOL_TRUE@LIBS += -L$(COINLIBDIR) @vollib@
-LIBS += -L$(COINLIBDIR) -lCoinUtils
-
-#===========================================================================#
 # The following is necessary under cygwin, if native compilers are used
-CYGPATH_W = echo
-
-#===========================================================================#
+CYGPATH_W = @CYGPATH_W@
 
 all: $(EXE)
 
@@ -266,4 +102,3 @@ clean:
 
 .cpp.obj:
 	$(CXX) $(CXXFLAGS) $(INCL) -c -o $@ `$(CYGPATH_W) '$<'`
-

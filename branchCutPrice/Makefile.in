@@ -31,21 +31,23 @@ ADDLIBS =
 
 
 # CHANGEME: Additional flags for compilation (e.g., include flags)
-ADDINCFLAGS =  -I${prefix}/include   -I`$(CYGPATH_W)  $(SRCDIR)/include`
+ADDINCFLAGS =  -I${prefix}/include   -I`$(CYGPATH_W) ./include`
 
 
 
-prefix = ../../
+# CHANGEME: Additional libraries
+ADDLIBS = 
 
-ASLLIB = @ASLLIB@
-#
-#
+
+
+prefix = ../..
+
 ##########################################################################
 #  Usually, you don't have to change anything below.  Note that if you   #
 #  change certain compiler options, you might have to recompile OS.   #
 ##########################################################################
 
-# C++ Compiler command
+# C++ Compiler command, for example g++
 CXX = @CXX@
 
 DEFS = -DHAVE_CONFIG_H
@@ -53,8 +55,8 @@ DEFS = -DHAVE_CONFIG_H
 # C++ Compiler options
 CXXFLAGS = @CXXFLAGS@  $(DEFS)
 
-
-
+CXXFLAGS += `pkg-config --cflags os`
+ 
 DARWIN=$(findstring darwin, @build_os@)
 WIN=$(findstring gw, @build_os@)
 
@@ -65,67 +67,16 @@ ifeq ($(DARWIN),darwin)
   CXXLINKFLAGS += -bind_at_load
 endif
 
-# Directory with header files
-OSINCDIR = @includedir@/coin
 
-# Directory with the libraries
-INSTALLIBDIR = @libdir@
-exec_prefix = @exec_prefix@
-
-
-# Libraries necessary to link with OS
-
+#ADD LIBRARIES
 # Libraries necessary to link
-LIBS = @oslib@   
-
-@COIN_HAS_COUENNE_TRUE@LIBS += @couennelib@
-
-
-@COIN_HAS_BONMIN_TRUE@LIBS += @bonminlib@
-
-#ADDITIONAL IPOPT LIBS
-ADDIPOPTLIBS = `cat $(prefix)/share/doc/coin/Ipopt/ipopt_addlibs_cpp.txt`
-@COIN_HAS_IPOPT_TRUE@LIBS += @ipoptlib@ $(ADDIPOPTLIBS)
-
-LIBS += @ADDLIBS@
-
-#
-#ADD ALL THE LIBS
-#
-LIBS += @bcplib@
-LIBS += @osicbclib@
-@COIN_HAS_SYMPHONY_TRUE@LIBS += @osisymphonylib@
-LIBS += @osiclplib@ 
-@COIN_HAS_DYLP_TRUE@LIBS += @osidylplib@
-@COIN_HAS_VOL_TRUE@LIBS += @osivollib@ 
-@COIN_HAS_GLPK_TRUE@LIBS += @osiglpklib@ 
-LIBS += @cbclib@
-@COIN_HAS_SYMPHONY_TRUE@LIBS += @symphonylib@
-LIBS += @cgllib@
-LIBS += @osilib@
-LIBS += @clplib@ 
-@COIN_HAS_DYLP_TRUE@LIBS += @dylplib@ 
-@COIN_HAS_VOL_TRUE@LIBS += @vollib@
-#
-
-LIBS += @coinutilslib@ 
-
-
-
-ifeq ($(WIN),gw)
-  KLUDGE =  /FORCE:MULTIPLE
-endif
-
-LIBS += $(ASLLIB) $(KLUDGE)
-
- 
+LIBS = `pkg-config --libs os` 
 #DONE ADDING LIBS
 
- 
 
 # Necessary Include dirs (we use the CYGPATH_W variables to allow
 # compilation with Windows compilers)
-INCL =  -I`$(CYGPATH_W) $(OSINCDIR)` $(ADDINCFLAGS)
+INCL =  `$(CYGPATH_W) $(ADDINCFLAGS)`  
 
 # The following is necessary under cygwin, if native compilers are used
 CYGPATH_W = @CYGPATH_W@
