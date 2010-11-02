@@ -53,7 +53,7 @@ prefix = ../..
 # C++ Compiler command, for example g++
 CXX = @CXX@
 
-DEFS = -DHAVE_CONFIG_H
+DEFS = -DHAVE_CONFIG_H -DCOIN_ASSERT -D__DECOMP_IP_CBC__ -D__DECOMP_LP_CLP__ -DCOIN_ASSERT -D__DECOMP_IP_CBC__ -D__DECOMP_LP_CLP__
 
 # C++ Compiler options
 CXXFLAGS = @CXXFLAGS@  $(DEFS)
