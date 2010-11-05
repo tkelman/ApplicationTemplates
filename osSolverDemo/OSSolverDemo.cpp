@@ -144,11 +144,11 @@ int main( ){
 		* Create a result object and get the optimal objective
 		* and primal variable values
 		*/	
-		getOSResult( solver->osrl);
+		//getOSResult( solver->osrl);
 		
-		OSResult *osr = solver->osresult;
-		int numOfBasisVar = osr->getNumberOfBasisVar(0);
-		std::cout << "NUMBER OF BASIS VARS = " << numOfBasisVar << std::endl;
+		//OSResult *osr = solver->osresult;
+		//int numOfBasisVar = osr->getNumberOfBasisVar(0);
+		//std::cout << "NUMBER OF BASIS VARS = " << numOfBasisVar << std::endl;
 		
 
 		
@@ -476,7 +476,10 @@ int main( ){
 		* Create a result object and get the optimal objective
 		* and primal variable values
 		*/	
+		
+
 		getOSResult( solver->osrl);
+
 		
 		// start garbage collection
 		delete[] xinitial;
