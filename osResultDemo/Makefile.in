@@ -22,7 +22,7 @@ ADDLIBS =
 
 # CHANGEME: Additional flags for compilation (e.g., include flags)
 # Use the below to get cppad headers for now
-ADDINCFLAGS =  -I${prefix}/include
+ADDINCFLAGS =  ${prefix}/include
 
 prefix = ../..
 
@@ -60,7 +60,7 @@ LIBS = `pkg-config --libs os`
 
 # Necessary Include dirs (we use the CYGPATH_W variables to allow
 # compilation with Windows compilers)
-INCL =  `$(CYGPATH_W) $(ADDINCFLAGS)`  
+INCL =  -I`$(CYGPATH_W) $(ADDINCFLAGS)`  
 
 # The following is necessary under cygwin, if native compilers are used
 CYGPATH_W = @CYGPATH_W@

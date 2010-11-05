@@ -31,7 +31,7 @@ ADDLIBS =
 
 
 # CHANGEME: Additional flags for compilation (e.g., include flags)
-ADDINCFLAGS =  -I${prefix}/include   -I`$(CYGPATH_W) ./include`
+ADDINCFLAGS =  ${prefix}/include   
 
 
 
@@ -76,7 +76,8 @@ LIBS = `pkg-config --libs os`
 
 # Necessary Include dirs (we use the CYGPATH_W variables to allow
 # compilation with Windows compilers)
-INCL =  `$(CYGPATH_W) $(ADDINCFLAGS)`  
+INCL =  -I`$(CYGPATH_W)` $(ADDINCFLAGS)  
+INCL += -I`$(CYGPATH_W) ./include`
 
 # The following is necessary under cygwin, if native compilers are used
 CYGPATH_W = @CYGPATH_W@
