@@ -142,7 +142,7 @@
 				AdditionalDependencies="libOS.lib libOsiCbc.lib libOsiClp.lib libCgl.lib libSym.lib libVol.lib libDylp.lib libCoinUtils.lib libClp.lib libCbc.lib libCbcSolver.lib libOsi.lib libOsiSym.lib libOsiVol.lib libOsiDylp.lib amplsolv.lib wsock32.lib"
 				OutputFile="$(ProjectName).exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\..\lib;..\..\lib\ifort"
+				AdditionalLibraryDirectories="..\..\lib\coin\ThirdParty;..\..\lib\coin;..\..\lib\ifort"
 				GenerateManifest="false"
 				GenerateDebugInformation="false"
 				ProgramDatabaseFile=""
