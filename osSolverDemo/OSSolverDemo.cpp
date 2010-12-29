@@ -38,12 +38,11 @@
 #include<iostream> 
 
 
-
 #ifdef COIN_HAS_ASL
 #include "OSnl2osil.h"
 #endif
 
-#ifdef COIN_HAS_Bonmin   
+#ifdef COIN_HAS_BONMIN  
 #include "OSBonminSolver.h"
 #endif
 
