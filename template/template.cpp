@@ -134,7 +134,7 @@ int main(int argC, char* argV[]){
 		columnMajor? osinstance->getLinearConstraintCoefficientsInColumnMajor()->starts : osinstance->getLinearConstraintCoefficientsInRowMajor()->starts, //Pointers to start of columns.
 		0,   0, maxGap ); 
 		
-		qpClpModel->setOptimizationDirection( -1);
+		qpClpModel->setOptimizationDirection( -1.0);
 		qpClpModel->loadProblem( *matrix, osinstance->getVariableLowerBounds(), 
 				osinstance->getVariableUpperBounds(),  
 				osinstance->getDenseObjectiveCoefficients()[0], 
