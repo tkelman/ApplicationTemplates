@@ -568,7 +568,7 @@ int main( ){
 		
 #endif //end of  COIN_HAS_BONMIN
         
-		return 0;		
+			
 		delete fileUtil;
 		fileUtil = NULL;	
 		return 0;
