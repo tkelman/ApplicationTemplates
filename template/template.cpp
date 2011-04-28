@@ -36,6 +36,9 @@
 #include "CoinFinite.hpp"
 
 #include "ClpSimplex.hpp"
+#include "ClpInterior.hpp"
+#include "ClpCholeskyBase.hpp"
+#include "ClpQuadraticObjective.hpp"
 
 #include<iostream> 
 #include <ostream>
@@ -55,13 +58,18 @@ int main(int argC, char* argV[]){
 	FileUtil *fileUtil = NULL; 
 	fileUtil = new FileUtil();
 	
-	ClpSimplex*  qpClpModel;
+	//ClpSimplex*  qpClpModel;
+    ClpInterior*  qpClpModel;
+    
+    
 	qpClpModel = NULL;
 	// template -- add your code here -- //
 	std::cout << "Hello World" << std::endl;
 	
 	try{
 
+        int i;
+ 
 
 		const char dirsep =  CoinFindDirSeparator();
 		std::string osil;
@@ -88,7 +96,7 @@ int main(int argC, char* argV[]){
 		* Get an instance in mps format, and create an OSInstance object
 		*/
 		std::string qpFileName;
-		qpFileName =  dataDir  +  "parincLinear.osil";
+		qpFileName =  dataDir  +  "parincQuadratic.osil";
 		// convert to the OS native format
 		osil = fileUtil->getFileAsString( qpFileName.c_str() );
 		osilreader = new OSiLReader(); 
@@ -119,7 +127,8 @@ int main(int argC, char* argV[]){
 		//solver->sSolverName ="clp"; 
 		
 
-		qpClpModel = new ClpSimplex();
+		//qpClpModel = new ClpSimplex();
+        qpClpModel = new  ClpInterior();
 		
 	    CoinPackedMatrix* matrix;
 	    bool columnMajor = true;
@@ -134,7 +143,7 @@ int main(int argC, char* argV[]){
 		columnMajor? osinstance->getLinearConstraintCoefficientsInColumnMajor()->starts : osinstance->getLinearConstraintCoefficientsInRowMajor()->starts, //Pointers to start of columns.
 		0,   0, maxGap ); 
 		
-		qpClpModel->setOptimizationDirection( -1.0);
+		qpClpModel->setOptimizationDirection( -1);
 		qpClpModel->loadProblem( *matrix, osinstance->getVariableLowerBounds(), 
 				osinstance->getVariableUpperBounds(),  
 				osinstance->getDenseObjectiveCoefficients()[0], 
@@ -142,13 +151,43 @@ int main(int argC, char* argV[]){
 		);
 		
 		
-		qpClpModel->primal();
+        //now for the quadratic part
+        
+        int *start = NULL;
+        int *idx = NULL;
+        double *nonz = NULL;
+
+        start = new int[3];
+        idx = new int[2]; //index the columns
+        nonz = new double[2];
+        
+        start[ 0] = 0;
+        start[ 1] = 1;
+        start[ 2] = 2;
+        
+        idx[0] = 0;
+        idx[1] = 1;
+        
+        nonz[ 0] = -.06666666*.5;
+        nonz[ 1] = -.2*.5;
+
+        qpClpModel->loadQuadraticObjective( qpClpModel->numberColumns(), start, idx, nonz);
+        
+        qpClpModel->writeMps("quad.mps");
+        
+        
+        //call solver
+		//qpClpModel->primal();
+        ClpCholeskyBase * cholesky = new ClpCholeskyBase();
+        cholesky->setKKT(true);
+        qpClpModel->setCholesky(cholesky);
+        qpClpModel->primalDual();
 		
         double *primal;
         double *dual;
         primal = qpClpModel->primalColumnSolution();
         dual = qpClpModel->dualRowSolution();
-		int i;
+	
 		
         int numberColumns = qpClpModel->numberColumns();
         int numberRows = qpClpModel->numberRows();
@@ -160,7 +199,7 @@ int main(int argC, char* argV[]){
              if (fabs(dual[i]) > 1.0e-8)
                   printf("%d dual %g\n", i, dual[i]);
         }
-		//qpClpModel->writeLp( "gail");
+	 
         
         std::cout << osinstance->printModel();
 		/******************** STEP 4 ************************
