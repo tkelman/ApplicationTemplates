@@ -168,8 +168,8 @@ int main(int argC, char* argV[]){
         idx[0] = 0;
         idx[1] = 1;
         
-        nonz[ 0] = -.06666666*.5;
-        nonz[ 1] = -.2*.5;
+        nonz[ 0] = -.06666666*2;
+        nonz[ 1] = -.2*2;
 
         qpClpModel->loadQuadraticObjective( qpClpModel->numberColumns(), start, idx, nonz);
         
@@ -202,6 +202,25 @@ int main(int argC, char* argV[]){
 	 
         
         std::cout << osinstance->printModel();
+        
+        
+        std::cout << "NUMBR OF OBJTERMS = " << osinstance->getNumberOfQuadraticTerms() << std::endl;
+        
+        QuadraticTerms* quadTerms = NULL;
+        
+        quadTerms = osinstance->getQuadraticTerms();
+        
+        for(i = 0; i < osinstance->getNumberOfQuadraticTerms(); i++){
+        	
+        	std::cout << "Row Indexes " << quadTerms->rowIndexes[i]  << std::endl;
+        	std::cout << "Var One Indexes " << quadTerms->varOneIndexes[i]  << std::endl;
+        	std::cout << "Var Two Indexes " << quadTerms->varTwoIndexes[i]  << std::endl;
+        	std::cout << "Coefficients " << quadTerms->coefficients[i]  << std::endl;
+        	
+        }
+        	
+
+        
 		/******************** STEP 4 ************************
 		* Give the solver the instance and options and solve
 		*/	
