@@ -97,7 +97,7 @@ int main(int argC, char* argV[]){
 		* Get an instance in mps format, and create an OSInstance object
 		*/
 		std::string qpFileName;
-		qpFileName =  dataDir  +  "parincQuadratic.osil";
+		qpFileName =  dataDir  +  "parincQuadratic2.osil";
 		// convert to the OS native format
 		osil = fileUtil->getFileAsString( qpFileName.c_str() );
 		osilreader = new OSiLReader(); 
@@ -154,55 +154,121 @@ int main(int argC, char* argV[]){
 		
         //now for the quadratic part
 		//get the quadratic terms
-		std::map<int, std::vector<int> > varIndexMap;
-		std::map<int, std::vector<int> >::iterator mit;
+		std::map<int, std::map<int, double> > varIndexMap;
+		std::map<int, std::map<int, double> >::iterator mit1;
+		std::map<int, double> tmpMap;
+		std::map<int, double>::iterator mit2;
+		
+		int numNonz;
+		numNonz = 0;
 		
         QuadraticTerms* quadTerms = NULL;
         quadTerms = osinstance->getQuadraticTerms();
-        
+        int i1;
+        int j1;
+        int tmpint;
+          
         for(i = 0; i < osinstance->getNumberOfQuadraticTerms(); i++){
         	
         	if( quadTerms->rowIndexes[ i] == -1){
         		
-        		mit = varIndexMap.find( quadTerms->varOneIndexes[ i] );
+        		i1 = quadTerms->varOneIndexes[ i] ;
+        		j1 = quadTerms->varTwoIndexes[ i] ;
         		
-        		if(mit == m_nodeMap.end() ){ //add new index
+        		//does Clp expect j1 >= i1?????
+        		//try this
+        		
+        		if(j1 < i1){ //switch
+        			
+        			tmpint = j1;
+        			j1 = i1;
+        			i1 = tmpint;
         			
         			
-        		}else{
-        			
-        			mit->second.push_back( quadTerms->varTwoIndexes[ i]);
         		}
-        	
+        		
+        		mit1 = varIndexMap.find( i1 );
+        		
+        		if( mit1 == varIndexMap.end() ){ //add new index
+        			
+        			tmpMap.insert( std::pair<int, double>( j1, 
+							quadTerms->coefficients[i]) );
+        			numNonz++;
+        			
+        			varIndexMap[ i1 ] = tmpMap;
+        			
+        			tmpMap.clear();
+        		}else{ 
+        			
+        			//map index already exists
+        			//insert second index if not alreay there
+        			mit2 = mit1->second.find( j1) ;
+        			
+        			if( mit2 == mit1->second.end() ){
+        				//add the new index and coefficient
+        				mit1->second.insert(  std::pair<int, double>( j1, 
+    							quadTerms->coefficients[i])  );
+        				numNonz++;
+        				
+        			}else{
+        				
+        				mit2->second += quadTerms->coefficients[i];
+        				
+        			}
+        			
+        		}       	
         	
         	}//end if on test for objective function index
         	
-       
-        	
-      
-        	//std::cout << "Coefficients " << quadTerms->coefficients[i]  << std::endl;
-        	
         }//end loop over quadratic terms
         	
+        std::cout << "numNonz = " << numNonz << std::endl;
 		
         
         int *start = NULL;
         int *idx = NULL;
         double *nonz = NULL;
 
-        start = new int[3];
-        idx = new int[2]; //index the columns
-        nonz = new double[2];
+        start = new int[ varIndexMap.size() + 1];
+        idx = new int[ numNonz]; //index the columns
+        nonz = new double[ numNonz];
         
-        start[ 0] = 0;
-        start[ 1] = 1;
-        start[ 2] = 2;
+        int kount;
+        kount = 0;
+        numNonz = 0;
+        start[ kount++] = numNonz;
+
+        for( mit1 = varIndexMap.begin(); mit1 != varIndexMap.end();  mit1++){
+        	
+        	std::cout  << std::endl;
+        	std::cout << "FIRST INDEX = " << mit1->first << std::endl;
+        	for( mit2 = mit1->second.begin(); mit2 != mit1->second.end();  mit2++){
+        		std::cout << "SECOND INDEX = " << mit2->first << std::endl;
+        		std::cout << "COEFFICIENT = " << mit2->second << std::endl;
+        		idx[ numNonz] = mit2->first;
+        		//we multiply by 2 for Clp
+        		nonz[ numNonz++ ] = 2*mit2->second;	
+        	}
+        	start[ kount++] = numNonz ;
+        	
+        }
+        
+       /**
+        start[ 1] = 2;
+        start[ 2] = 4;
         
         idx[0] = 0;
         idx[1] = 1;
         
+        idx[2] = 1;
+        idx[3] = 0;
+        
         nonz[ 0] = -.06666666*2;
-        nonz[ 1] = -.2*2;
+        nonz[ 1] = .4*2;
+        nonz[ 2] = -.2*2;
+        nonz[ 3] = -.3*2;
+        */
+       
 
         qpClpModel->loadQuadraticObjective( qpClpModel->numberColumns(), start, idx, nonz);
         
