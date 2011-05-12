@@ -97,7 +97,7 @@ int main(int argC, char* argV[]){
 		* Get an instance in mps format, and create an OSInstance object
 		*/
 		std::string qpFileName;
-		qpFileName =  dataDir  +  "parincQuadratic2.osil";
+		qpFileName =  dataDir  +  "parincQuadratic2Ipopt.osil";
 		// convert to the OS native format
 		osil = fileUtil->getFileAsString( qpFileName.c_str() );
 		osilreader = new OSiLReader(); 
@@ -175,6 +175,8 @@ int main(int argC, char* argV[]){
         		i1 = quadTerms->varOneIndexes[ i] ;
         		j1 = quadTerms->varTwoIndexes[ i] ;
         		
+        		if(i1 == j1) quadTerms->coefficients[i] = 2*quadTerms->coefficients[i];
+        		
         		//does Clp expect j1 >= i1?????
         		//try this
         		
@@ -247,7 +249,7 @@ int main(int argC, char* argV[]){
         		std::cout << "COEFFICIENT = " << mit2->second << std::endl;
         		idx[ numNonz] = mit2->first;
         		//we multiply by 2 for Clp
-        		nonz[ numNonz++ ] = 2*mit2->second;	
+        		nonz[ numNonz++ ] = mit2->second;	
         	}
         	start[ kount++] = numNonz ;
         	
