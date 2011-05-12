@@ -45,6 +45,7 @@
 #include <sstream>
 #include <streambuf>
 
+#include<map>
 #include<stdio.h>
  
 using std::cout;   
@@ -152,6 +153,38 @@ int main(int argC, char* argV[]){
 		
 		
         //now for the quadratic part
+		//get the quadratic terms
+		std::map<int, std::vector<int> > varIndexMap;
+		std::map<int, std::vector<int> >::iterator mit;
+		
+        QuadraticTerms* quadTerms = NULL;
+        quadTerms = osinstance->getQuadraticTerms();
+        
+        for(i = 0; i < osinstance->getNumberOfQuadraticTerms(); i++){
+        	
+        	if( quadTerms->rowIndexes[ i] == -1){
+        		
+        		mit = varIndexMap.find( quadTerms->varOneIndexes[ i] );
+        		
+        		if(mit == m_nodeMap.end() ){ //add new index
+        			
+        			
+        		}else{
+        			
+        			mit->second.push_back( quadTerms->varTwoIndexes[ i]);
+        		}
+        	
+        	
+        	}//end if on test for objective function index
+        	
+       
+        	
+      
+        	//std::cout << "Coefficients " << quadTerms->coefficients[i]  << std::endl;
+        	
+        }//end loop over quadratic terms
+        	
+		
         
         int *start = NULL;
         int *idx = NULL;
@@ -203,23 +236,6 @@ int main(int argC, char* argV[]){
         
         std::cout << osinstance->printModel();
         
-        
-        std::cout << "NUMBR OF OBJTERMS = " << osinstance->getNumberOfQuadraticTerms() << std::endl;
-        
-        QuadraticTerms* quadTerms = NULL;
-        
-        quadTerms = osinstance->getQuadraticTerms();
-        
-        for(i = 0; i < osinstance->getNumberOfQuadraticTerms(); i++){
-        	
-        	std::cout << "Row Indexes " << quadTerms->rowIndexes[i]  << std::endl;
-        	std::cout << "Var One Indexes " << quadTerms->varOneIndexes[i]  << std::endl;
-        	std::cout << "Var Two Indexes " << quadTerms->varTwoIndexes[i]  << std::endl;
-        	std::cout << "Coefficients " << quadTerms->coefficients[i]  << std::endl;
-        	
-        }
-        	
-
         
 		/******************** STEP 4 ************************
 		* Give the solver the instance and options and solve
