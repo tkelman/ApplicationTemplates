@@ -97,7 +97,7 @@ int main(int argC, char* argV[]){
 		* Get an instance in mps format, and create an OSInstance object
 		*/
 		std::string qpFileName;
-		qpFileName =  dataDir  +  "parincQuadratic2Ipopt.osil";
+		qpFileName =  dataDir  +  "parincQuadratic2.osil";
 		// convert to the OS native format
 		osil = fileUtil->getFileAsString( qpFileName.c_str() );
 		osilreader = new OSiLReader(); 
