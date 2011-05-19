@@ -36,6 +36,8 @@
 #include "CoinFinite.hpp"
 
 #include "ClpSimplex.hpp"
+#include "ClpSolve.hpp"
+#include "CbcOrClpParam.hpp"
 #include "ClpInterior.hpp"
 #include "ClpCholeskyBase.hpp"
 #include "ClpQuadraticObjective.hpp"
@@ -59,13 +61,82 @@ int main(int argC, char* argV[]){
 	FileUtil *fileUtil = NULL; 
 	fileUtil = new FileUtil();
 	
-	//ClpSimplex*  qpClpModel;
-    ClpInterior*  qpClpModel;
-    
-    
+	
+	//demonstrate use of Clp
+	ClpSolve solveOptions;
+	ClpSolve::SolveType method;
+	method = ClpSolve::useBarrier;
+	//or primal simplex
+	method = ClpSolve::usePrimal;
+	solveOptions.setSolveType( method);
+
+	ClpSimplex*  qpClpModel;
+    //ClpInterior*  qpClpModel;
 	qpClpModel = NULL;
 	// template -- add your code here -- //
 	std::cout << "Hello World" << std::endl;
+	
+	
+	/////////
+	
+    CbcOrClpParam parameters[CBCMAXPARAMETERS];
+    int numberParameters ;
+    establishParams(numberParameters, parameters) ;
+    std::cout << "NUMBER OF PARAMETERS = " << numberParameters<< std::endl;
+
+    /*
+    parameters[whichParam(CLP_PARAM_ACTION_BASISIN, numberParameters, parameters)].setStringValue(importBasisFile);
+    parameters[whichParam(CLP_PARAM_ACTION_BASISOUT, numberParameters, parameters)].setStringValue(exportBasisFile);
+    parameters[whichParam(CLP_PARAM_ACTION_PRINTMASK, numberParameters, parameters)].setStringValue(printMask);
+    parameters[whichParam(CLP_PARAM_ACTION_DIRECTORY, numberParameters, parameters)].setStringValue(directory);
+    parameters[whichParam(CLP_PARAM_ACTION_DIRSAMPLE, numberParameters, parameters)].setStringValue(dirSample);
+    parameters[whichParam(CLP_PARAM_ACTION_DIRNETLIB, numberParameters, parameters)].setStringValue(dirNetlib);
+    parameters[whichParam(CBC_PARAM_ACTION_DIRMIPLIB, numberParameters, parameters)].setStringValue(dirMiplib);
+    parameters[whichParam(CLP_PARAM_DBL_DUALBOUND, numberParameters, parameters)].setDoubleValue(models->dualBound());
+    parameters[whichParam(CLP_PARAM_DBL_DUALTOLERANCE, numberParameters, parameters)].setDoubleValue(models->dualTolerance());
+    parameters[whichParam(CLP_PARAM_ACTION_EXPORT, numberParameters, parameters)].setStringValue(exportFile);
+    parameters[whichParam(CLP_PARAM_INT_IDIOT, numberParameters, parameters)].setIntValue(doIdiot);
+    parameters[whichParam(CLP_PARAM_ACTION_IMPORT, numberParameters, parameters)].setStringValue(importFile);
+    parameters[whichParam(CLP_PARAM_INT_SOLVERLOGLEVEL, numberParameters, parameters)].setIntValue(models->logLevel());
+    parameters[whichParam(CLP_PARAM_INT_MAXFACTOR, numberParameters, parameters)].setIntValue(models->factorizationFrequency());
+    parameters[whichParam(CLP_PARAM_INT_MAXITERATION, numberParameters, parameters)].setIntValue(models->maximumIterations());
+    parameters[whichParam(CLP_PARAM_INT_OUTPUTFORMAT, numberParameters, parameters)].setIntValue(outputFormat);
+    parameters[whichParam(CLP_PARAM_INT_PRESOLVEPASS, numberParameters, parameters)].setIntValue(preSolve);
+    parameters[whichParam(CLP_PARAM_INT_PERTVALUE, numberParameters, parameters)].setIntValue(models->perturbation());
+    parameters[whichParam(CLP_PARAM_DBL_PRIMALTOLERANCE, numberParameters, parameters)].setDoubleValue(models->primalTolerance());
+    parameters[whichParam(CLP_PARAM_DBL_PRIMALWEIGHT, numberParameters, parameters)].setDoubleValue(models->infeasibilityCost());
+    parameters[whichParam(CLP_PARAM_ACTION_RESTORE, numberParameters, parameters)].setStringValue(restoreFile);
+    parameters[whichParam(CLP_PARAM_ACTION_SAVE, numberParameters, parameters)].setStringValue(saveFile);
+    parameters[whichParam(CLP_PARAM_DBL_TIMELIMIT, numberParameters, parameters)].setDoubleValue(models->maximumSeconds());
+    parameters[whichParam(CLP_PARAM_ACTION_SOLUTION, numberParameters, parameters)].setStringValue(solutionFile);
+    parameters[whichParam(CLP_PARAM_ACTION_SAVESOL, numberParameters, parameters)].setStringValue(solutionSaveFile);
+    parameters[whichParam(CLP_PARAM_INT_SPRINT, numberParameters, parameters)].setIntValue(doSprint);
+    parameters[whichParam(CLP_PARAM_INT_SUBSTITUTION, numberParameters, parameters)].setIntValue(substitution);
+    parameters[whichParam(CLP_PARAM_INT_DUALIZE, numberParameters, parameters)].setIntValue(dualize);
+    parameters[whichParam(CLP_PARAM_DBL_PRESOLVETOLERANCE, numberParameters, parameters)].setDoubleValue(1.0e-8);
+ */
+
+	///////
+	
+
+	qpClpModel = new ClpSimplex();
+    //qpClpModel = new  ClpInterior();
+	
+	
+	//set a parameter
+	
+
+	qpClpModel->setIntParam(ClpMaxNumIteration, 100) ;
+	
+	
+	//parameters[whichParam(CLP_PARAM_INT_SOLVERLOGLEVEL, numberParameters, parameters)].setIntValue(qpClpModel->logLevel());
+	
+	std::cout << "Parameter number for:  CLP_PARAM_INT_SOLVERLOGLEVEL  " <<  whichParam(CLP_PARAM_INT_SOLVERLOGLEVEL, numberParameters, parameters) << std::endl;
+	std::cout << "Parameter number for:  CLP_PARAM_INT_MAXITERATION  " <<  whichParam(CLP_PARAM_INT_MAXITERATION, numberParameters, parameters) << std::endl;
+	parameters[ whichParam(CLP_PARAM_INT_SOLVERLOGLEVEL, numberParameters, parameters)].setIntParameter(qpClpModel, 0);
+	parameters[ whichParam(CLP_PARAM_INT_MAXITERATION, numberParameters, parameters)].setIntParameter(qpClpModel, 10);
+	
+	std::cout << "CLP_PARAM_INT_SOLVERLOGLEVEL = "  <<  parameters[whichParam(CLP_PARAM_INT_SOLVERLOGLEVEL, numberParameters, parameters)].intValue() << std::endl;
 	
 	try{
 
@@ -127,9 +198,6 @@ int main(int argC, char* argV[]){
 		//solver = new CoinSolver();
 		//solver->sSolverName ="clp"; 
 		
-
-		//qpClpModel = new ClpSimplex();
-        qpClpModel = new  ClpInterior();
 		
 	    CoinPackedMatrix* matrix;
 	    bool columnMajor = true;
@@ -281,8 +349,10 @@ int main(int argC, char* argV[]){
 		//qpClpModel->primal();
         ClpCholeskyBase * cholesky = new ClpCholeskyBase();
         cholesky->setKKT(true);
-        qpClpModel->setCholesky(cholesky);
-        qpClpModel->primalDual();
+       // qpClpModel->setCholesky(cholesky);
+       // qpClpModel->primalDual();
+        
+        qpClpModel->initialSolve( solveOptions);
 		
         double *primal;
         double *dual;
