@@ -393,7 +393,7 @@ int main(int argC, char* argV[]){
 		//int numOfBasisVar = osr->getNumberOfBasisVar(0);
 		//std::cout << "NUMBER OF BASIS VARS = " << numOfBasisVar << std::endl;
 		
-
+dfd
 		
 		
 		//do garbage collection
