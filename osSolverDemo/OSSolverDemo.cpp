@@ -192,9 +192,9 @@ int main( ){
 		 *	std::string category, std::string type, std::string description);
 		 */
 		// tell Cbc limit the number of nodes in the branch and bound tree
-		osoption->setAnotherSolverOption("maxN","1000","cbc","","integer","");
+		osoption->setAnotherSolverOption("maxN","1","cbc","","integer","");
 		// tell Cbc limit the number of seconds
-		osoption->setAnotherSolverOption("sec",".01","cbc","","integer","");
+		osoption->setAnotherSolverOption("sec","10","cbc","","integer","");
 		// tell Cbc not to use cutting planes
 		osoption->setAnotherSolverOption("cuts","off","cbc","","string","");
 		//set a high-level of log reporting
