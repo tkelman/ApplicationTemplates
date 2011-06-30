@@ -168,23 +168,7 @@ int main( ){
 		/******************** End Clp Example *************************/
 		
 		
-		
-		
-		
 	
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		/******************** Start Cbc Example *************************/
 		std::cout << std::endl << std::endl;
@@ -207,10 +191,12 @@ int main( ){
 		 *	bool setAnotherSolverOption(std::string name, std::string value, std::string solver, 
 		 *	std::string category, std::string type, std::string description);
 		 */
-		// tell Cbc to use the primal simplex algorithm
-		osoption->setAnotherSolverOption("primalS","","cbc","","string","");
-		//in primal simplex set the pivot choice -- use steepest edge
-		osoption->setAnotherSolverOption("primalpivot","steepest","cbc","","string","");
+		// tell Cbc limit the number of nodes in the branch and bound tree
+		osoption->setAnotherSolverOption("maxN","1000","cbc","","integer","");
+		// tell Cbc limit the number of seconds
+		osoption->setAnotherSolverOption("sec",".01","cbc","","integer","");
+		// tell Cbc not to use cutting planes
+		osoption->setAnotherSolverOption("cuts","off","cbc","","string","");
 		//set a high-level of log reporting
 		osoption->setAnotherSolverOption("log","10","cbc","","integer","");
 		osolwriter = new OSoLWriter();
@@ -227,7 +213,7 @@ int main( ){
 		* Give the solver the instance and options and solve
 		*/			
 		solver->osinstance = osinstance;
-		//solver->osoption = osoption;	
+		solver->osoption = osoption;	
 		solver->solve();
 		
 		/******************** STEP 5 ************************
@@ -247,6 +233,8 @@ int main( ){
 		delete osolwriter;
 		osolwriter = NULL;
 		// finish garbage collection
+		
+		return 0;
 		
 		/******************** End Cbc Example *************************/
 		
@@ -603,7 +591,9 @@ void getOSResult(std::string osrl){
 		optSolValue = osresult->getOptimalObjValue( -1, 0);
 		std::cout << "OPTIMAL SOLUTION VALUE  " <<  optSolValue << std::endl;
 	}else{
-		std::cout << "NO OPTIMAL SOLUTION FOUND " << std::endl;
+		std::cout << std::endl;
+		std::cout << "We are not optimal!" << std::endl;
+		std::cout << solStatus << std::endl;
 	}
 	
 	int i;
