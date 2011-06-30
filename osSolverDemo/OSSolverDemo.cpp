@@ -68,7 +68,7 @@ int main( ){
 	FileUtil *fileUtil = NULL; 
 	fileUtil = new FileUtil();
 	cout << "Start Building the Model" << endl;
-	int i;
+	//int i;
 	try{
 
 
@@ -88,8 +88,8 @@ int main( ){
 		OSOption* osoption = NULL;
 		
 		// set initial/starting values of 0 for the variables
-		double* xinitial = NULL;
-		int numVar;
+		//double* xinitial = NULL;
+		//int numVar;
 		
 
 		
@@ -192,9 +192,9 @@ int main( ){
 		 *	std::string category, std::string type, std::string description);
 		 */
 		// tell Cbc limit the number of nodes in the branch and bound tree
-		osoption->setAnotherSolverOption("maxN","1","cbc","","integer","");
+		osoption->setAnotherSolverOption("maxN","1000","cbc","","integer","");
 		// tell Cbc limit the number of seconds
-		osoption->setAnotherSolverOption("sec","10","cbc","","integer","");
+		osoption->setAnotherSolverOption("sec",".01","cbc","","integer","");
 		// tell Cbc not to use cutting planes
 		osoption->setAnotherSolverOption("cuts","off","cbc","","string","");
 		//set a high-level of log reporting
