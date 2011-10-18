@@ -45,7 +45,7 @@
 //#include "OSCommonUtil.h"
 #include "OSErrorClass.h"
 #include "OSMathUtil.h"
-
+#include<string>
 #include<iostream> 
 using std::cout;   
 using std::endl;
@@ -134,7 +134,7 @@ int main( ){
 
 		// now solve the model synchronously
 		OSSolverAgent* osagent = NULL;
-		osagent = new OSSolverAgent("kipp.chicagobooth.edu/os/OSSolverService.jws");
+		osagent = new OSSolverAgent("http://74.94.100.129:8080/OSServer/services/OSSolverService");
 		
 
 		std::string osol = "<osol></osol>";
@@ -169,8 +169,8 @@ int main( ){
 		bool status_finished = false;
 		bool status_found    = false;
 
-		string::size_type pos1;
-		string::size_type pos2;
+		std::string::size_type pos1;
+		std::string::size_type pos2;
 		pos1 = osql.find( "<response" );
 		if (pos1 != std::string::npos){
 			pos2 = osql.find( ">", pos1 + 1);

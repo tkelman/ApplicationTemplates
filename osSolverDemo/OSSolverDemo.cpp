@@ -30,6 +30,7 @@
 #include "OShL.h"     
 #include "OSErrorClass.h"
 #include "OSmps2osil.h"   
+#include "OSnl2osil.h"   
 #include "OSBase64.h"
 #include "OSErrorClass.h"
 #include "OSMathUtil.h"
@@ -39,19 +40,19 @@
 
 
 
-#ifdef COIN_HAS_ASL
+#ifdef OS_HAS_ASL
 #include "OSnl2osil.h"
 #endif
 
-#ifdef COIN_HAS_BONMIN   
+#ifdef OS_HAS_BONMIN   
 #include "OSBonminSolver.h"
 #endif
 
-#ifdef COIN_HAS_COUENNE    
+#ifdef OS_HAS_COUENNE    
 #include "OSCouenneSolver.h"
 #endif
 
-#ifdef COIN_HAS_IPOPT    
+#ifdef OS_HAS_IPOPT    
 #include "OSIpoptSolver.h"
 #endif
 
@@ -89,7 +90,9 @@ int main( ){
 		
 		// set initial/starting values of 0 for the variables
 		//double* xinitial = NULL;
-		//int numVar;
+		int numVar;
+		double *xinitial;
+		int i;
 		
 
 		
@@ -234,13 +237,13 @@ int main( ){
 		osolwriter = NULL;
 		// finish garbage collection
 		
-		return 0;
+		//return 0;
 		
 		/******************** End Cbc Example *************************/
 		
 		
 	#if 1	
-#ifdef COIN_HAS_COUENNE		
+#ifdef OS_HAS_COUENNE		
 		/******************** Start Couenne Example *************************/
 		
 		std::cout << std::endl << std::endl;
@@ -338,7 +341,7 @@ int main( ){
 		
 		/******************** End Couenne Example *************************/
 		
-#endif //end of  COIN_HAS_COUENNE			
+#endif //end of  OS_HAS_COUENNE			
 #endif //end #if 0/1		
 		
 		
@@ -408,7 +411,7 @@ int main( ){
 		
 			
 
-#ifdef COIN_HAS_IPOPT		
+#ifdef OS_HAS_IPOPT		
 		/******************** Start Ipopt Example *************************/
 		
 		std::cout << std::endl << std::endl;
@@ -484,10 +487,10 @@ int main( ){
 	
 		
 		
-#endif //end of  COIN_HAS_IPOPT	
+#endif //end of  OS_HAS_IPOPT	
 
 
-#ifdef COIN_HAS_BONMIN	
+#ifdef OS_HAS_BONMIN	
 		/******************** Start Bonmin Example *************************/
 		
 		std::cout << std::endl << std::endl;
@@ -554,7 +557,7 @@ int main( ){
 		
 		/******************** End Bonmin Example *************************/
 		
-#endif //end of  COIN_HAS_BONMIN
+#endif //end of  OS_HAS_BONMIN
         
 			
 		delete fileUtil;

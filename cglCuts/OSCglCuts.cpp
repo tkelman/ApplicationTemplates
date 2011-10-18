@@ -141,7 +141,7 @@ int main( ){
 			// first set the number of Other Variable Results
 			osresult->setNumberOfOtherVariableResults(solIdx, numberOfOtherVariableResult);
 			
-			ostringstream outStr;
+			std::ostringstream outStr;
 			int numberOfVar =  solver->osinstance->getVariableNumber();
 			for(i=0; i < numberOfVar; i++){
 				outStr << model->getReducedCost()[ i]; 

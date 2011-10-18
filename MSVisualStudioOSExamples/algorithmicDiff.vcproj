@@ -138,10 +138,10 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libOS.lib libOsiCbc.lib libOsiClp.lib libCgl.lib libSym.lib libVol.lib libDylp.lib libCoinUtils.lib libClp.lib libCbc.lib libCbcSolver.lib libOsi.lib libOsiSym.lib libOsiVol.lib libOsiDylp.lib amplsolv.lib"
+				AdditionalDependencies="libOS.lib libOsiCbc.lib libOsiClp.lib libCgl.lib libSym.lib libVol.lib libDylp.lib libCoinUtils.lib libClp.lib libCbc.lib libCbcSolver.lib libOsi.lib libOsiSym.lib libOsiVol.lib libOsiDylp.lib"
 				OutputFile="$(ProjectName).exe"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="..\..\lib\ifort;..\..\lib\coin\ThirdParty;..\..\lib\coin"
+				AdditionalLibraryDirectories="..\..\lib\ifort;..\..\lib\"
 				GenerateDebugInformation="false"
 				SubSystem="1"
 				OptimizeReferences="2"
