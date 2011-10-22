@@ -1,15 +1,13 @@
 /* $Id: template.cpp 2710 2009-06-10 21:13:43Z kmartin $ */
-/** @file osTestCode.cpp
+/** @file template.cpp
  * 
  * @author  Horand Gassmann, Jun Ma, Kipp Martin, 
- * @version 1.0, 10/05/2005
- * @since   OS1.0
  *
  * \remarks
- * Copyright (C) 2005, Jun Ma, Kipp Martin,
- * Northwestern University, and the University of Chicago.
+ * Copyright (C) 2005-2011, Horand Gassmann, Jun Ma, Kipp Martin,
+ * Dalhousie University, Northwestern University, and the University of Chicago.
  * All Rights Reserved.
- * This software is licensed under the Common Public License. 
+ * This software is licensed under the Eclipse Public License. 
  * Please see the accompanying LICENSE file in root directory for terms.
  * 
  */ 
@@ -392,7 +390,9 @@ int main(int argC, char* argV[]){
 		//OSResult *osr = solver->osresult;
 		//int numOfBasisVar = osr->getNumberOfBasisVar(0);
 		//std::cout << "NUMBER OF BASIS VARS = " << numOfBasisVar << std::endl;
-
+		
+		
+		
 		//do garbage collection
 		delete osilreader;
 		osilreader = NULL;

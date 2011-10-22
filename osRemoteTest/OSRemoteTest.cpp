@@ -1,15 +1,13 @@
 /* $Id: OSRemoteTest.cpp 3355 2010-03-28 08:06:32Z kmartin $ */
-/** @file osRemoteTest.cpp
+/** @file OSRemoteTest.cpp
  * 
- * @author  Gus Gassmann, Jun Ma, Kipp Martin, 
- * @version 1.0, 26/06/2008
- * @since   OS1.1
+ * @author  Horand Gassmann, Jun Ma, Kipp Martin, 
  *
  * \remarks
- * Copyright (C) 2008, Gus Gassmann, Jun Ma, Kipp Martin,
+ * Copyright (C) 2008-2011, Horand Gassmann, Jun Ma, Kipp Martin,
  * Dalhousie University, Northwestern University, and the University of Chicago.
  * All Rights Reserved.
- * This software is licensed under the Common Public License. 
+ * This software is licensed under the Eclipse Public License. 
  * Please see the accompanying LICENSE file in root directory for terms.
  * 
  */ 
@@ -45,7 +43,7 @@
 //#include "OSCommonUtil.h"
 #include "OSErrorClass.h"
 #include "OSMathUtil.h"
-#include<string>
+
 #include<iostream> 
 using std::cout;   
 using std::endl;
@@ -134,7 +132,7 @@ int main( ){
 
 		// now solve the model synchronously
 		OSSolverAgent* osagent = NULL;
-		osagent = new OSSolverAgent("http://74.94.100.129:8080/OSServer/services/OSSolverService");
+		osagent = new OSSolverAgent("kipp.chicagobooth.edu/os/OSSolverService.jws");
 		
 
 		std::string osol = "<osol></osol>";

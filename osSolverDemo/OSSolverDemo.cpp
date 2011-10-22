@@ -1,15 +1,13 @@
 /* $Id: OSSolverDemo.cpp 3300 2010-03-17 07:32:54Z kmartin $ */
-/** @file OSOptionDemo.cpp
+/** @file OSSolverDemo.cpp
  * 
- * @author  Gus Gassmann, Jun Ma, Kipp Martin, 
- * @version 1.0, 26/06/2008
- * @since   OS1.1
+ * @author  Horand Gassmann, Jun Ma, Kipp Martin
  *
  * \remarks
- * Copyright (C) 2008, Gus Gassmann, Jun Ma, Kipp Martin,
+ * Copyright (C) 2008-2011, Horand Gassmann, Jun Ma, Kipp Martin,
  * Dalhousie University, Northwestern University, and the University of Chicago.
  * All Rights Reserved.
- * This software is licensed under the Common Public License. 
+ * This software is licensed under the Eclipse Public License. 
  * Please see the accompanying LICENSE file in root directory for terms.
  * 
  */ 
@@ -36,7 +34,7 @@
 #include "OSMathUtil.h"
 #include "CoinError.hpp"
 #include "CoinHelperFunctions.hpp"
-#include<iostream> 
+#include <iostream> 
 
 
 
