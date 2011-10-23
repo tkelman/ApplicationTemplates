@@ -24445,6 +24445,16 @@ fi
 
 # Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
+  cvl_tmp="data/parincQuadratic.osil"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
   cvl_tmp="data/rosenbrockmod.osil"
   for file in $cvl_tmp ; do
     coin_vpath_link_files="$coin_vpath_link_files $file"
