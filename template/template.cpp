@@ -143,11 +143,15 @@ int main(int argC, char* argV[]){
 
 		const char dirsep =  CoinFindDirSeparator();
 		std::string osil;
-		// Set directory containing mps data files.
+		/** Set directory containing mps data files.
+		 *  Note that the file location is hardwired into the program.
+		 *  If you move the executable or the data, 
+		 *  make sure to update dataDir appropriately
+		 */
 		std::string dataDir;
 		std::string osilFileName;
-		//dataDir = dirsep == '/' ? "../../data/" : "..\\..\\data\\";
 		dataDir = dirsep == '/' ? "../data/" : "..\\data\\";
+
 		// first declare a generic solver
 		DefaultSolver *solver  = NULL;
 		
@@ -166,7 +170,7 @@ int main(int argC, char* argV[]){
 		* Get an instance in mps format, and create an OSInstance object
 		*/
 		std::string qpFileName;
-		qpFileName =  dataDir  +  "parincQuadratic.osil";
+		qpFileName =  dataDir  +  "parincQuadratic2.osil";
 		// convert to the OS native format
 		osil = fileUtil->getFileAsString( qpFileName.c_str() );
 		osilreader = new OSiLReader(); 

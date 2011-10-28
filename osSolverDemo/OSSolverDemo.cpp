@@ -560,12 +560,14 @@ int main( ){
 			
 		delete fileUtil;
 		fileUtil = NULL;	
+		std::cout << "\nSolverDemo COMPLETED WITHOUT ERROR\n";
 		return 0;
 		//
 	}
 	catch(const ErrorClass& eclass){
 		delete fileUtil;
 		std::cout << eclass.errormsg <<  std::endl;
+		std::cout << "\nSolverDemo COMPLETED, BUT THERE WERE ERRORS\n";
 		return 0;
 	} 
 }// end main

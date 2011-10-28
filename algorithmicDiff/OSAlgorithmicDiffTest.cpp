@@ -1,5 +1,5 @@
 /* $Id: OSAlgorithmicDiffTest.cpp 2698 2009-06-09 04:14:07Z kmartin $ */
-/** @file algorithmicDiffTest.cpp
+/** @file OSAlgorithmicDiffTest.cpp
  * 
  * @author  Robert Fourer, Horand Gassmann, Jun Ma, Kipp Martin
  *
@@ -155,11 +155,11 @@ int  main(){
 		 * objective function plus constraint values
 		 * IMPORTANT: the forwardAD and reverseAD calls ONLY apply
 		 * to the nonlinear part of the problem. The 9*x1 term
-		 * in the objective is not part of the AD
-		 * calculation nor are any terms in <linearConstraintCoefficients>
+		 * in the objective is not part of the AD calculation
+		 * nor are any terms in <linearConstraintCoefficients>
 		 * that DO NOT appear in any nl nodes, for example the 7*x2 term
 		 * in constraint with index 1. Note also, that there are only three
-		 * variables that appear in nl nodes, x2 does not
+		 * variables that appear in nl nodes; x2 does not
 		 * 
 		 */
 		//
@@ -746,6 +746,7 @@ int  main(){
 		}
 	}
 	delete fileUtil;
+	std::cout << "\nTEST OF ALGORITHMIC DIFFERENTIATION CONCLUDED SUCCESSFULLY\n";
 	return 0;
 }// end main program
 
