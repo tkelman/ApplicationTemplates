@@ -24683,7 +24683,7 @@ fi
 
 # Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  cvl_tmp="MSVisualStudioOSExamples/algorithmicDiff.vcproj"
+  cvl_tmp="MSVisualStudio-v9/algorithmicDiff/algorithmicDiff.vcproj"
   for file in $cvl_tmp ; do
     coin_vpath_link_files="$coin_vpath_link_files $file"
   done
@@ -24693,7 +24693,7 @@ fi
 
 # Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  cvl_tmp="MSVisualStudioOSExamples/branchCutPrice.vcproj"
+  cvl_tmp="MSVisualStudio-v9/branchCutPrice/branchCutPrice.vcproj"
   for file in $cvl_tmp ; do
     coin_vpath_link_files="$coin_vpath_link_files $file"
   done
@@ -24703,7 +24703,7 @@ fi
 
 # Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  cvl_tmp="MSVisualStudioOSExamples/cglCuts.vcproj"
+  cvl_tmp="MSVisualStudio-v9/cglCuts/cglCuts.vcproj"
   for file in $cvl_tmp ; do
     coin_vpath_link_files="$coin_vpath_link_files $file"
   done
@@ -24713,7 +24713,7 @@ fi
 
 # Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  cvl_tmp="MSVisualStudioOSExamples/instanceGenerator.vcproj"
+  cvl_tmp="MSVisualStudio-v9/instanceGenerator/instanceGenerator.vcproj"
   for file in $cvl_tmp ; do
     coin_vpath_link_files="$coin_vpath_link_files $file"
   done
@@ -24723,7 +24723,7 @@ fi
 
 # Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  cvl_tmp="MSVisualStudioOSExamples/osModificationDemo.vcproj"
+  cvl_tmp="MSVisualStudio-v9/osModificationDemo/osModificationDemo.vcproj"
   for file in $cvl_tmp ; do
     coin_vpath_link_files="$coin_vpath_link_files $file"
   done
@@ -24733,7 +24733,7 @@ fi
 
 # Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  cvl_tmp="MSVisualStudioOSExamples/osRemoteTest.vcproj"
+  cvl_tmp="MSVisualStudio-v9/osRemoteTest/osRemoteTest.vcproj"
   for file in $cvl_tmp ; do
     coin_vpath_link_files="$coin_vpath_link_files $file"
   done
@@ -24743,7 +24743,7 @@ fi
 
 # Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  cvl_tmp="MSVisualStudioOSExamples/osResultDemo.vcproj"
+  cvl_tmp="MSVisualStudio-v9/osResultDemo/osResultDemo.vcproj"
   for file in $cvl_tmp ; do
     coin_vpath_link_files="$coin_vpath_link_files $file"
   done
@@ -24753,7 +24753,7 @@ fi
 
 # Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  cvl_tmp="MSVisualStudioOSExamples/osSolverDemo.vcproj"
+  cvl_tmp="MSVisualStudio-v9/osSolverDemo/osSolverDemo.vcproj"
   for file in $cvl_tmp ; do
     coin_vpath_link_files="$coin_vpath_link_files $file"
   done
@@ -24763,7 +24763,7 @@ fi
 
 # Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  cvl_tmp="MSVisualStudioOSExamples/template.vcproj"
+  cvl_tmp="MSVisualStudio-v9/template/template.vcproj"
   for file in $cvl_tmp ; do
     coin_vpath_link_files="$coin_vpath_link_files $file"
   done
@@ -24773,7 +24773,7 @@ fi
 
 # Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  cvl_tmp="MSVisualStudioOSExamples/VISUALSTUDIOREADME.txt"
+  cvl_tmp="MSVisualStudio-v9/VISUALSTUDIOREADME.txt"
   for file in $cvl_tmp ; do
     coin_vpath_link_files="$coin_vpath_link_files $file"
   done
@@ -24783,7 +24783,7 @@ fi
 
 # Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  cvl_tmp="MSVisualStudioOSExamples/osExamples.sln"
+  cvl_tmp="MSVisualStudio-v9/osExamples.sln"
   for file in $cvl_tmp ; do
     coin_vpath_link_files="$coin_vpath_link_files $file"
   done

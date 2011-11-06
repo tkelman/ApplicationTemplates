@@ -316,17 +316,17 @@ AC_COIN_VPATH_LINK(README)
 #                   VPATH links for example Visual Studio project files      #
 ##############################################################################
 
-AC_COIN_VPATH_LINK(MSVisualStudioOSExamples/algorithmicDiff.vcproj)
-AC_COIN_VPATH_LINK(MSVisualStudioOSExamples/branchCutPrice.vcproj)
-AC_COIN_VPATH_LINK(MSVisualStudioOSExamples/cglCuts.vcproj)
-AC_COIN_VPATH_LINK(MSVisualStudioOSExamples/instanceGenerator.vcproj)
-AC_COIN_VPATH_LINK(MSVisualStudioOSExamples/osModificationDemo.vcproj)
-AC_COIN_VPATH_LINK(MSVisualStudioOSExamples/osRemoteTest.vcproj)
-AC_COIN_VPATH_LINK(MSVisualStudioOSExamples/osResultDemo.vcproj)
-AC_COIN_VPATH_LINK(MSVisualStudioOSExamples/osSolverDemo.vcproj)
-AC_COIN_VPATH_LINK(MSVisualStudioOSExamples/template.vcproj)
-AC_COIN_VPATH_LINK(MSVisualStudioOSExamples/VISUALSTUDIOREADME.txt)
-AC_COIN_VPATH_LINK(MSVisualStudioOSExamples/osExamples.sln)
+AC_COIN_VPATH_LINK(MSVisualStudio-v9/algorithmicDiff/algorithmicDiff.vcproj)
+AC_COIN_VPATH_LINK(MSVisualStudio-v9/branchCutPrice/branchCutPrice.vcproj)
+AC_COIN_VPATH_LINK(MSVisualStudio-v9/cglCuts/cglCuts.vcproj)
+AC_COIN_VPATH_LINK(MSVisualStudio-v9/instanceGenerator/instanceGenerator.vcproj)
+AC_COIN_VPATH_LINK(MSVisualStudio-v9/osModificationDemo/osModificationDemo.vcproj)
+AC_COIN_VPATH_LINK(MSVisualStudio-v9/osRemoteTest/osRemoteTest.vcproj)
+AC_COIN_VPATH_LINK(MSVisualStudio-v9/osResultDemo/osResultDemo.vcproj)
+AC_COIN_VPATH_LINK(MSVisualStudio-v9/osSolverDemo/osSolverDemo.vcproj)
+AC_COIN_VPATH_LINK(MSVisualStudio-v9/template/template.vcproj)
+AC_COIN_VPATH_LINK(MSVisualStudio-v9/VISUALSTUDIOREADME.txt)
+AC_COIN_VPATH_LINK(MSVisualStudio-v9/osExamples.sln)
 
 ##############################################################################
 #                   Finishing up by writing all the output                   #
