@@ -22,7 +22,7 @@
 #include "UtilMacrosDecomp.h"
 
 //===========================================================================//
-void OS_DipInterface::readOSiL(string & fileName) {
+void OS_DipInterface::readOSiL(std::string & fileName) {
 
 	FileUtil *fileUtil = NULL;
 	fileUtil = new FileUtil();
@@ -73,7 +73,7 @@ void OS_DipInterface::readOSiL(string & fileName) {
 
 
 //===========================================================================//
-void OS_DipInterface::readOSoL(string & fileName) {
+void OS_DipInterface::readOSoL(std::string & fileName) {
 
 	FileUtil *fileUtil = NULL;
 	fileUtil = new FileUtil();
@@ -334,7 +334,7 @@ std::vector<std::map<int, int> > OS_DipInterface::getBlockConstraintIndexes() {
 					) {
 						//we have a new constraint index
 
-						conMap.insert(make_pair(indexes[i], kount));
+						conMap.insert(std::make_pair(indexes[i], kount));
 						kount++;
 					}
 				}
@@ -430,7 +430,7 @@ std::vector<OSInstance*> OS_DipInterface::getBlockOSInstances() {
 			//define variable arrays
 			numberVar = varSet.size();
 			varTypes = new char[numberVar];
-			varNames = new string[numberVar];
+			varNames = new std::string[numberVar];
 			varLowerBounds = new double[numberVar];
 			varUpperBounds = new double[numberVar];
 
@@ -786,7 +786,7 @@ std::map<int, std::vector< int> > OS_DipInterface::generateInitialMaster(){
 		kount = 0;
 		for(k = 0; k < numHubs; k++){
 			
-			routeDemand[k ] = primalValPair[ kount]->value;
+			routeDemand[k ] = (int)primalValPair[ kount]->value;
 			
 			std::cout << "Route Demand = " << routeDemand[k] << std::endl;
 			kount++;
@@ -856,7 +856,7 @@ std::map<int, std::vector< int> > OS_DipInterface::generateInitialMaster(){
 		
 
 	} catch (const ErrorClass& eclass) {
-		cout << endl << endl << endl;
+		std::cout << std::endl << std::endl << std::endl;
 		if (osilreader != NULL)
 			delete osilreader;
 		if (solver != NULL)

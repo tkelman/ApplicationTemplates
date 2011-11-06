@@ -375,7 +375,7 @@ void OSDipApp::createModels() {
 				static_cast<int> (modelCore->masterOnlyCols.size());
 		if (nMasterOnlyCols) {
 			if (m_appParam.LogLevel >= 1)
-				(*m_osLog) << "Create model part Master-Only." << endl;
+				(*m_osLog) << "Create model part Master-Only." << std::endl;
 
 			createModelMasterOnlys2(modelCore->masterOnlyCols);
 
@@ -401,7 +401,7 @@ void OSDipApp::createModels() {
 
 //===========================================================================//
 
-void OSDipApp::createModelMasterOnlys2(vector<int> & masterOnlyCols) {
+void OSDipApp::createModelMasterOnlys2(std::vector<int> & masterOnlyCols) {
 
 	int nBlocks = static_cast<int> (m_blockVars.size());
 	const int nCols = m_osInterface.getVariableNumber();
@@ -411,15 +411,15 @@ void OSDipApp::createModelMasterOnlys2(vector<int> & masterOnlyCols) {
 	int nMasterOnlyCols = static_cast<int> (masterOnlyCols.size());
 
 	if (m_appParam.LogLevel >= 1) {
-		(*m_osLog) << "nCols = " << nCols << endl;
-		(*m_osLog) << "nMasterOnlyCols = " << nMasterOnlyCols << endl;
+		(*m_osLog) << "nCols = " << nCols << std::endl;
+		(*m_osLog) << "nMasterOnlyCols = " << nMasterOnlyCols << std::endl;
 	}
 
 	if (nMasterOnlyCols == 0)
 		return;
 
 	int i;
-	vector<int>::iterator vit;
+	std::vector<int>::iterator vit;
 	for (vit = masterOnlyCols.begin(); vit != masterOnlyCols.end(); vit++) {
 		i = *vit;
 
@@ -444,7 +444,7 @@ void OSDipApp::createModelMasterOnlys2(vector<int> & masterOnlyCols) {
 			if (colLB[i] < -1.0e15)
 				model->m_masterOnlyLB = m_appParam.ColumnLB;
 
-		m_modelMasterOnly.insert(make_pair(i, model)); //keep track for garbage collection
+		m_modelMasterOnly.insert(std::make_pair(i, model)); //keep track for garbage collection
 		setModelRelax(model, "master_only" + UtilIntToStr(i), nBlocks);
 		nBlocks++;
 	}
@@ -589,13 +589,13 @@ int OSDipApp::generateInitVars(DecompVarList & initVars) {
 
 DecompSolverStatus OSDipApp::solveRelaxed(const int whichBlock,
 		const double * redCostX, const double convexDual,
-		list<DecompVar*> & vars) {
+		std::list<DecompVar*> & vars) {
 	
 	UtilPrintFuncBegin(m_osLog, m_classTag, "solveRelaxed()",
 			m_appParam.LogLevel, 2);
 
-	vector<int> solInd;
-	vector<double> solEls;
+	std::vector<int> solInd;
+	std::vector<double> solEls;
 	double varRedCost = 0.0;
 	double varOrigCost = 0.0;
 	int kount;

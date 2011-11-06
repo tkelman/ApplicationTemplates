@@ -31,7 +31,7 @@
 
 std::map<std::string, OSDipBlockSolverFactory*> OSDipBlockSolverFactory::factories;
 
-OSDipBlockSolver* OSDipBlockSolverFactory::createOSDipBlockSolver(const string &solverName) throw(ErrorClass){
+OSDipBlockSolver* OSDipBlockSolverFactory::createOSDipBlockSolver(const std::string &solverName) throw(ErrorClass){
 	
 	
 	if( factories.find(solverName) != factories.end() ){
