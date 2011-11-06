@@ -122,7 +122,7 @@ OSDipBlockBearcatSolver::OSDipBlockBearcatSolver( OSInstance *osinstance,  OSOpt
 		m_px = new int*[ m_numNodes];
 		m_tx = new int*[ m_numNodes];
 		
-		if(m_numNodes != demand.size( ) ) throw ErrorClass("inconsistent number of demand nodes");
+		if(m_numNodes != (int)demand.size( ) ) throw ErrorClass("inconsistent number of demand nodes");
 		int i;
 		for (i = 0; i < m_numNodes; i++) {
 			
@@ -347,7 +347,7 @@ double OSDipBlockBearcatSolver::qrouteCost(const int& k, const int& l, double* c
 	c+=  startPnt ;
 
 	*kountVar = 0;
-	int bestLastNode;
+	int bestLastNode = 0;
 	int i;
 	int j;
 	int l1;
