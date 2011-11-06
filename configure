@@ -24796,7 +24796,7 @@ fi
 
 # Here list all the files that configure should create (except for the
 # configuration header file)
-                                                                                                                        ac_config_files="$ac_config_files Makefile osDip/Makefile osDip/osdip.parm algorithmicDiff/Makefile instanceGenerator/Makefile cglCuts/Makefile osModificationDemo/Makefile osRemoteTest/Makefile osSolverDemo/Makefile osResultDemo/Makefile template/Makefile branchCutPrice/Makefile"
+                                                                                                                                  ac_config_files="$ac_config_files Makefile Makefile.Examples osDip/Makefile osDip/osdip.parm algorithmicDiff/Makefile instanceGenerator/Makefile cglCuts/Makefile osModificationDemo/Makefile osRemoteTest/Makefile osSolverDemo/Makefile osResultDemo/Makefile template/Makefile branchCutPrice/Makefile"
 
 
 
@@ -25490,6 +25490,7 @@ do
   case "$ac_config_target" in
   # Handling of arguments.
   "Makefile" ) CONFIG_FILES="$CONFIG_FILES Makefile" ;;
+  "Makefile.Examples" ) CONFIG_FILES="$CONFIG_FILES Makefile.Examples" ;;
   "osDip/Makefile" ) CONFIG_FILES="$CONFIG_FILES osDip/Makefile" ;;
   "osDip/osdip.parm" ) CONFIG_FILES="$CONFIG_FILES osDip/osdip.parm" ;;
   "algorithmicDiff/Makefile" ) CONFIG_FILES="$CONFIG_FILES algorithmicDiff/Makefile" ;;

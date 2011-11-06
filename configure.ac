@@ -335,6 +335,7 @@ AC_COIN_VPATH_LINK(MSVisualStudio-v9/osExamples.sln)
 # Here list all the files that configure should create (except for the
 # configuration header file)
 AC_CONFIG_FILES([Makefile
+  Makefile.Examples
   osDip/Makefile
   osDip/osdip.parm
   algorithmicDiff/Makefile

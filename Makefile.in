@@ -38,7 +38,8 @@ host_triplet = @host@
 DIST_COMMON = README $(am__configure_deps) $(srcdir)/../config.guess \
 	$(srcdir)/../config.sub $(srcdir)/../install-sh \
 	$(srcdir)/../ltmain.sh $(srcdir)/../missing \
-	$(srcdir)/Makefile.am $(srcdir)/Makefile.in \
+	$(srcdir)/Makefile.Examples.in $(srcdir)/Makefile.am \
+	$(srcdir)/Makefile.in \
 	$(top_srcdir)/algorithmicDiff/Makefile.in \
 	$(top_srcdir)/branchCutPrice/Makefile.in \
 	$(top_srcdir)/cglCuts/Makefile.in $(top_srcdir)/configure \
@@ -60,7 +61,7 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
  configure.lineno configure.status.lineno
 mkinstalldirs = $(install_sh) -d
-CONFIG_CLEAN_FILES = osDip/Makefile osDip/osdip.parm \
+CONFIG_CLEAN_FILES = Makefile.Examples osDip/Makefile osDip/osdip.parm \
 	algorithmicDiff/Makefile instanceGenerator/Makefile \
 	cglCuts/Makefile osModificationDemo/Makefile \
 	osRemoteTest/Makefile osSolverDemo/Makefile \
@@ -258,6 +259,8 @@ $(top_srcdir)/configure: @MAINTAINER_MODE_TRUE@ $(am__configure_deps)
 	cd $(srcdir) && $(AUTOCONF)
 $(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(am__aclocal_m4_deps)
 	cd $(srcdir) && $(ACLOCAL) $(ACLOCAL_AMFLAGS)
+Makefile.Examples: $(top_builddir)/config.status $(srcdir)/Makefile.Examples.in
+	cd $(top_builddir) && $(SHELL) ./config.status $@
 osDip/Makefile: $(top_builddir)/config.status $(top_srcdir)/osDip/Makefile.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
 osDip/osdip.parm: $(top_builddir)/config.status $(top_srcdir)/osDip/osdip.parm.in
@@ -300,7 +303,7 @@ CTAGS:
 distdir: $(DISTFILES)
 	$(am__remove_distdir)
 	mkdir $(distdir)
-	$(mkdir_p) $(distdir)/.. $(distdir)/algorithmicDiff $(distdir)/branchCutPrice $(distdir)/cglCuts $(distdir)/instanceGenerator $(distdir)/osDip $(distdir)/osModificationDemo $(distdir)/osRemoteTest $(distdir)/osResultDemo $(distdir)/osSolverDemo $(distdir)/template
+	$(mkdir_p) $(distdir)/. $(distdir)/.. $(distdir)/algorithmicDiff $(distdir)/branchCutPrice $(distdir)/cglCuts $(distdir)/instanceGenerator $(distdir)/osDip $(distdir)/osModificationDemo $(distdir)/osRemoteTest $(distdir)/osResultDemo $(distdir)/osSolverDemo $(distdir)/template
 	@srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`; \
 	topsrcdirstrip=`echo "$(top_srcdir)" | sed 's|.|.|g'`; \
 	list='$(DISTFILES)'; for file in $$list; do \
