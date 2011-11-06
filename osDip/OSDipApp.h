@@ -59,7 +59,7 @@ public:
 	std::vector<std::string >  m_blockFactories;
 	
 	/** Class id tag (for log / debugging). */
-	const string m_classTag;
+	const std::string m_classTag;
 
 	/** the OS interface */
 	OS_DipInterface m_osInterface;
@@ -72,10 +72,10 @@ public:
 
 	/** The model constraint systems used for different algos. */
 	DecompConstraintSet *m_modelC;
-	map<int, DecompConstraintSet*> m_modelR;
+	std::map<int, DecompConstraintSet*> m_modelR;
 	
 	/** The model constraint system used master only vars */
-	map<int, DecompConstraintSet*> m_modelMasterOnly;
+	std::map<int, DecompConstraintSet*> m_modelMasterOnly;
 
 	/** Initialize application. */
 	void initializeApp(UtilParameters & utilParam);
@@ -90,14 +90,14 @@ public:
 	/* @name Inherited (from virtual) methods. */
 	int generateInitVars(DecompVarList & initVars);
 
-	void createModelMasterOnlys2(vector<int> & masterOnlyCols);
+	void createModelMasterOnlys2(std::vector<int> & masterOnlyCols);
 
 	   /* @name Inherited (from virtual) methods. */
 	   /** Solve the relaxed problem. */
-	   DecompSolverStatus solveRelaxed(const int             whichBlock,
+	   DecompSolverStatus solveRelaxed(const int whichBlock,
 					   const double        * redCostX,
 					   const double          convexDual,
-					   list<DecompVar*>    & vars);  
+					   std::list<DecompVar*>    & vars);  
 	   
 	   
 	   int generateCuts(const double* x, DecompCutList & newCuts);

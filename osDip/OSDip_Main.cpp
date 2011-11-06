@@ -128,13 +128,13 @@ int main(int argc, char ** argv){
          //---
          //--- sanity check
          //---
-         cout << setiosflags(ios::fixed|ios::showpoint);
-         cout << "Status= " << status 
-              << " BestLB= " << setw(10) 
+         //cout << setiosflags(std::ios::fixedl std::ios::showpoint);
+         std::cout << "Status= " << status 
+              << " BestLB= " << std::setw(10) 
               << UtilDblToStr(alpsModel.getGlobalLB(),5)
-              << " BestUB= " << setw(10)
+              << " BestUB= " << std::setw(10)
               << UtilDblToStr(alpsModel.getGlobalUB(),5)        
-              << " Nodes= " << setw(6) 
+              << " Nodes= " << std::setw(6) 
               << alpsModel.getNumNodesProcessed()
               << " SetupCPU= "  << timeSetupCpu
               << " SolveCPU= "  << timeSolveCpu 
@@ -142,11 +142,11 @@ int main(int argc, char ** argv){
               << " SetupReal= " << timeSetupReal
               << " SetupReal= " << timeSolveReal
               << " TotalReal= " << timeSetupReal + timeSetupReal
-              << endl;  
+              << std::endl;  
          
          
          const DecompSolution * solution = alpsModel.getBestSolution();
-         cout << "Optimal Solution" << endl;
+         std::cout << "Optimal Solution" << std::endl;
          solution->print();
          //print final solution
          algo->getMasterOSI()->writeLp("finalRestrictedMaster", "lp", 1e-30, 5, 10);

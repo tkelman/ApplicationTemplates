@@ -34,10 +34,10 @@ class OSDipParam {
 	
 public:
    int    LogLevel;   
-   string DataDir;
-   string OSiLFile;
-   string OSoLFile;
-   string solverFactory;
+   std::string DataDir;
+   std::string OSiLFile;
+   std::string OSoLFile;
+   std::string solverFactory;
    int    UseNames;  //col/row names for debugging
    int    UseSparse; //create all blocks sparsely
    int    FullModel; //create full model for CPM or direct
@@ -67,22 +67,22 @@ public:
 
    }
 
-   void dumpSettings(ostream * os = &cout){
+   void dumpSettings(std::ostream * os = &std::cout){
       static const char * common = "OSDip";
       (*os) << "\n=====================================================\n"
             << "OSDipParam PARAMETER SETTINGS \n";
-      (*os) << common << ": LogLevel          : " << LogLevel         << endl;
-      (*os) << common << ": DataDir           : " << DataDir          << endl;
-      (*os) << common << ": OSiLFile          : " << OSiLFile         << endl;
-      (*os) << common << ": OSoLFile          : " << OSoLFile         << endl;
-      (*os) << common << ": solverFactory     : " << solverFactory         << endl;
-      (*os) << common << ": UseNames          : " << UseNames         << endl;
-      (*os) << common << ": UseSparse         : " << UseSparse        << endl;
-      (*os) << common << ": FullModel         : " << FullModel        << endl;
-      (*os) << common << ": BestKnownLB       : " << BestKnownLB      << endl;
-      (*os) << common << ": BestKnownUB       : " << BestKnownUB      << endl;
-      (*os) << common << ": ColumnUB          : " << ColumnUB         << endl;
-      (*os) << common << ": ColumnLB          : " << ColumnLB         << endl;
+      (*os) << common << ": LogLevel          : " << LogLevel         << std::endl;
+      (*os) << common << ": DataDir           : " << DataDir          << std::endl;
+      (*os) << common << ": OSiLFile          : " << OSiLFile         << std::endl;
+      (*os) << common << ": OSoLFile          : " << OSoLFile         << std::endl;
+      (*os) << common << ": solverFactory     : " << solverFactory         << std::endl;
+      (*os) << common << ": UseNames          : " << UseNames         << std::endl;
+      (*os) << common << ": UseSparse         : " << UseSparse        << std::endl;
+      (*os) << common << ": FullModel         : " << FullModel        << std::endl;
+      (*os) << common << ": BestKnownLB       : " << BestKnownLB      << std::endl;
+      (*os) << common << ": BestKnownUB       : " << BestKnownUB      << std::endl;
+      (*os) << common << ": ColumnUB          : " << ColumnUB         << std::endl;
+      (*os) << common << ": ColumnLB          : " << ColumnLB         << std::endl;
 
       (*os) << "\n=====================================================\n";
    }

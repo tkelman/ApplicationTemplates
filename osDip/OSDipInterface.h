@@ -78,9 +78,9 @@ public:
 
 
 	/** @name Helper Methods. */
-	void readOSiL(string & filename);
+	void readOSiL(std::string & filename);
 	
-	void readOSoL(string & filename);
+	void readOSoL(std::string & filename);
 
 	CoinPackedVector *getRow( int i);
 	
