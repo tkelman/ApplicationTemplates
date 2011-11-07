@@ -682,11 +682,19 @@ double* OS_DipInterface::getObjectiveFunctionCoeff() {
 OS_DipInterface::OS_DipInterface() :
 
 	m_isProvenOptimal(false), m_bestKnownLB(-1.e20), m_bestKnownUB(1.e20),
-			m_coinpm(NULL), m_blockVariableIndexesProcessed(false),
+			m_osinstance(NULL),
+			m_osoption(NULL),	
+			m_osilreader(NULL),
+			m_osolreader(NULL),
+			m_integerVars(NULL),
+			m_coinpm(NULL),
+			m_row(NULL),
+			m_blockVariableIndexesProcessed(false),
 			m_coreConstraintIndexesProcessed(false),
 			m_blockConstraintIndexesProcessed(false),
 			m_blockOSInstancesProcessed(false),
-			m_blockFactoriesProcessed(false) {
+			m_blockFactoriesProcessed(false) 
+{
 
 }
 
