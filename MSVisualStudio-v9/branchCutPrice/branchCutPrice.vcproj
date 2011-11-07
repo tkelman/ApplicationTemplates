@@ -139,7 +139,7 @@
 				Name="VCLinkerTool"
 				LinkLibraryDependencies="false"
 				AdditionalOptions="&#x0D;&#x0A;&#x0D;&#x0A;&#x0D;&#x0A;"
-				AdditionalDependencies="libipopt.lib libOS.lib libOsiCbc.lib libOsiClp.lib libCgl.lib libSym.lib libVol.lib libDylp.lib libCoinUtils.lib libClp.lib libCbc.lib libCbcSolver.lib libOsi.lib libOsiSym.lib libOsiVol.lib libOsiDylp.lib libBonCouenne.lib libbonmin.lib libbonminampl.lib libCouenne.lib libCouenneReadnl.lib libBcp.lib libcoinasl.lib libcoinblas.lib libcoinlapack.lib libcoinmumps.lib libcoinmetis.lib"
+				AdditionalDependencies="libipopt.lib libOS.lib libOsiCbc.lib libOsiClp.lib libCgl.lib libSym.lib libVol.lib libDylp.lib libCoinUtils.lib libClp.lib libCbc.lib libCbcSolver.lib libOsi.lib libOsiSym.lib libOsiVol.lib libOsiDylp.lib libBonCouenne.lib libbonmin.lib libbonminampl.lib libCouenne.lib libCouenneReadnl.lib libBcp.lib libcoinasl.lib libcoinblas.lib libcoinlapack.lib libcoinmumps.lib"
 				ShowProgress="0"
 				OutputFile="..\..\$(ProjectName)\$(ProjectName).exe"
 				LinkIncremental="1"

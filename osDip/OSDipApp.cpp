@@ -221,7 +221,7 @@ void OSDipApp::createModelPart(DecompConstraintSet * model,
 	int i, r;
 	for (i = 0; i < nRowsPart; i++) {
 		r = rowsPart[i];
-		if (m_appParam.UseNames == true) {
+		if (m_appParam.UseNames) {
 			const char * rowName =
 					m_osInterface.getConstraintNames()[r].c_str();
 			//		std::cout << "Row Name = " << m_osInterface.getConstraintNames()[r] << std::endl;
@@ -270,7 +270,7 @@ void OSDipApp::createModelPart(DecompConstraintSet * model,
 	//---  also set the column names, if they exist
 	//---
 	for (i = 0; i < nCols; i++) {
-		if (m_appParam.UseNames == true) {
+		if (m_appParam.UseNames) {
 			//const char * colName =  m_osInterface.columnName(i);
 			const char * colName = m_osInterface.getVariableNames()[i].c_str();
 
