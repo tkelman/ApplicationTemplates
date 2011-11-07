@@ -52,18 +52,18 @@ public:
 public:
    void getSettings(UtilParameters & utilParam){
       static const char * common ="OSDip";
-      LogLevel     = utilParam.GetSetting("LogLevel",     3,     common);
-      DataDir      = utilParam.GetSetting("DataDir",      "",    common);
-      OSiLFile     = utilParam.GetSetting("OSiLFile",     "",    common);   
-      OSoLFile     = utilParam.GetSetting("OSoLFile",     "",    common); 
-      solverFactory     = utilParam.GetSetting("solverFactory",     "",    common); 
-      UseNames     = utilParam.GetSetting("UseNames",       0, common);
-      UseSparse    = utilParam.GetSetting("UseSparse",      0, common);
-      FullModel    = utilParam.GetSetting("FullModel",      0, common);
-      BestKnownLB  = utilParam.GetSetting("BestKnownLB",  -1.e100, common);
-      BestKnownUB  = utilParam.GetSetting("BestKnownUB",   1.e100, common);
-      ColumnUB     = utilParam.GetSetting("ColumnUB",      1.0,  common);
-      ColumnLB     = utilParam.GetSetting("ColumnLB",     0.0,  common);
+      LogLevel      = utilParam.GetSetting("LogLevel",     3,     common);
+      DataDir       = utilParam.GetSetting("DataDir",      "",    common);
+      OSiLFile      = utilParam.GetSetting("OSiLFile",     "",    common);   
+      OSoLFile      = utilParam.GetSetting("OSoLFile",     "",    common); 
+      solverFactory = utilParam.GetSetting("solverFactory",     "",    common); 
+      UseNames      = utilParam.GetSetting("UseNames",       0, common);
+      UseSparse     = utilParam.GetSetting("UseSparse",      0, common);
+      FullModel     = utilParam.GetSetting("FullModel",      0, common);
+      BestKnownLB   = utilParam.GetSetting("BestKnownLB",  -1.e100, common);
+      BestKnownUB   = utilParam.GetSetting("BestKnownUB",   1.e100, common);
+      ColumnUB      = utilParam.GetSetting("ColumnUB",      1.0,  common);
+      ColumnLB      = utilParam.GetSetting("ColumnLB",     0.0,  common);
 
    }
 
@@ -75,7 +75,7 @@ public:
       (*os) << common << ": DataDir           : " << DataDir          << std::endl;
       (*os) << common << ": OSiLFile          : " << OSiLFile         << std::endl;
       (*os) << common << ": OSoLFile          : " << OSoLFile         << std::endl;
-      (*os) << common << ": solverFactory     : " << solverFactory         << std::endl;
+      (*os) << common << ": solverFactory     : " << solverFactory    << std::endl;
       (*os) << common << ": UseNames          : " << UseNames         << std::endl;
       (*os) << common << ": UseSparse         : " << UseSparse        << std::endl;
       (*os) << common << ": FullModel         : " << FullModel        << std::endl;

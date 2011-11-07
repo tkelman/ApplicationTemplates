@@ -94,10 +94,10 @@ public:
 
 	   /* @name Inherited (from virtual) methods. */
 	   /** Solve the relaxed problem. */
-	   DecompSolverStatus solveRelaxed(const int whichBlock,
-					   const double        * redCostX,
-					   const double          convexDual,
-					   std::list<DecompVar*>    & vars);  
+       DecompSolverStatus solveRelaxed(const int          whichBlock,
+                                       const double     * redCostX,
+                                       const double       convexDual,
+                                       std::list<DecompVar*> & vars);  
 	   
 	   
 	   int generateCuts(const double* x, DecompCutList & newCuts);
