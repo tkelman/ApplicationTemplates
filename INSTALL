@@ -1,0 +1,17 @@
+There is nothing to install!
+
+WINDOWS: we assume you have Visual Studio.
+Connect to the MSVisualStudio directory and 
+open the file osExamples.sln
+
+LINUX and Mac OS X. You need to have pkgconfig on
+your machine. Connect to an example
+directory. Set 
+
+export PKG_CONFIG_PATH=path_to_/lib/pkgconfig
+
+type make.
+
+Also see documentation at
+
+https://projects.coin-or.org/CoinEasy
