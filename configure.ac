@@ -216,9 +216,8 @@ AC_COIN_VPATH_LINK(osDip/OSDipBlockSolverFactory.cpp)
 AC_COIN_VPATH_LINK(osDip/OSDipInterface.cpp)
 AC_COIN_VPATH_LINK(osDip/OSDipInterface.h)
 AC_COIN_VPATH_LINK(osDip/OSDipParam.h)
-AC_COIN_VPATH_LINK(osDip/own.sty)
-AC_COIN_VPATH_LINK(osDip/osDip.tex)
-AC_COIN_VPATH_LINK(osDip/osDip.pdf)
+
+
 
 AC_COIN_VPATH_LINK(osDip/solvers/OSDipBlockCoinSolver.cpp)
 AC_COIN_VPATH_LINK(osDip/solvers/OSDipBlockCoinSolver.h)
