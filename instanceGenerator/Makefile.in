@@ -17,7 +17,6 @@ EXE = OSInstanceGenerator@EXEEXT@
 OBJS = OSInstanceGenerator.@OBJEXT@ 
 
 # CHANGEME: Additional libraries
-# CHANGEME: Additional libraries
 ADDLIBS = 
 
 

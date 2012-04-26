@@ -102,7 +102,7 @@ int main( ){
 		* Get an instance in mps format, and create an OSInstance object
 		*/
 		std::string mpsFileName;
-		mpsFileName =  dataDir  +  "parinc.mps";
+		mpsFileName =  dataDir  + "mpsFiles" + dirsep +  "parinc.mps";
 		// convert to the OS native format
 		OSmps2osil *mps2osil = NULL;
 		mps2osil = new OSmps2osil( mpsFileName);
@@ -178,7 +178,7 @@ int main( ){
 		/******************** STEP 1 ************************
 		* Get an instance in native OSiL format and create an OSInstance object
 		*/
-		osilFileName =   dataDir +  "p0033.osil";
+		osilFileName =   dataDir + "osilFiles" + dirsep +  "p0033.osil";
 		osil = fileUtil->getFileAsString( osilFileName.c_str() );
 		osilreader = new OSiLReader(); 
 		osinstance = osilreader->readOSiL( osil);
@@ -251,7 +251,7 @@ int main( ){
 		 * Get an instance in AMPL nl  format, and create an OSInstance object
 		 */
 		std::string nlFileName;
-		nlFileName =  dataDir  +   "bonminEx1.nl";
+		nlFileName =  dataDir  +  "amplFiles" + dirsep +  "bonminEx1.nl";
 		// convert to the OS native format
 		OSnl2osil *nl2osil = NULL;
 		nl2osil = new OSnl2osil( nlFileName);
@@ -353,7 +353,7 @@ int main( ){
 		/******************** STEP 1 ************************
 		* Get an instance in native OSiL format and create an OSInstance object
 		*/
-		osilFileName =  dataDir +  "p0033.osil";
+		osilFileName =  dataDir + "osilFiles" + dirsep +  "p0033.osil";
 		osil = fileUtil->getFileAsString( osilFileName.c_str() );
 		osilreader = new OSiLReader(); 
 		osinstance = osilreader->readOSiL( osil);
@@ -418,7 +418,7 @@ int main( ){
 		/******************** STEP 1 ************************
 		* Get an instance in OSiL  format, and create an OSiL string
 		*/
-		osilFileName =  dataDir  +   "rosenbrockmod.osil";
+		osilFileName =  dataDir  +  "osilFiles" + dirsep +  "rosenbrockmod.osil";
 		//get an osil string
 		osil = fileUtil->getFileAsString( osilFileName.c_str() );
 
@@ -497,7 +497,7 @@ int main( ){
 		/******************** STEP 1 ************************
 		* Get an instance in OSiL  format, and create an OSInstance object
 		*/
-		osilFileName =  dataDir  +   "wayneQuadratic.osil";
+		osilFileName =  dataDir  + "osilFiles" + dirsep +   "wayneQuadratic.osil";
 		osil = fileUtil->getFileAsString( osilFileName.c_str() );
 		osilreader = new OSiLReader(); 
 		osinstance = osilreader->readOSiL( osil);

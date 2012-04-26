@@ -54,7 +54,7 @@ int main( ){
 	try{
 		// get the p0033 problem
 		std::string osilFileName;
-		osilFileName =  dataDir  +   "p0033.osil";
+		osilFileName =  dataDir  +  "osilFiles" + dirsep +  "p0033.osil";
 		std::cout << "Try to read a sample file" << std::endl;
 		std::cout << "The file is: " ;
 		std::cout <<  osilFileName << std::endl;
@@ -187,6 +187,7 @@ int main( ){
 		delete model;
 		model = NULL;
 		cout << "Done with garbage collection" << endl;
+		cout << "Program terminates normally" << endl;
 		return 0;
 	}
 	catch(const ErrorClass& eclass){

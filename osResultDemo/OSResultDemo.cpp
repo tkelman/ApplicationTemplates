@@ -57,7 +57,7 @@ int main( ){
 		std::string osilFileName;
 		dataDir = dirsep == '/' ? "../data/" : "..\\data\\";
 		
-		osilFileName =  dataDir  +  "parincLinear.osil";
+		osilFileName =  dataDir + "osilFiles" + dirsep +  "parincLinear.osil";
 		std::cout << "Try to read a sample file" << std::endl;
 		std::cout << "The file is: " ;
 		std::cout <<  osilFileName << std::endl;
@@ -146,6 +146,7 @@ int main( ){
 		delete osilreader;
 		osilreader = NULL;
 		cout << "Done with garbage collection" << endl;
+		cout << "Program terminates normally" << endl;
 		return 0;
 		//
 	}

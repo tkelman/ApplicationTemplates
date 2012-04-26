@@ -127,8 +127,8 @@ int  main(){
   	// Set directory containing mps data files.
   	std::string dataDir;
     dataDir = dirsep == '/' ? "../data/" : "..\\data\\";
-	//osilFileName =  dataDir + "HS071_NLP.osil";
-	osilFileName =  dataDir   + "CppADTestLag.osil";
+	//osilFileName =  dataDir + "osilFiles" + dirsep + "HS071_NLP.osil";
+	osilFileName =  dataDir   + "osilFiles" + dirsep + "CppADTestLag.osil";
 	std::cout  << "osilFileName  =  " << osilFileName << std::endl;
 	fileUtil = new FileUtil();
 	osil = fileUtil->getFileAsString( &osilFileName[0]);	

@@ -48,8 +48,9 @@ int main(int argc, char* argv[]) {
 	int retCode = -1;
 	std::cout << "Call bcp_main  "  << std::endl;
 	retCode =  bcp_main(argc, argv, &os_init);
-	std::cout << "Return from call to bcp_main  "<< retCode << std::endl;
+	std::cout << "Return from call to bcp_main " << retCode << std::endl;
 	//delete os_init.tm;
+	std::cout << "OSBranchCutPrice terminates normally" << std::endl;
 	return retCode;
 }
 

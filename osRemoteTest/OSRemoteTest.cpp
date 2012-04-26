@@ -217,6 +217,7 @@ int main( ){
 		osagent = NULL;
 
 		cout << "Done with garbage collection" << endl;
+		cout << "Program terminates normally" << endl;
 		return 0;
 		//
 	}

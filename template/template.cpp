@@ -417,6 +417,7 @@ int main(int argC, char* argV[]){
 	
 	delete fileUtil;
 	fileUtil = NULL;	
+	std::cout << "Program terminates normally" << std::endl;
 	return 0;
 	
 	}

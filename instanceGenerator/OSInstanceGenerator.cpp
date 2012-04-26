@@ -14,7 +14,7 @@
  * to generate an OSiL problem instance.
  * 
  * The objective of this example is to illustrate how to build a problem instance
- * using the OSIntance class API. In particular we illutrate a number of the set()
+ * using the OSInstance class API. In particular we illustrate a number of the set()
  * methods in the OSInstance class. As written, we need the LINDO nonlinear solver.
  *
  * <b>Model:</b> A nonlinear model with multiple local minimizers.
@@ -31,7 +31,7 @@
  *                    x1 is binary <br />
  */
 
-#include<iostream>
+#include <iostream>
 #include <vector>  
 
 #include "CoinHelperFunctions.hpp"
@@ -73,7 +73,7 @@ int  main(){
 		//
 		// now add the objective function
 		osinstance->setObjectiveNumber( 1);
-		// now the coefficient
+		// now the single coefficient in the linear part
 		SparseVector *objcoeff;
 		objcoeff = new SparseVector(1);   
 		objcoeff->indexes[ 0] = 1;
@@ -318,6 +318,7 @@ int  main(){
 		delete osilwriter;
 		osilwriter = NULL;
 		cout << "Done with garbage collection" << endl;
+		cout << "Program terminates normally" << endl;
 		return 0;
 	}
 	catch(const ErrorClass& eclass){

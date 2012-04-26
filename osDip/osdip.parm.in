@@ -76,7 +76,7 @@ OSoLFile = spl1.osol
 #OSoLFile = smallIPBook.osol
 
 
-DataDir = ../data
+DataDir = ../data/dipFiles
 solverFactory  = OSDipBlockCoinSolver
 #solverFactory = MyOwnSolver
 
