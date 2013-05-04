@@ -315,13 +315,13 @@ AC_COIN_VPATH_LINK(data/osilFiles/rosenbrockmod.osil)
 AC_COIN_VPATH_LINK(data/osilFiles/wayneQuadratic.osil)
 
 ##### OSOL FILES
-AC_COIN_VPATH_LINK(data/kill.osol)
-AC_COIN_VPATH_LINK(data/parsertest.osol)
-AC_COIN_VPATH_LINK(data/remoteSolve1.osol)
-AC_COIN_VPATH_LINK(data/remoteSolve2.osol)
-AC_COIN_VPATH_LINK(data/retrieve.osol)
-AC_COIN_VPATH_LINK(data/sendWithJobID.osol)
-AC_COIN_VPATH_LINK(data/solveroptions.osol)
+AC_COIN_VPATH_LINK(data/osolFiles/kill.osol)
+AC_COIN_VPATH_LINK(data/osolFiles/parsertest.osol)
+AC_COIN_VPATH_LINK(data/osolFiles/remoteSolve1.osol)
+AC_COIN_VPATH_LINK(data/osolFiles/remoteSolve2.osol)
+AC_COIN_VPATH_LINK(data/osolFiles/retrieve.osol)
+AC_COIN_VPATH_LINK(data/osolFiles/sendWithJobID.osol)
+AC_COIN_VPATH_LINK(data/osolFiles/solveroptions.osol)
 
 
 ##### OSPL FILES
