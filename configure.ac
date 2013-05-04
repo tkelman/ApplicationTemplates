@@ -263,36 +263,81 @@ AC_DEFUN([AC_COPY_FROM_FILE],
 #                   VPATH links for example data files                      #
 ##############################################################################
 #### EXAMPLE DATA FILES
-AC_COIN_VPATH_LINK(data/CoinOS.opt)
-AC_COIN_VPATH_LINK(data/CppADTestLag.osil)
-AC_COIN_VPATH_LINK(data/bonminEx1.nl)
-AC_COIN_VPATH_LINK(data/eastborne.gms)
-AC_COIN_VPATH_LINK(data/eastborne.mod)
-AC_COIN_VPATH_LINK(data/eastborne.nl)
-AC_COIN_VPATH_LINK(data/eastborne.osil)
-AC_COIN_VPATH_LINK(data/knock.ospl)
-AC_COIN_VPATH_LINK(data/nonconvex.osil)
-AC_COIN_VPATH_LINK(data/p0033.osil)
-AC_COIN_VPATH_LINK(data/parinc.mps)
-AC_COIN_VPATH_LINK(data/parincLinear.osil)
-AC_COIN_VPATH_LINK(data/parincQuadratic.osil)
-AC_COIN_VPATH_LINK(data/rosenbrockmod.osil)
+
+#### AMPL FILES
+AC_COIN_VPATH_LINK(data/amplFiles/bonminEx1.nl)
+AC_COIN_VPATH_LINK(data/amplFiles/eastborne.mod)
+AC_COIN_VPATH_LINK(data/amplFiles/eastborne.nl)
+
+
+##### CONFIG FILES
+
+AC_COIN_VPATH_LINK(data/configFiles/kill.config)
+AC_COIN_VPATH_LINK(data/configFiles/testLocal.config)
+AC_COIN_VPATH_LINK(data/configFiles/testcalclp.config)
+AC_COIN_VPATH_LINK(data/configFiles/testRemote.config)
+AC_COIN_VPATH_LINK(data/configFiles/testRemoteKnock.config)
+AC_COIN_VPATH_LINK(data/configFiles/testRemoteRetrieve.config)
+AC_COIN_VPATH_LINK(data/configFiles/testRemoteSend.config)
+
+##### DIP FILES
+AC_COIN_VPATH_LINK(data/dipFiles/spl1.osil)
+AC_COIN_VPATH_LINK(data/dipFiles/spl2.osil)
+AC_COIN_VPATH_LINK(data/dipFiles/spl3.osil)
+AC_COIN_VPATH_LINK(data/dipFiles/genAssign.osil)
+AC_COIN_VPATH_LINK(data/dipFiles/smallIPBook.osil)
+AC_COIN_VPATH_LINK(data/dipFiles/spl1.osol)
+AC_COIN_VPATH_LINK(data/dipFiles/spl1-b.osol)
+AC_COIN_VPATH_LINK(data/dipFiles/spl2.osol)
+AC_COIN_VPATH_LINK(data/dipFiles/spl3.osol)
+AC_COIN_VPATH_LINK(data/dipFiles/spl2-b.osol)
+AC_COIN_VPATH_LINK(data/dipFiles/genAssign.osol)
+AC_COIN_VPATH_LINK(data/dipFiles/smallIPBook.osol)
+
+#####GAMS Files
+AC_COIN_VPATH_LINK(data/gamsFiles/eastborne.gms)
+AC_COIN_VPATH_LINK(data/gamsFiles/CoinOS.opt)
+
+#####MATLAB Files
+AC_COIN_VPATH_LINK(data/matlabFiles/osdip.parm)
+
+#####MPS FILES
+AC_COIN_VPATH_LINK(data/mps/parinc.mps)
+
+##### OSIL FILES
+AC_COIN_VPATH_LINK(data/osilFiles/CppADTestLag.osil)
+AC_COIN_VPATH_LINK(data/osilFiles/eastborne.osil)
+AC_COIN_VPATH_LINK(data/osilFiles/nonconvex.osil)
+AC_COIN_VPATH_LINK(data/osilFiles/p0033.osil)
+AC_COIN_VPATH_LINK(data/osilFiles/parincLinear.osil)
+AC_COIN_VPATH_LINK(data/osilFiles/parincQuadratic.osil)
+AC_COIN_VPATH_LINK(data/osilFiles/rosenbrockmod.osil)
+AC_COIN_VPATH_LINK(data/osilFiles/wayneQuadratic.osil)
+
+##### OSOL FILES
+AC_COIN_VPATH_LINK(data/kill.osol)
+AC_COIN_VPATH_LINK(data/parsertest.osol)
+AC_COIN_VPATH_LINK(data/remoteSolve1.osol)
+AC_COIN_VPATH_LINK(data/remoteSolve2.osol)
+AC_COIN_VPATH_LINK(data/retrieve.osol)
 AC_COIN_VPATH_LINK(data/sendWithJobID.osol)
-AC_COIN_VPATH_LINK(data/wayneQuadratic.osil)
+AC_COIN_VPATH_LINK(data/solveroptions.osol)
 
-AC_COIN_VPATH_LINK(data/spl1.osil)
-AC_COIN_VPATH_LINK(data/spl2.osil)
-AC_COIN_VPATH_LINK(data/spl3.osil)
-AC_COIN_VPATH_LINK(data/genAssign.osil)
-AC_COIN_VPATH_LINK(data/smallIPBook.osil)
 
-AC_COIN_VPATH_LINK(data/spl1.osol)
-AC_COIN_VPATH_LINK(data/spl1-b.osol)
-AC_COIN_VPATH_LINK(data/spl2.osol)
-AC_COIN_VPATH_LINK(data/spl3.osol)
-AC_COIN_VPATH_LINK(data/spl2-b.osol)
-AC_COIN_VPATH_LINK(data/genAssign.osol)
-AC_COIN_VPATH_LINK(data/smallIPBook.osol)
+##### OSPL FILES
+AC_COIN_VPATH_LINK(data/osplFiles/knock.ospl)
+AC_COIN_VPATH_LINK(data/osplFiles/demo.ospl)
+AC_COIN_VPATH_LINK(data/osplFiles/result.ospl)
+
+
+
+
+
+
+
+
+
+
 
 
 ##############################################################################
