@@ -1,1 +1,1 @@
-<osol xmlns="os.optimizationservices.org"><general><instanceLocation locationType="http">http://www.coin-or.org/OS/p0033.osil</instanceLocation><solverToInvoke>symphony</solverToInvoke></general></osol>
+<osol xmlns="os.optimizationservices.org"><general><instanceLocation locationType="http">http://www.coin-or.org/OS/pdf.osil</instanceLocation><solverToInvoke>ipopt</solverToInvoke></general></osol>

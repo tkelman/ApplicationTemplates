@@ -302,7 +302,7 @@ AC_COIN_VPATH_LINK(data/gamsFiles/CoinOS.opt)
 AC_COIN_VPATH_LINK(data/matlabFiles/osdip.parm)
 
 #####MPS FILES
-AC_COIN_VPATH_LINK(data/mps/parinc.mps)
+AC_COIN_VPATH_LINK(data/mpsFiles/parinc.mps)
 
 ##### OSIL FILES
 AC_COIN_VPATH_LINK(data/osilFiles/CppADTestLag.osil)
