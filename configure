@@ -1096,6 +1096,7 @@ Optional Features:
                           -mno-cygwin. Set to msvc to use cl/link (or
                           icl/link). Default when mentioned: mingw. Default
                           when not mentioned: disabled.
+
   --enable-static[=PKGS]
                           build static libraries [default=no]
   --disable-dependency-tracking  speeds up one-time build
@@ -1860,6 +1861,23 @@ echo "$as_me: error: Invalid value $enable_doscompile for --enable-doscompile.
     { echo "$as_me:$LINENO: DOS compile style is: $enable_doscompile" >&5
 echo "$as_me: DOS compile style is: $enable_doscompile" >&6;}
   fi
+
+
+# Check whether --enable-static-standardlibs or --disable-static-standardlibs was given.
+if test "${enable_static_standardlibs+set}" = set; then
+  enableval="$enable_static_standardlibs"
+  case "$enableval" in
+     no | yes | auto ) ;;
+     *)
+       { { echo "$as_me:$LINENO: error: invalid argument for --enable-static-standardlibs: $enableval" >&5
+echo "$as_me: error: invalid argument for --enable-static-standardlibs: $enableval" >&2;}
+   { (exit 1); exit 1; }; } ;;
+   esac
+   use_static_standardlibs=$enableval
+else
+  use_static_standardlibs=no
+fi;
+
 
 
 
@@ -2986,6 +3004,7 @@ rm -f conftest.err conftest.$ac_objext \
   else
     CFLAGS="$OPT_CFLAGS"
   fi
+
 else
   CFLAGS="$CFLAGS $ADD_CFLAGS $CDEFS"
   if test x${DBG_CFLAGS+set} != xset; then
@@ -3154,6 +3173,82 @@ case "$CC" in
     ;;
 esac
 
+# check whether to add flags for static linking against standard libraries to LDFLAGS
+if test x$use_static_standardlibs != xno ; then
+  case $build in
+    *-mingw*)
+      static_standardlib_flag=-static
+      ;;
+    *)
+      static_standardlib_flag=-static-libgcc
+      ;;
+  esac
+  case " $LDFLAGS " in
+    *" $static_standardlib_flag "* ) ;;
+    *)
+    echo "$as_me:$LINENO: checking whether linking with $static_standardlib_flag works" >&5
+echo $ECHO_N "checking whether linking with $static_standardlib_flag works... $ECHO_C" >&6
+    coin_save_LDFLAGS="$LDFLAGS"
+    LDFLAGS="$LDFLAGS $static_standardlib_flag"
+    cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+
+int
+main ()
+{
+int i=0;
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext conftest$ac_exeext
+if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
+  (eval $ac_link) 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+	 { ac_try='test -z "$ac_c_werror_flag"
+			 || test ! -s conftest.err'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; } &&
+	 { ac_try='test -s conftest$ac_exeext'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  echo "$as_me:$LINENO: result: yes" >&5
+echo "${ECHO_T}yes" >&6
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+echo "$as_me:$LINENO: result: no" >&5
+echo "${ECHO_T}no" >&6
+       LDFLAGS="$coin_save_LDFLAGS"
+       if test $use_static_standardlibs = yes ; then
+         { { echo "$as_me:$LINENO: error: failed to link with $static_standardlib_flag" >&5
+echo "$as_me: error: failed to link with $static_standardlib_flag" >&2;}
+   { (exit 1); exit 1; }; }
+       fi
+
+fi
+rm -f conftest.err conftest.$ac_objext \
+      conftest$ac_exeext conftest.$ac_ext
+    ;;
+  esac
+fi
+
 ac_ext=c
 ac_cpp='$CPP $CPPFLAGS'
 ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
@@ -3163,6 +3258,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 
  #Let's try if that overcomes configuration problem with VC++ 6.0
+
 
 ac_ext=cc
 ac_cpp='$CXXCPP $CPPFLAGS'
@@ -4102,6 +4198,82 @@ case "$CXX" in
     ;;
 esac
 
+# check whether to add flag for static linking against standard libraries to LDFLAGS
+if test x$use_static_standardlibs != xno ; then
+  case $build in
+    *-mingw*)
+      static_standardlib_flag=-static
+      ;;
+    *)
+      static_standardlib_flag=-static-libstdc++
+      ;;
+  esac
+  case " $LDFLAGS " in
+    *" $static_standardlib_flag "* ) ;;
+    *)
+    echo "$as_me:$LINENO: checking whether linking with $static_standardlib_flag works" >&5
+echo $ECHO_N "checking whether linking with $static_standardlib_flag works... $ECHO_C" >&6
+    coin_save_LDFLAGS="$LDFLAGS"
+    LDFLAGS="$LDFLAGS $static_standardlib_flag"
+    cat >conftest.$ac_ext <<_ACEOF
+/* confdefs.h.  */
+_ACEOF
+cat confdefs.h >>conftest.$ac_ext
+cat >>conftest.$ac_ext <<_ACEOF
+/* end confdefs.h.  */
+
+int
+main ()
+{
+int i=0;
+  ;
+  return 0;
+}
+_ACEOF
+rm -f conftest.$ac_objext conftest$ac_exeext
+if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
+  (eval $ac_link) 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+	 { ac_try='test -z "$ac_cxx_werror_flag"
+			 || test ! -s conftest.err'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; } &&
+	 { ac_try='test -s conftest$ac_exeext'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  echo "$as_me:$LINENO: result: yes" >&5
+echo "${ECHO_T}yes" >&6
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+echo "$as_me:$LINENO: result: no" >&5
+echo "${ECHO_T}no" >&6
+       LDFLAGS="$coin_save_LDFLAGS"
+       if test $use_static_standardlibs = yes ; then
+         { { echo "$as_me:$LINENO: error: failed to link with $static_standardlib_flag" >&5
+echo "$as_me: error: failed to link with $static_standardlib_flag" >&2;}
+   { (exit 1); exit 1; }; }
+       fi
+
+fi
+rm -f conftest.err conftest.$ac_objext \
+      conftest$ac_exeext conftest.$ac_ext
+    ;;
+  esac
+fi
+
 ac_ext=c
 ac_cpp='$CPP $CPPFLAGS'
 ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
@@ -4220,6 +4392,7 @@ fi
 
 
 if test "$F77" != unavailable ; then
+
 
 
 
@@ -4434,7 +4607,7 @@ fi
 
 
 # Provide some information about the compiler.
-echo "$as_me:4437:" \
+echo "$as_me:4610:" \
      "checking for Fortran 77 compiler version" >&5
 ac_compiler=`set X $ac_compile; echo $2`
 { (eval echo "$as_me:$LINENO: \"$ac_compiler --version </dev/null >&5\"") >&5
@@ -4801,6 +4974,7 @@ rm -f conftest.err conftest.$ac_objext \
   else
     FFLAGS="$OPT_FFLAGS"
   fi
+
 else
   FFLAGS="$FFLAGS $ADD_FFLAGS"
   if test x${DBG_FFLAGS+set} != xset; then
@@ -4943,6 +5117,72 @@ case "$F77" in
     ;;
 esac
 
+# check whether to add flag for static linking against standard libraries to LDFLAGS
+if test x$use_static_standardlibs != xno ; then
+  case $build in
+    *-mingw*)
+      static_standardlib_flag=-static
+      ;;
+    *)
+      static_standardlib_flag=-static-libgfortran
+      ;;
+  esac
+  case " $LDFLAGS " in
+    *" $static_standardlib_flag "* ) ;;
+    *)
+    echo "$as_me:$LINENO: checking whether linking with $static_standardlib_flag works" >&5
+echo $ECHO_N "checking whether linking with $static_standardlib_flag works... $ECHO_C" >&6
+    coin_save_LDFLAGS="$LDFLAGS"
+    LDFLAGS="$LDFLAGS $static_standardlib_flag"
+    cat >conftest.$ac_ext <<_ACEOF
+      program main
+      integer i
+      end
+_ACEOF
+rm -f conftest.$ac_objext conftest$ac_exeext
+if { (eval echo "$as_me:$LINENO: \"$ac_link\"") >&5
+  (eval $ac_link) 2>conftest.er1
+  ac_status=$?
+  grep -v '^ *+' conftest.er1 >conftest.err
+  rm -f conftest.er1
+  cat conftest.err >&5
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); } &&
+	 { ac_try='test -z "$ac_f77_werror_flag"
+			 || test ! -s conftest.err'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; } &&
+	 { ac_try='test -s conftest$ac_exeext'
+  { (eval echo "$as_me:$LINENO: \"$ac_try\"") >&5
+  (eval $ac_try) 2>&5
+  ac_status=$?
+  echo "$as_me:$LINENO: \$? = $ac_status" >&5
+  (exit $ac_status); }; }; then
+  echo "$as_me:$LINENO: result: yes" >&5
+echo "${ECHO_T}yes" >&6
+else
+  echo "$as_me: failed program was:" >&5
+sed 's/^/| /' conftest.$ac_ext >&5
+
+echo "$as_me:$LINENO: result: no" >&5
+echo "${ECHO_T}no" >&6
+       LDFLAGS="$coin_save_LDFLAGS"
+       if test $use_static_standardlibs = yes ; then
+         { { echo "$as_me:$LINENO: error: failed to link with $static_standardlib_flag" >&5
+echo "$as_me: error: failed to link with $static_standardlib_flag" >&2;}
+   { (exit 1); exit 1; }; }
+       fi
+
+fi
+rm -f conftest.err conftest.$ac_objext \
+      conftest$ac_exeext conftest.$ac_ext
+    ;;
+  esac
+fi
+
 ac_ext=c
 ac_cpp='$CPP $CPPFLAGS'
 ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
@@ -5003,7 +5243,7 @@ _ACEOF
 # flags.
 ac_save_FFLAGS=$FFLAGS
 FFLAGS="$FFLAGS $ac_verb"
-(eval echo $as_me:5006: \"$ac_link\") >&5
+(eval echo $as_me:5246: \"$ac_link\") >&5
 ac_f77_v_output=`eval $ac_link 5>&1 2>&1 | grep -v 'Driving:'`
 echo "$ac_f77_v_output" >&5
 FFLAGS=$ac_save_FFLAGS
@@ -5081,7 +5321,7 @@ _ACEOF
 # flags.
 ac_save_FFLAGS=$FFLAGS
 FFLAGS="$FFLAGS $ac_cv_prog_f77_v"
-(eval echo $as_me:5084: \"$ac_link\") >&5
+(eval echo $as_me:5324: \"$ac_link\") >&5
 ac_f77_v_output=`eval $ac_link 5>&1 2>&1 | grep -v 'Driving:'`
 echo "$ac_f77_v_output" >&5
 FFLAGS=$ac_save_FFLAGS
@@ -7587,7 +7827,7 @@ ia64-*-hpux*)
   ;;
 *-*-irix6*)
   # Find out which ABI we are using.
-  echo '#line 7590 "configure"' > conftest.$ac_ext
+  echo '#line 7830 "configure"' > conftest.$ac_ext
   if { (eval echo "$as_me:$LINENO: \"$ac_compile\"") >&5
   (eval $ac_compile) 2>&5
   ac_status=$?
@@ -9567,11 +9807,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:9570: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:9810: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:9574: \$? = $ac_status" >&5
+   echo "$as_me:9814: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -9835,11 +10075,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:9838: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:10078: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:9842: \$? = $ac_status" >&5
+   echo "$as_me:10082: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -9939,11 +10179,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:9942: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:10182: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:9946: \$? = $ac_status" >&5
+   echo "$as_me:10186: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -12356,7 +12596,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<EOF
-#line 12359 "configure"
+#line 12599 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -12456,7 +12696,7 @@ else
   lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
   lt_status=$lt_dlunknown
   cat > conftest.$ac_ext <<EOF
-#line 12459 "configure"
+#line 12699 "configure"
 #include "confdefs.h"
 
 #if HAVE_DLFCN_H
@@ -14816,11 +15056,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:14819: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:15059: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:14823: \$? = $ac_status" >&5
+   echo "$as_me:15063: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -14920,11 +15160,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:14923: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:15163: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:14927: \$? = $ac_status" >&5
+   echo "$as_me:15167: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -16490,11 +16730,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:16493: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:16733: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:16497: \$? = $ac_status" >&5
+   echo "$as_me:16737: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -16594,11 +16834,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:16597: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:16837: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:16601: \$? = $ac_status" >&5
+   echo "$as_me:16841: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -18801,11 +19041,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:18804: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:19044: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:18808: \$? = $ac_status" >&5
+   echo "$as_me:19048: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -19069,11 +19309,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:19072: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:19312: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>conftest.err)
    ac_status=$?
    cat conftest.err >&5
-   echo "$as_me:19076: \$? = $ac_status" >&5
+   echo "$as_me:19316: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s "$ac_outfile"; then
      # The compiler can only warn and ignore the option if not recognized
      # So say no if there are warnings other than the usual output.
@@ -19173,11 +19413,11 @@ else
    -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
    -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
    -e 's:$: $lt_compiler_flag:'`
-   (eval echo "\"\$as_me:19176: $lt_compile\"" >&5)
+   (eval echo "\"\$as_me:19416: $lt_compile\"" >&5)
    (eval "$lt_compile" 2>out/conftest.err)
    ac_status=$?
    cat out/conftest.err >&5
-   echo "$as_me:19180: \$? = $ac_status" >&5
+   echo "$as_me:19420: \$? = $ac_status" >&5
    if (exit $ac_status) && test -s out/conftest2.$ac_objext
    then
      # The compiler can only warn and ignore the option if not recognized
@@ -24309,10 +24549,12 @@ fi
 ##############################################################################
 #### EXAMPLE DATA FILES
 
+#### AMPL FILES
+
 
 # Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  cvl_tmp="data/CoinOS.opt"
+  cvl_tmp="data/amplFiles/bonminEx1.nl"
   for file in $cvl_tmp ; do
     coin_vpath_link_files="$coin_vpath_link_files $file"
   done
@@ -24322,7 +24564,7 @@ fi
 
 # Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  cvl_tmp="data/CppADTestLag.osil"
+  cvl_tmp="data/amplFiles/eastborne.mod"
   for file in $cvl_tmp ; do
     coin_vpath_link_files="$coin_vpath_link_files $file"
   done
@@ -24332,7 +24574,21 @@ fi
 
 # Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  cvl_tmp="data/bonminEx1.nl"
+  cvl_tmp="data/amplFiles/eastborne.nl"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+##### CONFIG FILES
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/configFiles/kill.config"
   for file in $cvl_tmp ; do
     coin_vpath_link_files="$coin_vpath_link_files $file"
   done
@@ -24342,7 +24598,7 @@ fi
 
 # Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  cvl_tmp="data/eastborne.gms"
+  cvl_tmp="data/configFiles/testLocal.config"
   for file in $cvl_tmp ; do
     coin_vpath_link_files="$coin_vpath_link_files $file"
   done
@@ -24352,7 +24608,7 @@ fi
 
 # Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  cvl_tmp="data/eastborne.mod"
+  cvl_tmp="data/configFiles/testcalclp.config"
   for file in $cvl_tmp ; do
     coin_vpath_link_files="$coin_vpath_link_files $file"
   done
@@ -24362,7 +24618,7 @@ fi
 
 # Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  cvl_tmp="data/eastborne.nl"
+  cvl_tmp="data/configFiles/testRemote.config"
   for file in $cvl_tmp ; do
     coin_vpath_link_files="$coin_vpath_link_files $file"
   done
@@ -24372,7 +24628,7 @@ fi
 
 # Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  cvl_tmp="data/eastborne.osil"
+  cvl_tmp="data/configFiles/testRemoteKnock.config"
   for file in $cvl_tmp ; do
     coin_vpath_link_files="$coin_vpath_link_files $file"
   done
@@ -24382,7 +24638,7 @@ fi
 
 # Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  cvl_tmp="data/knock.ospl"
+  cvl_tmp="data/configFiles/testRemoteRetrieve.config"
   for file in $cvl_tmp ; do
     coin_vpath_link_files="$coin_vpath_link_files $file"
   done
@@ -24392,7 +24648,19 @@ fi
 
 # Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  cvl_tmp="data/nonconvex.osil"
+  cvl_tmp="data/configFiles/testRemoteSend.config"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+##### DIP FILES
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/dipFiles/spl1.osil"
   for file in $cvl_tmp ; do
     coin_vpath_link_files="$coin_vpath_link_files $file"
   done
@@ -24402,7 +24670,7 @@ fi
 
 # Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  cvl_tmp="data/p0033.osil"
+  cvl_tmp="data/dipFiles/spl2.osil"
   for file in $cvl_tmp ; do
     coin_vpath_link_files="$coin_vpath_link_files $file"
   done
@@ -24412,7 +24680,7 @@ fi
 
 # Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  cvl_tmp="data/parinc.mps"
+  cvl_tmp="data/dipFiles/spl3.osil"
   for file in $cvl_tmp ; do
     coin_vpath_link_files="$coin_vpath_link_files $file"
   done
@@ -24422,7 +24690,7 @@ fi
 
 # Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  cvl_tmp="data/parincLinear.osil"
+  cvl_tmp="data/dipFiles/genAssign.osil"
   for file in $cvl_tmp ; do
     coin_vpath_link_files="$coin_vpath_link_files $file"
   done
@@ -24432,7 +24700,7 @@ fi
 
 # Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  cvl_tmp="data/parincQuadratic.osil"
+  cvl_tmp="data/dipFiles/smallIPBook.osil"
   for file in $cvl_tmp ; do
     coin_vpath_link_files="$coin_vpath_link_files $file"
   done
@@ -24442,7 +24710,247 @@ fi
 
 # Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  cvl_tmp="data/rosenbrockmod.osil"
+  cvl_tmp="data/dipFiles/spl1.osol"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/dipFiles/spl1-b.osol"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/dipFiles/spl2.osol"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/dipFiles/spl3.osol"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/dipFiles/spl2-b.osol"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/dipFiles/genAssign.osol"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/dipFiles/smallIPBook.osol"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+#####GAMS Files
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/gamsFiles/eastborne.gms"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/gamsFiles/CoinOS.opt"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+#####MATLAB Files
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/matlabFiles/osdip.parm"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+#####MPS FILES
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/mps/parinc.mps"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+##### OSIL FILES
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/osilFiles/CppADTestLag.osil"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/osilFiles/eastborne.osil"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/osilFiles/nonconvex.osil"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/osilFiles/p0033.osil"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/osilFiles/parincLinear.osil"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/osilFiles/parincQuadratic.osil"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/osilFiles/rosenbrockmod.osil"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/osilFiles/wayneQuadratic.osil"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+##### OSOL FILES
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/kill.osol"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/parsertest.osol"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/remoteSolve1.osol"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/remoteSolve2.osol"
+  for file in $cvl_tmp ; do
+    coin_vpath_link_files="$coin_vpath_link_files $file"
+  done
+fi
+
+
+
+# Allow for newlines in the parameter
+if test $coin_vpath_config = yes; then
+  cvl_tmp="data/retrieve.osol"
   for file in $cvl_tmp ; do
     coin_vpath_link_files="$coin_vpath_link_files $file"
   done
@@ -24462,7 +24970,7 @@ fi
 
 # Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  cvl_tmp="data/wayneQuadratic.osil"
+  cvl_tmp="data/solveroptions.osol"
   for file in $cvl_tmp ; do
     coin_vpath_link_files="$coin_vpath_link_files $file"
   done
@@ -24470,20 +24978,12 @@ fi
 
 
 
-
-# Allow for newlines in the parameter
-if test $coin_vpath_config = yes; then
-  cvl_tmp="data/spl1.osil"
-  for file in $cvl_tmp ; do
-    coin_vpath_link_files="$coin_vpath_link_files $file"
-  done
-fi
-
+##### OSPL FILES
 
 
 # Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  cvl_tmp="data/spl2.osil"
+  cvl_tmp="data/osplFiles/knock.ospl"
   for file in $cvl_tmp ; do
     coin_vpath_link_files="$coin_vpath_link_files $file"
   done
@@ -24493,7 +24993,7 @@ fi
 
 # Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  cvl_tmp="data/spl3.osil"
+  cvl_tmp="data/osplFiles/demo.ospl"
   for file in $cvl_tmp ; do
     coin_vpath_link_files="$coin_vpath_link_files $file"
   done
@@ -24503,17 +25003,7 @@ fi
 
 # Allow for newlines in the parameter
 if test $coin_vpath_config = yes; then
-  cvl_tmp="data/genAssign.osil"
-  for file in $cvl_tmp ; do
-    coin_vpath_link_files="$coin_vpath_link_files $file"
-  done
-fi
-
-
-
-# Allow for newlines in the parameter
-if test $coin_vpath_config = yes; then
-  cvl_tmp="data/smallIPBook.osil"
+  cvl_tmp="data/osplFiles/result.ospl"
   for file in $cvl_tmp ; do
     coin_vpath_link_files="$coin_vpath_link_files $file"
   done
@@ -24522,73 +25012,12 @@ fi
 
 
 
-# Allow for newlines in the parameter
-if test $coin_vpath_config = yes; then
-  cvl_tmp="data/spl1.osol"
-  for file in $cvl_tmp ; do
-    coin_vpath_link_files="$coin_vpath_link_files $file"
-  done
-fi
 
 
 
-# Allow for newlines in the parameter
-if test $coin_vpath_config = yes; then
-  cvl_tmp="data/spl1-b.osol"
-  for file in $cvl_tmp ; do
-    coin_vpath_link_files="$coin_vpath_link_files $file"
-  done
-fi
 
 
 
-# Allow for newlines in the parameter
-if test $coin_vpath_config = yes; then
-  cvl_tmp="data/spl2.osol"
-  for file in $cvl_tmp ; do
-    coin_vpath_link_files="$coin_vpath_link_files $file"
-  done
-fi
-
-
-
-# Allow for newlines in the parameter
-if test $coin_vpath_config = yes; then
-  cvl_tmp="data/spl3.osol"
-  for file in $cvl_tmp ; do
-    coin_vpath_link_files="$coin_vpath_link_files $file"
-  done
-fi
-
-
-
-# Allow for newlines in the parameter
-if test $coin_vpath_config = yes; then
-  cvl_tmp="data/spl2-b.osol"
-  for file in $cvl_tmp ; do
-    coin_vpath_link_files="$coin_vpath_link_files $file"
-  done
-fi
-
-
-
-# Allow for newlines in the parameter
-if test $coin_vpath_config = yes; then
-  cvl_tmp="data/genAssign.osol"
-  for file in $cvl_tmp ; do
-    coin_vpath_link_files="$coin_vpath_link_files $file"
-  done
-fi
-
-
-
-# Allow for newlines in the parameter
-if test $coin_vpath_config = yes; then
-  cvl_tmp="data/smallIPBook.osol"
-  for file in $cvl_tmp ; do
-    coin_vpath_link_files="$coin_vpath_link_files $file"
-  done
-fi
 
 
 
