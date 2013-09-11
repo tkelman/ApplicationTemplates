@@ -27,8 +27,7 @@
 #include "OSDefaultSolver.h"  
 #include "OShL.h"     
 #include "OSErrorClass.h"
-#include "OSmps2osil.h"   
-#include "OSnl2osil.h"   
+#include "OSmps2osil.h"
 #include "OSBase64.h"
 #include "OSErrorClass.h"
 #include "OSMathUtil.h"
@@ -39,7 +38,8 @@
 
 
 #ifdef OS_HAS_ASL
-#include "OSnl2osil.h"
+#include "OSnl2OS.h"
+#include "OSosrl2ampl.h"
 #endif
 
 #ifdef OS_HAS_BONMIN   
@@ -52,6 +52,10 @@
 
 #ifdef OS_HAS_IPOPT    
 #include "OSIpoptSolver.h"
+#endif
+
+#ifdef OS_HAS_ASL
+#include <asl.h>
 #endif
 
 
@@ -69,8 +73,6 @@ int main( ){
 	cout << "Start Building the Model" << endl;
 	//int i;
 	try{
-
-
 		const char dirsep =  CoinFindDirSeparator();
 		std::string osil;
 		// Set directory containing mps data files.
@@ -253,10 +255,13 @@ int main( ){
 		std::string nlFileName;
 		nlFileName =  dataDir  +   "bonminEx1.nl";
 		// convert to the OS native format
-		OSnl2osil *nl2osil = NULL;
-		nl2osil = new OSnl2osil( nlFileName);
+
+        OSnl2OS *nl2osil = new OSnl2OS();
+
+        nl2osil->readNl(nlFileName);
+
 		// create the first in-memory OSInstance
-		nl2osil->createOSInstance() ;
+		nl2osil->createOSObjects() ;
 		osinstance =  nl2osil->osinstance;
 		
 		/******************** STEP 2 ************************
